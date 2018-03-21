@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kahoot Tools</title>
+</head>
+
+<body>
+    <div id="login-panel" class="container">
+        <div class="center-aligner">
+            <div class="title-container">
+                <h1 class="center-align title">Kahoot Tools</h1>
+                <h5 class="center-align subtitle">By ya boi @idiidk</h5>
+            </div>
+        </div>
+
+        <div class="center-aligner">
+            <input class="inset" placeholder="Pin" id="pin" type="text">
+            <input class="inset" placeholder="Name" id="name" type="text">
+        </div>
+
+        <div id="login-wrapper" class="center-aligner">
+            <input class="inset" placeholder="Username" id="username" type="text">
+            <input class="inset" placeholder="Password" id="password" type="password">
+        </div>
+
+        <p class="center-aligner">
+            <button id="start-login" class="leggo-button inset">Leggo</button>
+        </p>
+    </div>
+
+    <div id="game-panel" class="container">
+        <div class="center-aligner">
+            <div class="title-container">
+                <h1 class="center-align title">Game Control</h1>
+                <h5 id="game-state" class="center-align subtitle">Pin: | Name: </h5>
+            </div>
+        </div>
+
+        <h2 class="centered-text">Send Answer</h2>
+
+        <div class="center-aligner answer-wrapper">
+            <button id="▲" class="inset kahoot-color-0 inverse-text">▲</button>
+            <button id="◆" class="inset kahoot-color-1 inverse-text">◆</button>
+            <button id="●" class="inset kahoot-color-2 inverse-text">●</button>
+            <button id="■" class="inset kahoot-color-3 inverse-text">■</button>
+        </div>
+
+        <div class="seperator"></div>
+
+        <h2 class="centered-text">Send Bots</h2>
+
+        <div class="center-aligner">
+            <input class="inset" placeholder="Bot Amount" id="bot-count" type="text">
+            <input class="inset" placeholder="Bot Prefix" id="bot-prefix" type="text">
+        </div>
+
+        <div class="seperator" style="margin-bottom: 4vh"></div>
+
+        <div class="center-aligner">
+            <button id="bot-send" class="inset">Send Bots</button>
+        </div>
+
+        <div class="seperator"></div>
+
+        <h2 class="centered-text">Experimental Hacks</h2>
+
+        <div class="center-aligner">
+            <button id="crash-game" class="inset">Crash Game</button>
+        </div>
+
+        <div class="seperator" style="margin-bottom: 4vh"></div>
+
+        <div class="center-aligner">
+            <button id="answer-current-correct" class="inset">Answer Correctly</button>
+        </div>
+    </div>
+
+    <div id="server-panel" class="container">
+        <div class="center-aligner">
+            <div class="title-container">
+                <h1 class="center-align title">Server Control</h1>
+                <h5 class="center-align subtitle">Pin: Not Started</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="seperator" style="margin-bottom: 4vh"></div>
+
+    <div id="message-container" class="message-container"></div>
+</body>
+
+</html>

@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+* {
+    font-family: 'Montserrat', sans-serif;
+    font-stretch: 100%;
+    color: white;
+}
+
+html,
+body {
+    background-color: black;
+    overflow-x: hidden;
+}
+
+input {
+    font-size: 3.5vmin;
+    width: 20vw;
+    min-height: 7.5vh;
+    margin: 1.2vh;
+    padding-top: 4px;
+    padding-right: 6px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    text-align: center;
+    text-indent: 0;
+    color: #333;
+    border: none;
+    -moz-outline-style: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 2px;
+}
+
+button {
+    font-size: 3.5vmin;
+    font-weight: 700;
+    display: inline-block;
+    min-width: 20vw;
+    min-height: 7.5vh;
+    margin-bottom: 0;
+    padding-top: 4px;
+    padding-right: 6px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    color: #333;
+    background-color: white;
+    transition: background 0.1s;
+    -moz-outline-style: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+button:active {
+    background-color: whitesmoke;
+    color: #333;
+}
+
+.title-container {
+    width: 35vw;
+    min-width: 300px;
+    margin-bottom: 8vh;
+    margin-top: 4vh;
+    padding: 3vh;
+    text-align: center;
+    border-radius: 2px;
+    background-color: white;
+    box-shadow: inset 0 -3px rgba(0, 0, 0, .15);
+    .title {
+        font-size: 7.5vmin;
+        margin: 0;
+        margin-bottom: 2vh;
+        color: #333;
+        font-weight: 700;
+    }
+    .subtitle {
+        font-size: 4vmin;
+        font-weight: normal;
+        margin: 0;
+        color: #333;
+    }
+}
+
+.leggo-button {
+    margin-top: 4vh;
+}
+
+.message-container {
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    right: 0;
+    display: absolute;
+    padding: 2vh;
+}
+
+.message-container .card {
+    box-shadow: inset 0 -3px rgba(0, 0, 0, .15);
+    padding: 2vh;
+    padding-bottom: 2px;
+    margin-bottom: 2vh;
+    border-radius: 2px;
+}
+
+.kahoot-color-0 {
+    background-color: #e21b3c;
+}
+
+.kahoot-color-1 {
+    background-color: #1368ce;
+}
+
+.kahoot-color-2 {
+    background-color: #d89e00;
+}
+
+.kahoot-color-3 {
+    background-color: #298f0d;
+}
+
+.inverse-text {
+    color: white;
+}
+
+.button-active {
+    background-color: #1368ce;
+    color: white;
+}
+
+.seperator {
+    margin-bottom: 8vh;
+}
+
+.disabled {
+    background-color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+}
+
+.centered-text {
+    font-size: 3vmin;
+    width: 100vw;
+    text-align: center;
+}
+
+.bearer-token {
+    font-size: 3vmin;
+    margin-bottom: 4vh;
+}
+
+.center-aligner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.answer-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button {
+        width: 15vw;
+        margin-left: 1vw;
+        margin-right: 1vw;
+    }
+}
+
+.inset {
+    box-shadow: inset 0 -3px rgba(0, 0, 0, .15);
+}
+
+.animated-background {
+    -webkit-animation: bgcolor 20s infinite;
+    animation: bgcolor 20s infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+    background-color: #45a3e5
+}
+
+@-webkit-keyframes bgcolor {
+    0% {
+        background-color: #45a3e5
+    }
+    17% {
+        background-color: #3cc
+    }
+    34% {
+        background-color: #66bf39
+    }
+    51% {
+        background-color: #ffa602
+    }
+    67% {
+        background-color: #eb670f
+    }
+    84% {
+        background-color: #f35
+    }
+    100% {
+        background-color: #864cbf
+    }
+}
+
+@keyframes bgcolor {
+    0% {
+        background-color: #45a3e5
+    }
+    17% {
+        background-color: #3cc
+    }
+    34% {
+        background-color: #66bf39
+    }
+    51% {
+        background-color: #ffa602
+    }
+    67% {
+        background-color: #eb670f
+    }
+    84% {
+        background-color: #f35
+    }
+    100% {
+        background-color: #864cbf
+    }
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(160, 160, 160, .8);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(160, 160, 160, .8);
+}

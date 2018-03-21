@@ -1,0 +1,41 @@
+{
+  "name": "webpack-boilerplate",
+  "version": "3.0.0",
+  "description": "Plain webpack 3 Boilerplate with Babel, SASS and lodash on board",
+  "author": "Christoph von Gellhorn",
+  "license": "MIT",
+  "homepage": "https://github.com/cvgellhorn/webpack-boilerplate",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=dev webpack-dev-server --host 0.0.0.0 --progress --config webpack.config.dev.js",
+    "build": "webpack -p --progress --config webpack.config.build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://cvgellhorn@github.com/cvgellhorn/webpack-boilerplate.git"
+  },
+  "dependencies": {
+    "cors-anywhere": "^0.4.1",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.5",
+    "normalize.css": "^8.0.0",
+    "velocity-animate": "^1.5.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.18",
+    "cross-env": "^5.1.3",
+    "css-loader": "^0.28.10",
+    "ejs-loader": "^0.3.0",
+    "file-loader": "^1.1.9",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.20.2",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1",
+    "webpack-merge": "^4.1.2"
+  }
+}
