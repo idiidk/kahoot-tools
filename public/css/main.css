@@ -1,0 +1,206 @@
+* {
+    font-family: 'Roboto Mono', monospace;
+    color: white;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-animation: Gradient 30s ease infinite;
+    -moz-animation: Gradient 30s ease infinite;
+    animation: Gradient 30s ease infinite;
+    background: linear-gradient(130deg, #c33764, #1d2671, #c33764);
+    background-size: 600% 600%;
+}
+
+a {
+    cursor: pointer;
+}
+
+li.collection-item {
+    background-color: #2c2e33 !important;
+}
+
+textarea.materialize-textarea:focus {
+    color: #fff !important;
+    border-bottom: 1px solid #3949ab !important;
+    box-shadow: 0 1px 0 0 #3949ab !important;
+}
+
+.btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.panel {
+    height: 100vh;
+    padding: 20px;
+}
+
+.function-box h4 {
+    margin-top: 20px;
+}
+
+.message-container {
+    position: fixed;
+    z-index: 200;
+    bottom: 0;
+    display: absolute;
+    width: 100%;
+    padding: 20px;
+}
+
+.message-container .card {
+    width: 100%;
+}
+
+.server-disabled-components {
+    margin-top: 10vh;
+}
+
+.no-margin {
+    margin: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.kahoot-color-0 {
+    background-color: #e21b3c !important;
+}
+
+.kahoot-color-1 {
+    background-color: #1368ce !important;
+}
+
+.kahoot-color-2 {
+    background-color: #d89e00 !important;
+}
+
+.kahoot-color-3 {
+    background-color: #298f0d !important;
+}
+
+.answer-btn {
+    width: 10vw;
+    margin: 4px;
+}
+
+.page-title {
+    margin-top: 3vh;
+    margin-bottom: 5vh;
+    text-align: center;
+}
+
+.page-title h1 {
+    font-family: 'Roboto', monospace;
+    text-shadow: 4px 4px #000;
+}
+
+.page-title h1,
+h5 {
+    margin: 0;
+}
+
+.input-field label {
+    color: #fff !important;
+}
+
+.input-field {
+    margin: 2vh !important;
+    color: #fff !important;
+}
+
+.input-field input:focus+label {
+    color: #fff !important;
+}
+
+.input-field input:focus {
+    border-bottom: 1px solid #3949ab !important;
+    box-shadow: 0 1px 0 0 #3949ab !important;
+}
+
+.input-field input.valid {
+    border-bottom: 1px solid #3949ab !important;
+    box-shadow: 0 1px 0 0 #3949ab !important;
+}
+
+.input-field input.invalid {
+    border-bottom: 1px solid #3949ab !important;
+    box-shadow: 0 1px 0 0 #3949ab !important;
+}
+
+.input-field .prefix.active {
+    color: #3949ab !important;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(160, 160, 160, .8);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(160, 160, 160, .8);
+}
+
+@-webkit-keyframes Gradient {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 51%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+@-moz-keyframes Gradient {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 51%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+@keyframes Gradient {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 51%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}

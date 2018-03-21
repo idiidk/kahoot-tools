@@ -1,0 +1,27 @@
+{
+  "name": "kahoot-tools",
+  "version": "0.3.1",
+  "description": "A set of tools for manipulating kahoot in fun ways.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idiidk/kahoot-tools.git"
+  },
+  "keywords": [
+    "kahoot",
+    "tools"
+  ],
+  "author": "idiidk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/idiidk/kahoot-tools/issues"
+  },
+  "homepage": "https://github.com/idiidk/kahoot-tools#readme",
+  "dependencies": {
+    "cors-anywhere": "^0.4.0",
+    "express": "^4.15.5"
+  }
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Kahoot Tools</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/css/materialize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="login-panel" class="panel">
+            <div class="page-title-block">
+                <div class="col s12 page-title">
+                    <h1>Kahoot Tools</h1>
+                    <br/>
+                    <h5>Made by @idiidk</h5>
+                </div>
+                <div class="col col s12">
+                    <center>
+                        <div class="input-field col s12">
+                            <input placeholder="Pin" type="text" id="pin">
+                            <input placeholder="Name" type="text" id="name">
+                        </div>
+                    </center>
+                    <br/>
+                    <br/>
+                    <center>
+                        <h5 id="kahoot-web-login-text">To retrieve answers please login, (this is not required):</h5>
+                    </center>
+                    <br/>
+                    <center>
+                        <div id="kahoot-web-login" style="display: none">
+                            <div class="input-field col s12">
+                                <input placeholder="Kahoot Username" type="text" id="kahoot-username">
+                                <input placeholder="Kahoot Password" type="password" id="kahoot-password">
+                            </div>
+                        </div>
+                    </center>
+                    <br/>
+                    <center>
+                        <a id="activate-pin-btn" class="waves-effect waves-light btn kahoot-color-1">Login with pin</a>
+                        <p> or </p>
+                        <a id="custom-server-btn" class="waves-effect waves-light btn kahoot-color-1">Create a custom server</a>
+                    </center>
+                </div>
+            </div>
+        </div>
+
+        <div id="server-panel" class="panel hidden">
+            <div class="page-title-block">
+                <div class="page-title">
+                    <h1>Server Creation</h1>
+                    <br/>
+                    <h5 id="server-status">Status: Not Started | Pin: Not Started</h5>
+                </div>
+
+                <center>
+                    <a id="start-server-btn" class="waves-effect waves-light btn indigo">Start Server</a>
+
+                    <div class="server-components">
+                        <br>
+                        <br>
+                        <div id="send-javascript">
+                            <h4>Send JavaScript</h4>
+                            <div class="input-field col s6 no-margin">
+                                <input id="javascript-code" placeholder="Code" type="text" class="validate">
+                            </div>
+                            <a id="send-javscript-btn" class="waves-effect waves-light btn indigo">Send</a>
+                        </div>
+                        <br>
+                        <div id="connected-clients-wrapper">
+                            <h4>Connected Clients:</h4>
+                            <h5>Amount:
+                                <span id="connected-clients">0</span>
+                            </h5>
+                            <div id="list">
+                            </div>
+                        </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+
+        <div id="control-panel" class="panel hidden">
+            <div class="page-title-block">
+                <div class="page-title">
+                    <h1>Logged in:</h1>
+                    <br/>
+                    <h5 id="pin-display"></h5>
+                </div>
+            </div>
+
+            <div id="function-box" class="col s12 control-panel-item function-box">
+                <center>
+                    <h4>Answer:</h4>
+                    <div class="input-field col s12">
+                        <a class="waves-effect waves-light btn answer-btn kahoot-color-0 red" id="answer-0">▲</a>
+                        <a class="waves-effect waves-light btn answer-btn kahoot-color-1 blue" id="answer-1">◆</a>
+                        <a class="waves-effect waves-light btn answer-btn kahoot-color-2 yellow" id="answer-2">●</a>
+                        <a class="waves-effect waves-light btn answer-btn kahoot-color-3 green" id="answer-3">■</a>
+                    </div>
+
+                    <h4>Crazy hacks:</h4>
+                    <div class="input-field col s12">
+                        <a class="waves-effect waves-light btn kahoot-color-1" id="send-correct-answer-btn">Answer current question correctly</a>
+                    </div>
+
+                    <h4>Spam:</h4>
+                    <div class="input-field col s12">
+                        <div class="input-field col s6 no-margin">
+                            <input id="bot-amount" type="text" class="validate">
+                            <label for="bot-amount">Amount of Bots</label>
+                        </div>
+                        <div class="input-field col s6 no-margin">
+                            <input id="bot-name-prefix" type="text" class="validate">
+                            <label for="bot-name-prefix">Bot Name Prefix</label>
+                        </div>
+                        <a class="waves-effect waves-light btn kahoot-color-1" id="flood-btn">Send Bots</a>
+                    </div>
+
+                    <h4>Lets cause some damage:</h4>
+                    <a class="waves-effect waves-light btn kahoot-color-1" id="crash-btn">Crash Game (Only works with more than one player, No going back...)</a>
+                </center>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.1/velocity.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
+        <script src="js/eventPolyfill.js"></script>
+        <script src="js/cometd.js"></script>
+        <script src="js/kahoot.v4.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/game.js"></script>
+        <script src="js/server.js"></script>
+    </div>
+
+    <div id="message-container" class="message-container">
+
+    </div>
+</body>
+
+</html>
