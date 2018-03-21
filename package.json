@@ -1,17 +1,17 @@
 {
-  "name": "webpack-boilerplate",
-  "version": "3.0.0",
-  "description": "Plain webpack 3 Boilerplate with Babel, SASS and lodash on board",
-  "author": "Christoph von Gellhorn",
+  "name": "kahoot-tools",
+  "version": "4.0.0",
+  "description": "A set of tools for manipulating kahoot in fun ways.",
+  "author": "idiidk",
   "license": "MIT",
-  "homepage": "https://github.com/cvgellhorn/webpack-boilerplate",
+  "homepage": "https://github.com/idiidk/kahoot-tools",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack-dev-server --host 0.0.0.0 --progress --config webpack.config.dev.js",
     "build": "webpack -p --progress --config webpack.config.build.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://cvgellhorn@github.com/cvgellhorn/webpack-boilerplate.git"
+    "url": "git+https://github.com/idiidk/kahoot-tools.git"
   },
   "dependencies": {
     "cors-anywhere": "^0.4.1",

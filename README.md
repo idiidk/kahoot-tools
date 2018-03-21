@@ -1,39 +1,52 @@
-Webpack 3 Boilerplate
-===========
+# Kahoot Tools
+> Scaring teachers since Sep 27, 2017!
 
-[![Dependency Status](https://david-dm.org/cvgellhorn/webpack-boilerplate.svg)](https://david-dm.org/cvgellhorn/webpack-boilerplate) 
-[![devDependency Status](https://david-dm.org/cvgellhorn/webpack-boilerplate/dev-status.svg)](https://david-dm.org/cvgellhorn/webpack-boilerplate)
+A suite of tools for fucking with Kahoot games. Easily installable and customizable.
 
-> Plain webpack 3 boilerplate with Babel, SASS and lodash on board
+## Installation
 
-## Requirements
-You only need <b>node.js</b> pre-installed and you’re good to go. 
+OS X, Linux and Windows:
 
-If you don’t want to work with lodash, just remove it from the node packages and the webpack config.
-
-## Download
-Download in current directory
 ```sh
-$ curl -L -o master.zip https://github.com/cvgellhorn/webpack-boilerplate/archive/master.zip && unzip master.zip && rm master.zip && mv ./webpack-boilerplate-master/{.,}* ./ && rm -r ./webpack-boilerplate-master
+git clone https://github.com/idiidk/kahoot-tools.git
+cd kahoot-tools
+yarn install
+yarn dev
 ```
 
-## Setup
-Install dependencies
-```sh
-$ npm install
-```
+## Usage
 
-## Development
-Run the local webpack-dev-server with livereload and autocompile on [http://localhost:8080/](http://localhost:8080/)
-```sh
-$ npm run dev
-```
-## Deployment
-Build the current application
-```sh
-$ npm run build
-```
+Kahoot tools runs a webserver on port 8080 and a cors server on port 3000. To use kahoot-tools, yarn dev, open a browser and go to localhost:8080.
 
-## [webpack](https://webpack.js.org/)
-If you're not familiar with webpack, the [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) will serve the static files in your build folder and watch your source files for changes.
-When changes are made the bundle will be recompiled. This modified bundle is served from memory at the relative path specified in publicPath.
+## Release History
+
+* 4.0.0
+    * Switched to webpack and rewrote a bunch of code!
+
+...older history can be found in the [old](https://github.com/idiidk/kahoot-tools/tree/old) branch
+
+## Goals
+
+### Version 4.1
+- [ ] Fully implement custom servers.
+    * [ ] Make a server API for building servers.
+    * [ ] Make a spot for custom server file hosting.
+
+## Meta
+
+idiidk – [@idiidka](https://twitter.com/idiidka)
+
+Distributed under the MIT license. See ``LICENSE`` for more information.
+
+[https://github.com/idiidk](https://github.com/idiidk/)
+
+## Contributing
+
+1. Fork it (<https://github.com/idiidk/kahoot-tools/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+
+## Credit
+[@cvgellhorn](https://github.com/cvgellhorn/) - For the webkit boilerplate: [https://github.com/cvgellhorn/webpack-boilerplate](repositiory)
