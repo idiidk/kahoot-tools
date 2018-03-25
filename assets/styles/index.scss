@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 * {
     font-family: 'Montserrat', sans-serif;
     font-stretch: 100%;
@@ -7,8 +7,9 @@
 
 html,
 body {
-    background-color: black;
     overflow-x: hidden;
+    background-color: black;
+    margin-bottom: 20px;
 }
 
 input {
@@ -24,11 +25,11 @@ input {
     text-indent: 0;
     color: #333;
     border: none;
+    border-radius: 2px;
     -moz-outline-style: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border-radius: 2px;
 }
 
 button {
@@ -43,33 +44,33 @@ button {
     padding-bottom: 4px;
     padding-left: 6px;
     cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: background .1s;
     text-align: center;
+    color: #333;
     border: none;
     border-radius: 2px;
-    color: #333;
     background-color: white;
-    transition: background 0.1s;
     -moz-outline-style: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    -moz-user-select: none;
     -khtml-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 button:active {
-    background-color: whitesmoke;
     color: #333;
+    background-color: #f1f1f1;
 }
 
 .title-container {
     width: 35vw;
     min-width: 300px;
-    margin-bottom: 8vh;
     margin-top: 4vh;
+    margin-bottom: 8vh;
     padding: 3vh;
     text-align: center;
     border-radius: 2px;
@@ -77,10 +78,10 @@ button:active {
     box-shadow: inset 0 -3px rgba(0, 0, 0, .15);
     .title {
         font-size: 7.5vmin;
+        font-weight: 700;
         margin: 0;
         margin-bottom: 2vh;
         color: #333;
-        font-weight: 700;
     }
     .subtitle {
         font-size: 4vmin;
@@ -104,11 +105,41 @@ button:active {
 }
 
 .message-container .card {
-    box-shadow: inset 0 -3px rgba(0, 0, 0, .15);
+    margin-bottom: 2vh;
     padding: 2vh;
     padding-bottom: 2px;
-    margin-bottom: 2vh;
     border-radius: 2px;
+    box-shadow: inset 0 -3px rgba(0, 0, 0, .15);
+}
+
+.navigator {
+    font-size: 3.5vmin;
+    font-weight: 700;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100vw;
+}
+
+.navigator .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #333;
+    background-color: white;
+    cursor: pointer;
+    transition: background 1s;
+}
+
+.navigator .box.active {
+    background-color: whitesmoke;
+    cursor: default;
+    pointer-events: none;
 }
 
 .kahoot-color-0 {
@@ -132,8 +163,8 @@ button:active {
 }
 
 .button-active {
-    background-color: #1368ce;
     color: white;
+    background-color: #1368ce;
 }
 
 .seperator {
@@ -141,8 +172,8 @@ button:active {
 }
 
 .disabled {
-    background-color: rgba(255, 255, 255, 0.5);
     pointer-events: none;
+    background-color: rgba(255, 255, 255, .5);
 }
 
 .centered-text {
@@ -168,8 +199,8 @@ button:active {
     justify-content: center;
     button {
         width: 15vw;
-        margin-left: 1vw;
         margin-right: 1vw;
+        margin-left: 1vw;
     }
 }
 
@@ -182,54 +213,54 @@ button:active {
     animation: bgcolor 20s infinite;
     -webkit-animation-direction: alternate;
     animation-direction: alternate;
-    background-color: #45a3e5
+    background-color: #45a3e5;
 }
 
 @-webkit-keyframes bgcolor {
     0% {
-        background-color: #45a3e5
+        background-color: #45a3e5;
     }
     17% {
-        background-color: #3cc
+        background-color: #3cc;
     }
     34% {
-        background-color: #66bf39
+        background-color: #66bf39;
     }
     51% {
-        background-color: #ffa602
+        background-color: #ffa602;
     }
     67% {
-        background-color: #eb670f
+        background-color: #eb670f;
     }
     84% {
-        background-color: #f35
+        background-color: #f35;
     }
     100% {
-        background-color: #864cbf
+        background-color: #864cbf;
     }
 }
 
 @keyframes bgcolor {
     0% {
-        background-color: #45a3e5
+        background-color: #45a3e5;
     }
     17% {
-        background-color: #3cc
+        background-color: #3cc;
     }
     34% {
-        background-color: #66bf39
+        background-color: #66bf39;
     }
     51% {
-        background-color: #ffa602
+        background-color: #ffa602;
     }
     67% {
-        background-color: #eb670f
+        background-color: #eb670f;
     }
     84% {
-        background-color: #f35
+        background-color: #f35;
     }
     100% {
-        background-color: #864cbf
+        background-color: #864cbf;
     }
 }
 
@@ -240,16 +271,16 @@ button:active {
 ::-webkit-scrollbar-track {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
 }
 
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
     background: rgba(160, 160, 160, .8);
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {

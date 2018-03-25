@@ -21,13 +21,40 @@ $("#start-login").click(doLogin);
 
 $(() => {
     $(".container").fadeOut(0);
-    showPanel("login");
+    showPanel(window.location.hash.replace("#", ""));
 
     const token = localStorage.getItem("bearerToken");
 
     if (token) {
         $("#login-wrapper").html(`<h2 class="bearer-token">Bearer Token: ${token}</h2>`);
     }
+
+    if (window.location.hash === "game" || window.location.hash === "login") {
+        showPanel(kahootSession ? "game" : "login");
+    } else {
+        showPanel(window.location.hash.replace("#", ""));
+    }
+
+    $("#game-navigator").click(() => {
+        showPanel(kahootSession ? "game" : "login");
+        $("#game-navigator").addClass("active");
+        $("#server-navigator").removeClass("active");
+    });
+
+    $("#server-navigator").click(() => {
+        showPanel(window.location.hash = "server");
+        $("#server-navigator").addClass("active");
+        $("#game-navigator").removeClass("active");
+    });
+
+    let activePage = window.location.hash.replace("#", "");
+    let inactivePage = window.location.hash.replace("#", "");
+
+    activePage = (activePage === "game" || activePage === "login" ? "game" : activePage)
+    inactivePage = (inactivePage !== "game" && inactivePage !== "login" ? "game" : "server")
+
+    $("#" + activePage + "-navigator").addClass("active");
+    $("#" + inactivePage + "-navigator").removeClass("active");
 });
 
 function showPanel(panel) {
@@ -36,6 +63,8 @@ function showPanel(panel) {
         $("#" + panel + "-panel").show();
         Velocity($("#" + panel + "-panel"), { opacity: 1 });
     });
+
+    document.location.hash = panel;
 }
 
 function doComLogin(username, password, callback) {
