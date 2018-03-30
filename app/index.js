@@ -31,8 +31,10 @@ $(() => {
 
     if (window.location.hash === "game" || window.location.hash === "login") {
         showPanel(kahootSession ? "game" : "login");
-    } else {
+    } else if(window.location.hash) {
         showPanel(window.location.hash.replace("#", ""));
+    } else {
+        showPanel("login");
     }
 
     $("#game-navigator").click(() => {

@@ -152,20 +152,14 @@ class KahootClient {
         this.cometd.websocketEnabled = true;
         this.cometd.handshake(function (h) {
             if (h.successful) {
-                let controller = self.cometd.subscribe("/service/controller", function (m) { })
-                let player = self.cometd.subscribe("/service/player", function (m) { })
-                let status = self.cometd.subscribe("/service/status", function (m) { })
-                self.cometd.unsubscribe(controller, function (m) { })
-                self.cometd.unsubscribe(player, function (m) { })
-                self.cometd.unsubscribe(status, function (m) { })
-                controller = self.cometd.subscribe("/service/controller", function (m) {
+                let controller = self.cometd.subscribe("/service/controller", function (m) {
                     self.onRawMessageController(m);
                     if (m.data.error) {
                         self.state = 3;
                         self.error = m.data.description;
                     }
-                })
-                player = self.cometd.subscribe("/service/player", function (m) {
+                });
+                let player = self.cometd.subscribe("/service/player", function (m) {
                     self.onRawMessagePlayer(m);
                     let tempJson;
 
@@ -193,7 +187,7 @@ class KahootClient {
                             break;
                     }
                 })
-                status = self.cometd.subscribe("/service/status", function (m) {
+                let status = self.cometd.subscribe("/service/status", function (m) {
                     self.onRawMessageStatus(m);
                     if (m.data.status === "ACTIVE") {
                         self.state = 1;

@@ -9,20 +9,27 @@ let answers = false;
 
 class GameController {
     static init(kahootSession) {
-        if (localStorage.getItem("bearerToken")) {
-            kahootSession.onRawMessagePlayer = m => {
-                if (m.data.id === 9) {
-                    let json = JSON.parse(m.data.content);
-                    sendMessage("kahoot-color-1", "Info", `Got quiz name: ${json.quizName}. Searching for answers...`, 5000);
-                    KahootHelper.getGameAnswers(json.quizName, localStorage.getItem("bearerToken"), (err, answerList) => {
-                        if (err) {
-                            sendMessage("kahoot-color-0", "Error", "No answers were found. This can happen if the kahoot is private.", 6000);
-                        } else {
-                            sendMessage("kahoot-color-3", "Success", `Got ${answerList.length} answers. The hack should work now!`, 5000);
-                            $("#answer-current-correct").removeClass("disabled");
-                            answers = answerList;
-                        }
-                    });
+
+        kahootSession.onRawMessagePlayer = m => {
+            if (m.data.id === 9 && localStorage.getItem("bearerToken")) {
+                let json = JSON.parse(m.data.content);
+                sendMessage("kahoot-color-1", "Info", `Got quiz name: ${json.quizName}. Searching for answers...`, 5000);
+                KahootHelper.getGameAnswers(json.quizName, localStorage.getItem("bearerToken"), (err, answerList) => {
+                    if (err) {
+                        sendMessage("kahoot-color-0", "Error", "No answers were found. This can happen if the kahoot is private.", 6000);
+                    } else {
+                        sendMessage("kahoot-color-3", "Success", `Got ${answerList.length} answers. The hack should work now!`, 5000);
+                        $("#answer-current-correct").removeClass("disabled");
+                        answers = answerList;
+                    }
+                });
+            } else if (m.data.id === 2) {
+                for (let i = 0; i < bots.length; i++) {
+                    if (answers) {
+                        bots[i].sendGameAnswer(answers[kahootSession.questionNum].answerNum);
+                    } else {
+                        bots[i].sendGameAnswer(Math.floor(Math.random() * 4) + 0);
+                    }
                 }
             }
         }
@@ -85,7 +92,7 @@ class GameController {
                 sendMessage("kahoot-color-1", "Info", `Doing it with ${bots.length + 1} players...`, 4000);
 
                 crashTimer = setInterval(() => {
-                    for (let i = 0; i < bots.length; i++) {
+                    for (let i = 0; i < bots.length - 1; i++) {
                         bots[i].sendGameAnswer(0);
                     }
 
@@ -97,7 +104,6 @@ class GameController {
         });
 
         $("#answer-current-correct").click(() => {
-
             if (kahootSession.questionNum !== null) {
                 kahootSession.sendGameAnswer(answers[kahootSession.questionNum].answerNum);
                 sendMessage("kahoot-color-3", "Success", `Sent answer ${answers[kahootSession.questionNum].answerNum + 1} for question ${kahootSession.questionNum + 1}`, 4000);
