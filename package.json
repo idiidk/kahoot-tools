@@ -6,8 +6,9 @@
   "license": "MIT",
   "homepage": "https://github.com/idiidk/kahoot-tools",
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev webpack-dev-server --host 0.0.0.0 --progress --config webpack.config.dev.js",
-    "build": "webpack -p --progress --config webpack.config.build.js"
+    "dev": "cross-env NODE_ENV=dev node_modules/webpack-dev-server/bin/webpack-dev-server.js --host 0.0.0.0 --progress --config webpack.config.dev.js",
+    "build": "node node_modules/webpack/bin/webpack.js -p --progress --config webpack.config.build.js",
+    "clean": "rm -rf dist"
   },
   "repository": {
     "type": "git",
