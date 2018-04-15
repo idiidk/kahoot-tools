@@ -10,6 +10,7 @@ import * as Velocity from "velocity-animate";
 import { sendMessage } from "./message.js";
 import { KahootClient, KahootHelper } from "./kahoot.js";
 import { GameController } from "./game.js";
+import { ServerController } from "./server.js";
 
 // Style imports
 import "normalize.css/normalize.css"
@@ -29,9 +30,9 @@ $(() => {
         $("#login-wrapper").html(`<h2 class="bearer-token">Bearer Token: ${token}</h2>`);
     }
 
-    if (window.location.hash === "game" || window.location.hash === "login") {
-        showPanel(kahootSession ? "game" : "login");
-    } else if(window.location.hash) {
+    if (window.location.hash === "#game" || window.location.hash === "#login") {
+        showPanel("login");
+    } else if (window.location.hash) {
         showPanel(window.location.hash.replace("#", ""));
     } else {
         showPanel("login");
@@ -44,7 +45,7 @@ $(() => {
     });
 
     $("#server-navigator").click(() => {
-        showPanel(window.location.hash = "server");
+        showPanel("server");
         $("#server-navigator").addClass("active");
         $("#game-navigator").removeClass("active");
     });
@@ -57,6 +58,8 @@ $(() => {
 
     $("#" + activePage + "-navigator").addClass("active");
     $("#" + inactivePage + "-navigator").removeClass("active");
+
+    ServerController.init();
 });
 
 function showPanel(panel) {
@@ -89,6 +92,7 @@ function doGameLogin(pin, name) {
         if (err) {
             sendMessage("kahoot-color-0", "Error", err, 4000);
             $("#start-login").removeClass("disabled");
+            kahootSession = null;
         } else {
             if (kahootSession.twoFactor) {
                 sendMessage("kahoot-color-1", "Info", "Found 2fa, Bypassing...", 4000);

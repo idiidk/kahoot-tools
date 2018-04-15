@@ -14,8 +14,8 @@ body {
 
 input {
     font-size: 3.5vmin;
-    width: 20vw;
-    min-height: 7.5vh;
+    width: calc(20vw - 12px);
+    min-height: calc(7.5vh - 8px);
     margin: 1.2vh;
     padding-top: 4px;
     padding-right: 6px;
@@ -26,10 +26,39 @@ input {
     color: #333;
     border: none;
     border-radius: 2px;
-    -moz-outline-style: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+    outline: 0;
+}
+
+select {
+    font-size: 3.5vmin;
+    font-weight: 700;
+    display: inline-block;
+    min-width: 20vw;
+    min-height: 7.5vh;
+    margin-bottom: 0;
+    padding-top: 4px;
+    padding-right: 6px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: background .1s;
+    text-align: center;
+    color: #333;
+    border: none;
+    border-radius: 2px;
+    background-color: white;
+    outline: 0;
+}
+
+select option {
+    font-size: 3.5vmin;
+    font-weight: 700;
+    color: #333;
+    outline: 0;
 }
 
 button {
@@ -54,11 +83,7 @@ button {
     border: none;
     border-radius: 2px;
     background-color: white;
-    -moz-outline-style: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    -khtml-user-select: none;
+    outline: 0;
 }
 
 button:active {

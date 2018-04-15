@@ -83,8 +83,27 @@
         <div class="center-aligner">
             <div class="title-container">
                 <h1 class="center-align title">Server Control</h1>
-                <h5 class="center-align subtitle">Pin: Not Started</h5>
+                <h5 class="center-align subtitle">Pin: <span id="pin">Not Started</span></h5>
             </div>
+        </div>
+
+        <h2 class="centered-text">Custom Gamemode</h2>
+
+        <div class="center-aligner">
+            <select id="gamemode-selector" class="inset">
+                <option value="test">Test</option>
+                <option value="custom">Load from URL</option>
+            </select>
+
+            <div id="custom-url-wrapper">
+                <input class="inset" placeholder="URL" id="custom-url" type="text">
+            </div>
+        </div>
+
+        <div class="seperator"></div>
+
+        <div class="center-aligner">
+            <button id="start-server" class="inset">Start Server</button>
         </div>
     </div>
 

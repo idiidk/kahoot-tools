@@ -28,8 +28,8 @@ Kahoot tools runs a webserver on port 8080 and a cors server on port 3000. To us
 ## Goals
 
 ### Version 4.1
-- [ ] Fully implement custom servers.
-    * [ ] Make a server API for building servers.
+- [x] Fully implement custom servers.
+    * [x] Make a server API for building servers.
     * [ ] Make a spot for custom server file hosting.
 
 ## Meta
