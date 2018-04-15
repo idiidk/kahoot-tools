@@ -10,6 +10,7 @@ OS X, Linux and Windows:
 ```sh
 git clone https://github.com/idiidk/kahoot-tools.git
 cd kahoot-tools
+npm install
 npm run build
 node kahoot-tools.js
 ```
