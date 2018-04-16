@@ -10,9 +10,13 @@ OS X, Linux and Windows:
 ```sh
 git clone https://github.com/idiidk/kahoot-tools.git
 cd kahoot-tools
+npm install
 npm run build
 node kahoot-tools.js
 ```
+
+You can now also just use the hosted version!
+[dviide.xyz](http://dviide.xyz)
 
 ## Usage
 
