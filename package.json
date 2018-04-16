@@ -7,7 +7,7 @@
   "homepage": "https://github.com/idiidk/kahoot-tools",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev node_modules/webpack-dev-server/bin/webpack-dev-server.js --host 0.0.0.0 --progress --config webpack.config.dev.js",
-    "build": "npm run clean && node node_modules/webpack/bin/webpack.js -p --progress --config webpack.config.build.js && cp -r gamemodes/ dist/",
+    "build": "npm run clean  && node node_modules/webpack/bin/webpack.js -p --progress --config webpack.config.build.js && cp -r gamemodes/ dist/",
     "clean": "rm -rf dist"
   },
   "repository": {
