@@ -12,3 +12,10 @@ bower_components/
 ## Files
 result.xml
 npm-debug.log
+yarn-error.log
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
