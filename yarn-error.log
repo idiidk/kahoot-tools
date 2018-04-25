@@ -1,5 +1,5 @@
 Arguments: 
-  /home/idiidk/.nvm/versions/node/v9.2.0/bin/node /home/idiidk/.yarn/bin/yarn.js rund ev
+  /home/idiidk/.nvm/versions/node/v9.2.0/bin/node /home/idiidk/.yarn/bin/yarn.js run dev
 
 PATH: 
   /home/idiidk/.yarn/bin:/home/idiidk/.config/yarn/global/node_modules/.bin:/home/idiidk/.yarn/bin:/home/idiidk/.config/yarn/global/node_modules/.bin:/home/idiidk/.nvm/versions/node/v9.2.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/idiidk/android-sdk-linux:/home/idiidk/android-sdk-linux
@@ -16,14 +16,14 @@ Platform:
 npm manifest: 
   {
     "name": "kahoot-tools",
-    "version": "4.0.0",
+    "version": "4.0.6",
     "description": "A set of tools for manipulating kahoot in fun ways.",
     "author": "idiidk",
     "license": "MIT",
     "homepage": "https://github.com/idiidk/kahoot-tools",
     "scripts": {
       "dev": "cross-env NODE_ENV=dev node_modules/webpack-dev-server/bin/webpack-dev-server.js --host 0.0.0.0 --progress --config webpack.config.dev.js",
-      "build": "node node_modules/webpack/bin/webpack.js -p --progress --config webpack.config.build.js",
+      "build": "npm run clean && node node_modules/webpack/bin/webpack.js -p --progress --config webpack.config.build.js && cp -r gamemodes/ dist/",
       "clean": "rm -rf dist"
     },
     "repository": {
@@ -5613,14 +5613,16 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: Command "rund" not found.
-      at new MessageError (/home/idiidk/.yarn/lib/cli.js:186:110)
-      at /home/idiidk/.yarn/lib/cli.js:87307:17
-      at Generator.next (<anonymous>)
-      at step (/home/idiidk/.yarn/lib/cli.js:98:30)
-      at /home/idiidk/.yarn/lib/cli.js:116:14
-      at new Promise (<anonymous>)
-      at new F (/home/idiidk/.yarn/lib/cli.js:23451:28)
-      at /home/idiidk/.yarn/lib/cli.js:95:12
-      at runCommand (/home/idiidk/.yarn/lib/cli.js:87312:22)
-      at Object.<anonymous> (/home/idiidk/.yarn/lib/cli.js:87412:14)
+  Error: Command failed.
+  Exit code: 1
+  Command: sh
+  Arguments: -c cross-env NODE_ENV=dev node_modules/webpack-dev-server/bin/webpack-dev-server.js --host 0.0.0.0 --progress --config webpack.config.dev.js
+  Directory: /home/idiidk/Documents/Node_Project/kahoot-tools-2
+  Output:
+  
+      at ProcessTermError.MessageError (/home/idiidk/.yarn/lib/cli.js:186:110)
+      at new ProcessTermError (/home/idiidk/.yarn/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/home/idiidk/.yarn/lib/cli.js:30281:17)
+      at ChildProcess.emit (events.js:159:13)
+      at maybeClose (internal/child_process.js:943:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)

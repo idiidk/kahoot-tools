@@ -226,6 +226,7 @@ class KahootServer {
         this.uuid;
         this.quiz;
         this.cometd;
+        this.message = () => { };
 
         this.players = [];
         this.options = {
@@ -270,7 +271,7 @@ class KahootServer {
                 const challenge = KahootHelper.solveChallenge(response.challenge);
                 const rawSession = req.getResponseHeader("x-kahoot-session-token");
                 const session = KahootHelper.shiftBits(rawSession, challenge);
-                self.cometd = new org.cometd.CometD();
+                self.cometd = new cometd.CometD();
 
                 self.cometd.configure({
                     url: "wss://play.kahoot.it/cometd/" + self.pin + "/" + session,
@@ -280,11 +281,11 @@ class KahootServer {
                 self.cometd.handshake(function (h) {
                     if (h.successful) {
                         self.cometd.subscribe("/service/player", function (m) {
-                            self.emit("message", m)
+                            self.message(m);
                         });
 
                         self.cometd.subscribe("/controller/" + self.pin, function (m) {
-                            self.emit("message", m);
+                            self.message(m);
 
                             if (m.data.type === "joined") {
                                 self.send("/service/player", {

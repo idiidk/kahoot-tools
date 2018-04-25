@@ -9,7 +9,6 @@ let answers = false;
 
 class GameController {
     static init(kahootSession) {
-
         kahootSession.onRawMessagePlayer = m => {
             if (m.data.id === 9 && localStorage.getItem("bearerToken")) {
                 let json = JSON.parse(m.data.content);

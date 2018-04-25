@@ -6,6 +6,7 @@
 // JS imports
 import $ from "jquery/dist/jquery.min.js";
 import * as Velocity from "velocity-animate";
+import * as M from "materialize-css";
 
 import { sendMessage } from "./message.js";
 import { KahootClient, KahootHelper } from "./kahoot.js";
@@ -21,13 +22,14 @@ let kahootSession;
 $("#start-login").click(doLogin);
 
 $(() => {
+    M.FormSelect.init($("select"));
     $(".container").fadeOut(0);
     showPanel(window.location.hash.replace("#", ""));
 
     const token = localStorage.getItem("bearerToken");
 
     if (token) {
-        $("#login-wrapper").html(`<h2 class="bearer-token">Bearer Token: ${token}</h2>`);
+        $("#login-wrapper").html(`<h5 class="center-align">Bearer Token: ${token}</h5>`);
     }
 
     if (window.location.hash === "#game" || window.location.hash === "#login") {

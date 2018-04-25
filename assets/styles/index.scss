@@ -1,126 +1,49 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,700");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css");
 * {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-stretch: 100%;
-    color: white;
 }
 
 html,
 body {
     overflow-x: hidden;
-    background-color: black;
     margin-bottom: 20px;
 }
 
-input {
-    font-size: 3.5vmin;
-    width: calc(20vw - 12px);
-    min-height: calc(7.5vh - 8px);
-    margin: 1.2vh;
-    padding-top: 4px;
-    padding-right: 6px;
-    padding-bottom: 4px;
-    padding-left: 6px;
-    text-align: center;
-    text-indent: 0;
-    color: #333;
-    border: none;
-    border-radius: 2px;
-    outline: 0;
+#▲,
+#◆,
+#●,
+#■ {
+    margin-left: .5vw;
+    margin-right: .5vw;
+    width: 10vw;
 }
 
-select {
-    font-size: 3.5vmin;
-    font-weight: 700;
-    display: inline-block;
-    min-width: 20vw;
-    min-height: 7.5vh;
-    margin-bottom: 0;
-    padding-top: 4px;
-    padding-right: 6px;
-    padding-bottom: 4px;
-    padding-left: 6px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    transition: background .1s;
-    text-align: center;
-    color: #333;
-    border: none;
-    border-radius: 2px;
-    background-color: white;
-    outline: 0;
+.container {
+    min-height: 80vh;
+    max-height: calc(100vh - 20px);
 }
 
-select option {
-    font-size: 3.5vmin;
+.centerer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 7.5vmin;
     font-weight: 700;
     color: #333;
-    outline: 0;
 }
 
-button {
-    font-size: 3.5vmin;
-    font-weight: 700;
-    display: inline-block;
-    min-width: 20vw;
-    min-height: 7.5vh;
-    margin-bottom: 0;
-    padding-top: 4px;
-    padding-right: 6px;
-    padding-bottom: 4px;
-    padding-left: 6px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    transition: background .1s;
-    text-align: center;
+.subtitle {
+    font-size: 4vmin;
+    font-weight: normal;
     color: #333;
-    border: none;
-    border-radius: 2px;
-    background-color: white;
-    outline: 0;
-}
-
-button:active {
-    color: #333;
-    background-color: #f1f1f1;
-}
-
-.title-container {
-    width: 35vw;
-    min-width: 300px;
-    margin-top: 4vh;
-    margin-bottom: 8vh;
-    padding: 3vh;
-    text-align: center;
-    border-radius: 2px;
-    background-color: white;
-    box-shadow: inset 0 -3px rgba(0, 0, 0, .15);
-    .title {
-        font-size: 7.5vmin;
-        font-weight: 700;
-        margin: 0;
-        margin-bottom: 2vh;
+    .pin {
         color: #333;
     }
-    .subtitle {
-        font-size: 4vmin;
-        font-weight: normal;
-        margin: 0;
-        color: #333;
-        .pin {
-            color: #333;
-        }
-    }
-}
-
-.leggo-button {
-    margin-top: 4vh;
 }
 
 .message-container {
@@ -129,18 +52,17 @@ button:active {
     top: 0;
     right: 0;
     display: absolute;
-    padding: 2vh;
 }
 
 .message-container .card {
     margin-bottom: 2vh;
-    padding: 2vh;
-    padding-bottom: 2px;
-    border-radius: 2px;
+    margin-right: 2vh;
+    margin-top: 2vh;
     box-shadow: inset 0 -3px rgba(0, 0, 0, .15);
 }
 
 .navigator {
+    z-index: 10000;
     font-size: 3.5vmin;
     font-weight: 700;
     position: fixed;
@@ -186,15 +108,6 @@ button:active {
     background-color: #298f0d;
 }
 
-.inverse-text {
-    color: white;
-}
-
-.button-active {
-    color: white;
-    background-color: #1368ce;
-}
-
 .seperator {
     margin-bottom: 8vh;
 }
@@ -206,25 +119,10 @@ button:active {
 
 .centered-text {
     font-size: 3vmin;
-    width: 100vw;
     text-align: center;
 }
 
-.bearer-token {
-    font-size: 3vmin;
-    margin-bottom: 4vh;
-}
-
-.center-aligner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .answer-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     button {
         width: 15vw;
         margin-right: 1vw;

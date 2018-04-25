@@ -7,27 +7,11 @@ const api = {
     KahootClient, 
     KahootHelper,
     KahootServer,
-    updatePin: (pin) => { $("#pin").text(pin) },
+    updatePin: (pin) => { $("#pin-display").html(pin) },
 }
 
 class ServerController {
     static init() {
-        if ($("#gamemode-selector").val() !== "custom") {
-            $("#custom-url-wrapper").animate({ width: "toggle", opacity: "toggle" }, 0);
-        }
-
-        $("#gamemode-selector").on("change", () => {
-            if ($("#gamemode-selector").val() === "custom") {
-                if (!$("#custom-url-wrapper").is(":visible")) {
-                    $("#custom-url-wrapper").animate({ width: "toggle", opacity: "toggle" }, 350);
-                }
-            } else {
-                if ($("#custom-url-wrapper").is(":visible")) {
-                    $("#custom-url-wrapper").animate({ width: "toggle", opacity: "toggle" }, 350);
-                }
-            }
-        });
-
         $("#start-server").click(() => {
             let fileUrl;
 
