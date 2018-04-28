@@ -1,8 +1,11 @@
 @import "themes.scss";
+@import "../node_modules/materialize-css/sass/components/_color-variables.scss";
+
+$secondary-color: color("indigo", "base") !default;
+
+@import "../node_modules/materialize-css/sass/materialize.scss";
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,700");
-
-$secondary-color: color("indigo", "lighten-1") !default;
 
 @mixin themify($themes: $themes) {
     @each $theme, $map in $themes {

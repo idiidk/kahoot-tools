@@ -15,7 +15,6 @@ import { ServerController } from "./server.js";
 import { OptionsController } from "./options.js";
 
 // Style imports
-import "materialize-css/sass/materialize.scss";
 import "styles/index.scss";
 
 let kahootSession;
