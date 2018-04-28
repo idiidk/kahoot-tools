@@ -2,7 +2,7 @@
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,700");
 
-@import url("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css");
+$secondary-color: color("indigo", "lighten-1") !default;
 
 @mixin themify($themes: $themes) {
     @each $theme, $map in $themes {
