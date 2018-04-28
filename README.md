@@ -15,14 +15,22 @@ npm run build
 node kahoot-tools.js
 ```
 
-You can now also just use the hosted version!
-[dviide.xyz](http://dviide.xyz)
+To run kahoot-tools in dev mode, follow the steps above but replace ```npm run build``` with: ```npm run dev```
+
+Don`t have the time or resources to host yourself? You can now also just use my prehosted version!
+[http://dviide.xyz](http://dviide.xyz)
 
 ## Usage
 
 Kahoot tools runs a webserver on port 8080 and a cors server on port 3000. To use kahoot-tools, yarn dev, open a browser and go to localhost:8080.
 
 ## Release History
+
+* 4.1.0
+    * Implemented custom servers!
+    * Implemented themes and option menu!
+    * Switched to materialize.
+    * Rewrote and wrote a bunch of code!
 
 * 4.0.0
     * Switched to webpack and rewrote a bunch of code!
@@ -34,7 +42,8 @@ Kahoot tools runs a webserver on port 8080 and a cors server on port 3000. To us
 ### Version 4.1
 - [x] Fully implement custom servers.
     * [x] Make a server API for building servers.
-    * [ ] Make a spot for custom server file hosting.
+    * [x] Make a spot for custom server file hosting.
+    * [x] Fully implement themes.
 
 ## Meta
 

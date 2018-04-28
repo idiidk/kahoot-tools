@@ -9,145 +9,175 @@
 </head>
 
 <body>
-    <div id="login-panel" class="container">
-        <div class="row">
-            <div class="col s12">
-                <h1 class="center-align title">Kahoot Tools</h1>
-                <h5 class="center-align subtitle">By ya boi @idiidk</h5>
+    <div class="app-container">
+        <div id="login-panel" class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h1 class="center-align title">Kahoot Tools</h1>
+                    <h5 class="center-align subtitle">By ya boi @idiidk</h5>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="input-field col s6">
-                <input id="pin" type="text">
-                <label for="pin">Pin</label>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="pin" type="text">
+                    <label for="pin">Pin</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="name" type="text">
+                    <label for="name">Name</label>
+                </div>
             </div>
-            <div class="input-field col s6">
-                <input id="name" type="text">
-                <label for="name">Name</label>
-            </div>
-        </div>
 
-        <div id="login-wrapper" class="row">
-            <div class="input-field col s6">
-                <input id="username" type="text">
-                <label for="username">Username</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="password" type="password">
-                <label for="password">Password</label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col s12 centerer">
-                <a class="waves-effect waves-light btn" id="start-login">Leggo</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="game-panel" class="container">
-        <div class="row">
-            <div class="col s12">
-                <h1 class="center-align title">Game Control</h1>
-                <h5 id="game-state" class="center-align subtitle">Pin: | Name: </h5>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col s12">
-                <h2 class="centered-text">Send Answer</h2>
-            </div>
-        </div>
-
-        <div class="row answer-wrapper">
-            <div class="col s12 centerer">
-                <a id="▲" class=" kahoot-color-0 inverse-text waves-effect waves-light btn">▲</a>
-                <a id="◆" class=" kahoot-color-1 inverse-text waves-effect waves-light btn">◆</a>
-                <a id="●" class=" kahoot-color-2 inverse-text waves-effect waves-light btn">●</a>
-                <a id="■" class=" kahoot-color-3 inverse-text waves-effect waves-light btn">■</a>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col s12">
-                <h2 class="centered-text">Send Bots</h2>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field col s6">
-                <input id="bot-count" type="text">
-                <label for="bot-count">Bot Amount</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="bot-prefix" type="text">
-                <label for="bot-prefix">Bot Prefix</label>
+            <div id="login-wrapper" class="row">
+                <div class="input-field col s6">
+                    <input id="username" type="text">
+                    <label for="username">Username</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="password" type="password">
+                    <label for="password">Password</label>
+                </div>
             </div>
 
             <div class="row">
                 <div class="col s12 centerer">
-                    <a id="bot-send" class="waves-effect waves-light btn">Send Bots</a>
+                    <a class="waves-effect waves-light btn" id="start-login">Leggo</a>
                 </div>
             </div>
         </div>
 
-        <h2 class="centered-text">Experimental Hacks</h2>
+        <div id="game-panel" class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h1 class="center-align title">Game Control</h1>
+                    <h5 id="game-state" class="center-align subtitle">Pin: | Name: </h5>
+                </div>
+            </div>
 
-        <div class="row">
-            <div class="col s12 centerer">
-                <a id="crash-game" class="waves-effect waves-light btn">Crash Game</a>
+            <div class="row">
+                <div class="col s12">
+                    <h2 class="centered-text">Send Answer</h2>
+                </div>
+            </div>
+
+            <div class="row answer-wrapper">
+                <div class="col s12 centerer">
+                    <a id="▲" class=" kahoot-color-0 inverse-text waves-effect waves-light btn">▲</a>
+                    <a id="◆" class=" kahoot-color-1 inverse-text waves-effect waves-light btn">◆</a>
+                    <a id="●" class=" kahoot-color-2 inverse-text waves-effect waves-light btn">●</a>
+                    <a id="■" class=" kahoot-color-3 inverse-text waves-effect waves-light btn">■</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <h2 class="centered-text">Send Bots</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="bot-count" type="text">
+                    <label for="bot-count">Bot Amount</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="bot-prefix" type="text">
+                    <label for="bot-prefix">Bot Prefix</label>
+                </div>
+
+                <div class="row">
+                    <div class="col s12 centerer">
+                        <a id="bot-send" class="waves-effect waves-light btn">Send Bots</a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="centered-text">Experimental Hacks</h2>
+
+            <div class="row">
+                <div class="col s12 centerer">
+                    <a id="crash-game" class="waves-effect waves-light btn">Crash Game</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 centerer">
+                    <a id="answer-current-correct" class="waves-effect waves-light btn">Answer Correctly</a>
+                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col s12 centerer">
-                <a id="answer-current-correct" class="waves-effect waves-light btn">Answer Correctly</a>
+        <div id="server-panel" class="container">
+            <div class="row">
+                <div class="title-container">
+                    <h1 class="center-align title">Server Control</h1>
+                    <h5 class="center-align subtitle">Pin:
+                        <span class="pin" id="pin-display">Not Started</span>
+                    </h5>
+                </div>
+            </div>
+
+            <div id="select-gamemode-wrapper">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select id="gamemode-selector">
+                            <option value="test">API Test</option>
+                            <option value="uitest">UI Test</option>
+                            <option value="vs">Versus Example</option>
+                            <option value="custom">Load from URL</option>
+                        </select>
+                        <label>Gamemode</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="custom-url" type="text">
+                        <label for="custom-url">URL (for load from url option)</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12 centerer">
+                        <a id="start-server" class="waves-effect waves-light btn">Start Server</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="server-ui-wrapper" class="col s12">
+                </div>
             </div>
         </div>
+
+        <div id="options-panel" class="container">
+            <div class="row">
+                <div class="title-container">
+                    <h1 class="center-align title">Options</h1>
+                    <h5 class="center-align subtitle">Customize kahoot-tools</h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="theme-selector">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                    <label>Theme</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigator">
+            <div id="game-navigator" class="box active">Game</div>
+            <div id="server-navigator" class="box">Server</div>
+            <div id="options-navigator" class="box">Options</div>
+        </div>
+
+        <div id="message-container" class="message-container"></div>
     </div>
-
-    <div id="server-panel" class="container">
-        <div class="row">
-            <div class="title-container">
-                <h1 class="center-align title">Server Control</h1>
-                <h5 class="center-align subtitle">Pin:
-                    <span class="pin" id="pin-display">Not Started</span>
-                </h5>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field">
-                <select id="gamemode-selector">
-                    <option value="test">Test</option>
-                    <option value="vs">Versus Example</option>
-                    <option value="custom">Load from URL</option>
-                </select>
-                <label>Gamemode</label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="input-field">
-                <input id="custom-url" type="text">
-                <label for="custom-url">URL (for load from url option)</label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col s12 centerer">
-                <a id="start-server" class="waves-effect waves-light btn">Start Server</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="navigator">
-        <div id="game-navigator" class="box active">Game</div>
-        <div id="server-navigator" class="box">Server</div>
-    </div>
-
-    <div id="message-container" class="message-container"></div>
 </body>
 
 </html>

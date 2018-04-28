@@ -1,5 +1,31 @@
+@import "themes.scss";
+
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,700");
+
 @import url("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css");
+
+@mixin themify($themes: $themes) {
+    @each $theme, $map in $themes {
+        .theme-#{$theme} & {
+            $theme-map: () !global;
+
+            @each $key, $submap in $map {
+                $value: map-get(map-get($themes, $theme), "#{$key}");
+
+                $theme-map: map-merge($theme-map, ($key: $value)) !global;
+            }
+
+            @content;
+
+            $theme-map: null !global;
+        }
+    }
+}
+
+@function themed($key) {
+    @return map-get($theme-map, $key);
+}
+
 * {
     font-family: "Poppins", sans-serif;
     font-stretch: 100%;
@@ -9,6 +35,17 @@ html,
 body {
     overflow-x: hidden;
     margin-bottom: 20px;
+
+    @include themify($themes) {
+        color: themed("textColor");
+        background-color: themed("backgroundColor");
+    }
+}
+
+input {
+    @include themify($themes) {
+        color: themed("textColor");
+    }
 }
 
 #▲,
@@ -18,6 +55,10 @@ body {
     margin-left: .5vw;
     margin-right: .5vw;
     width: 10vw;
+}
+
+#server-ui-wrapper {
+    opacity: 0;
 }
 
 .container {
@@ -34,16 +75,11 @@ body {
 .title {
     font-size: 7.5vmin;
     font-weight: 700;
-    color: #333;
 }
 
 .subtitle {
     font-size: 4vmin;
     font-weight: normal;
-    color: #333;
-    .pin {
-        color: #333;
-    }
 }
 
 .message-container {
@@ -58,7 +94,8 @@ body {
     margin-bottom: 2vh;
     margin-right: 2vh;
     margin-top: 2vh;
-    box-shadow: inset 0 -3px rgba(0, 0, 0, .15);
+    box-shadow: inset 0 -3px rgba(0, 0, 0, 0.15);
+    min-width: 20vw;
 }
 
 .navigator {
@@ -70,24 +107,32 @@ body {
     display: flex;
     flex-wrap: wrap;
     width: 100vw;
+    height: 7vh;
+
+    @include themify($themes) {
+        color: themed("navigatorTextColor");
+        background-color: themed("navigatorBackgroundColor");
+    }
 }
 
 .navigator .box {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: calc(100%/3);
     height: 100%;
     padding-top: 10px;
     padding-bottom: 10px;
-    color: #333;
-    background-color: white;
     cursor: pointer;
     transition: background 1s;
 }
 
 .navigator .box.active {
-    background-color: whitesmoke;
+    @include themify($themes) {
+        background-color: themed("selectedBackground");
+    }
+
+
     cursor: default;
     pointer-events: none;
 }
@@ -114,7 +159,7 @@ body {
 
 .disabled {
     pointer-events: none;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .centered-text {
@@ -131,63 +176,7 @@ body {
 }
 
 .inset {
-    box-shadow: inset 0 -3px rgba(0, 0, 0, .15);
-}
-
-.animated-background {
-    -webkit-animation: bgcolor 20s infinite;
-    animation: bgcolor 20s infinite;
-    -webkit-animation-direction: alternate;
-    animation-direction: alternate;
-    background-color: #45a3e5;
-}
-
-@-webkit-keyframes bgcolor {
-    0% {
-        background-color: #45a3e5;
-    }
-    17% {
-        background-color: #3cc;
-    }
-    34% {
-        background-color: #66bf39;
-    }
-    51% {
-        background-color: #ffa602;
-    }
-    67% {
-        background-color: #eb670f;
-    }
-    84% {
-        background-color: #f35;
-    }
-    100% {
-        background-color: #864cbf;
-    }
-}
-
-@keyframes bgcolor {
-    0% {
-        background-color: #45a3e5;
-    }
-    17% {
-        background-color: #3cc;
-    }
-    34% {
-        background-color: #66bf39;
-    }
-    51% {
-        background-color: #ffa602;
-    }
-    67% {
-        background-color: #eb670f;
-    }
-    84% {
-        background-color: #f35;
-    }
-    100% {
-        background-color: #864cbf;
-    }
+    box-shadow: inset 0 -3px rgba(0, 0, 0, 0.15);
 }
 
 ::-webkit-scrollbar {
@@ -197,18 +186,18 @@ body {
 ::-webkit-scrollbar-track {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: rgba(160, 160, 160, .8);
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+    background: rgba(160, 160, 160, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {
-    background: rgba(160, 160, 160, .8);
+    background: rgba(160, 160, 160, 0.8);
 }

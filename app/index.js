@@ -12,6 +12,7 @@ import { sendMessage } from "./message.js";
 import { KahootClient, KahootHelper } from "./kahoot.js";
 import { GameController } from "./game.js";
 import { ServerController } from "./server.js";
+import { OptionsController } from "./options.js";
 
 // Style imports
 import "normalize.css/normalize.css"
@@ -22,6 +23,13 @@ let kahootSession;
 $("#start-login").click(doLogin);
 
 $(() => {
+    if (!window.localStorage) {
+        alert("localStorage is not defined. Please exit private mode or update your browser!");
+        document.write("localStorage is not defined. Please exit private mode or update your browser!");
+    }
+
+    OptionsController.init();
+
     M.FormSelect.init($("select"));
     $(".container").fadeOut(0);
     showPanel(window.location.hash.replace("#", ""));
@@ -44,12 +52,21 @@ $(() => {
         showPanel(kahootSession ? "game" : "login");
         $("#game-navigator").addClass("active");
         $("#server-navigator").removeClass("active");
+        $("#options-navigator").removeClass("active");
     });
 
     $("#server-navigator").click(() => {
         showPanel("server");
         $("#server-navigator").addClass("active");
         $("#game-navigator").removeClass("active");
+        $("#options-navigator").removeClass("active");
+    });
+
+    $("#options-navigator").click(() => {
+        showPanel("options");
+        $("#options-navigator").addClass("active");
+        $("#game-navigator").removeClass("active");
+        $("#server-navigator").removeClass("active");
     });
 
     let activePage = window.location.hash.replace("#", "");

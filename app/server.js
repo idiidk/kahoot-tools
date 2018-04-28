@@ -1,12 +1,15 @@
 import $ from "jquery/dist/jquery.min.js";
+import * as Velocity from "velocity-animate";
 import { sendMessage } from "./message.js";
 import { KahootClient, KahootHelper, KahootServer } from "./kahoot.js";
+import * as UI from "./serverUI.js";
 
 const api = {
     sendMessage,
-    KahootClient, 
+    KahootClient,
     KahootHelper,
     KahootServer,
+    UI: UI,
     updatePin: (pin) => { $("#pin-display").html(pin) },
 }
 
@@ -28,6 +31,11 @@ class ServerController {
                     if (typeof data === "string" && data.includes("this.")) {
                         const gamemode = new new Function(data)();
                         gamemode.api = api;
+
+                        if (gamemode.usesUI) {
+                            $("#select-gamemode-wrapper").slideUp();
+                            Velocity($("#server-ui-wrapper"), { opacity: 1 });
+                        }
 
                         if (gamemode.init) {
                             sendMessage("kahoot-color-1", "Info", `Initializing gamemode: ${gamemode.name}!`, 4000);
