@@ -98,6 +98,20 @@ class KahootClient {
         }, function (publishAck) { });
     }
 
+    sendTeam(names) {
+        setTimeout(() => {
+            this.cometd.publish("/service/controller", {
+                id: clientEvents.joinTeamMembers,
+                type: "message",
+                gameid: this.pin,
+                host: "kahoot.it",
+                content: JSON.stringify(
+                    names
+                )
+            }, function (publishAck) { });
+        }, 500);
+    }
+
     //bruteForceTwoFactor - tries to bruteforce the two factor auth code. pretty easy because of only 24 possibilities.
     bruteForceTwoFactor() {
         let combinations = ["0123", "0132", "0213", "0231", "0321", "0312", "1023", "1032", "1203", "1230", "1302", "1320", "2013", "2031", "2103", "2130", "2301", "2310", "3012", "3021", "3102", "3120", "3201", "3210"]
@@ -237,7 +251,7 @@ class KahootServer {
     }
 
     sendJavascript(script) {
-        server.send("/service/player", {
+        this.send("/service/player", {
             type: "message",
             id: 2,
             content: JSON.stringify({

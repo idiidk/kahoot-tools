@@ -34,6 +34,11 @@ $secondary-color: color("indigo", "base") !default;
     font-stretch: 100%;
 }
 
+body {
+    overflow-y: hidden;
+    padding-bottom: 7vh;
+}
+
 html,
 body {
     overflow-x: hidden;
@@ -66,7 +71,6 @@ input {
 
 .container {
     min-height: 80vh;
-    max-height: calc(100vh - 20px);
 }
 
 .centerer {

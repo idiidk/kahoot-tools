@@ -19,6 +19,7 @@ class Button {
     }
 
     init() {
+        this.element = $("#" + this.id);
         $("#" + this.id).click(this.clickHandler);
     }
 }
@@ -45,6 +46,10 @@ class Label {
         this.id = guid();
         this.template = `<${size} id="${this.id}">${text}</${size}>`;
         this.text = text;
+    }
+
+    init() {
+        this.element = $("#" + this.id);
     }
 }
 

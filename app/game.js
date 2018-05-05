@@ -82,6 +82,27 @@ class GameController {
             }
         });
 
+        $("#member-send").click(() => {
+            const memberCount = $("#member-count").val();
+            const memberPrefix = $("#member-prefix").val();
+
+            if (memberCount && memberPrefix) {
+                sendMessage("kahoot-color-1", "Info", `Sending ${memberCount} members...`, 4000);
+
+                let totalMembers = [];
+
+                for (let i = 0; i < parseInt(memberCount); i++) {
+                    totalMembers.push(memberPrefix + i);
+                }
+
+                kahootSession.sendTeam(totalMembers);
+
+                sendMessage("kahoot-color-3", "Success", "Queued up your members. They should connect soon...", 5000);
+            } else {
+                sendMessage("kahoot-color-0", "Error", "Please supply a prefix and amount!", 4000);
+            }
+        });
+
         $("#crash-game").click(() => {
             if (crashTimer) {
                 sendMessage("kahoot-color-1", "Info", "Stopping timers...", 4000);
