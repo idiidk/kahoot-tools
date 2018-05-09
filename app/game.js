@@ -22,14 +22,6 @@ class GameController {
                         answers = answerList;
                     }
                 });
-            } else if (m.data.id === 2) {
-                for (let i = 0; i < bots.length; i++) {
-                    if (answers) {
-                        bots[i].sendGameAnswer(answers[kahootSession.questionNum].answerNum);
-                    } else {
-                        bots[i].sendGameAnswer(Math.floor(Math.random() * 4) + 0);
-                    }
-                }
             }
         }
 
@@ -37,18 +29,30 @@ class GameController {
 
         $("#▲").click(() => {
             kahootSession.sendGameAnswer(0);
+            for (let i = 0; i < bots.length; i++) {
+                bots[i].sendGameAnswer(0);
+            }
         });
 
         $("#◆").click(() => {
             kahootSession.sendGameAnswer(1);
+            for (let i = 0; i < bots.length; i++) {
+                bots[i].sendGameAnswer(1);
+            }
         });
 
         $("#●").click(() => {
             kahootSession.sendGameAnswer(2);
+            for (let i = 0; i < bots.length; i++) {
+                bots[i].sendGameAnswer(2);
+            }
         });
 
         $("#■").click(() => {
             kahootSession.sendGameAnswer(3);
+            for (let i = 0; i < bots.length; i++) {
+                bots[i].sendGameAnswer(3);
+            }
         });
 
         $("#bot-send").click(() => {
@@ -126,6 +130,9 @@ class GameController {
         $("#answer-current-correct").click(() => {
             if (kahootSession.questionNum !== null) {
                 kahootSession.sendGameAnswer(answers[kahootSession.questionNum].answerNum);
+                for (let i = 0; i < bots.length; i++) {
+                    bots[i].sendGameAnswer(answers[kahootSession.questionNum].answerNum);
+                }
                 sendMessage("kahoot-color-3", "Success", `Sent answer ${answers[kahootSession.questionNum].answerNum + 1} for question ${kahootSession.questionNum + 1}`, 4000);
             } else {
                 sendMessage("kahoot-color-0", "Error", "Did the quiz start? We dont have a question num!", 4000);
