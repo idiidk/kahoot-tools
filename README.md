@@ -42,8 +42,8 @@ Kahoot tools runs a webserver on port 8080 and a cors server on port 3000. To us
 ### Version 4.2 (thanks for the suggestion [@antiburen](https://github.com/antiburen/) !)
 - [x] Fully support teams
     * [x] Allow hosting with team names.
-    * [ ] Make teams work with bots
-    * [ ] ???
+    * [x] Make teams work with bots
+    * [ ] CRAZY NEW HACKS COMING SOON...
 
 ### Version 4.1
 - [x] Fully implement custom servers.
