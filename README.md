@@ -28,6 +28,14 @@ Kahoot tools runs a webserver on port 8080 and a cors server on port 3000. To us
 
 ## Release History
 
+* 5.0.0 **(Prerelease)**
+    * Implemented 50% of the found exploits
+    * Implemented multi player system
+    * Improved player join speed by ~500% (yes you read that correctly)
+    * Added ability for ghost players to join
+    * Added selection for grouped or individual CID`s
+    * Added grouped player hacking! (select a player group to affect)
+
 * 4.1.0
     * Implemented custom servers!
     * Implemented themes and option menu!
@@ -41,11 +49,20 @@ Kahoot tools runs a webserver on port 8080 and a cors server on port 3000. To us
 
 ## Goals
 
+### Version 5 (major update)
+
+- [x] Implement multi player system
+  * Multiple players per game
+  * Custom CID`s
+  * Kick on command
+- [x] Make players join faster
+- [ ] Implement other POC`s on [dviide.xyz/experiments](http://dviide.xyz/experiments)
+
 ### Version 4.2 (thanks for the suggestion [@antiburen](https://github.com/antiburen/) !)
 - [x] Fully support teams
     * [x] Allow hosting with team names.
     * [x] Make teams work with bots
-    * [ ] CRAZY NEW HACKS COMING SOON...
+    * [x] CRAZY NEW HACKS COMING SOON...
 
 ### Version 4.1
 - [x] Fully implement custom servers.

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="theme-light">
 
 <head>
     <meta charset="UTF-8">
@@ -15,17 +15,18 @@
                 <div class="col s12">
                     <h1 class="center-align title">Kahoot Tools</h1>
                     <h5 class="center-align subtitle">By ya boi @idiidk</h5>
+                    <h6 class="center-align">
+                        <a href="https://discord.gg/uB9bPms">Discord Server!</a>
+                    </h6>
                 </div>
             </div>
 
+            <div class="seperator"></div>
+
             <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s12">
                     <input id="pin" type="text">
                     <label for="pin">Pin</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="name" type="text">
-                    <label for="name">Name</label>
                 </div>
             </div>
 
@@ -51,7 +52,16 @@
             <div class="row">
                 <div class="col s12">
                     <h1 class="center-align title">Game Control</h1>
-                    <h5 id="game-state" class="center-align subtitle">Pin: | Name: </h5>
+                    <h5 id="game-state" class="center-align subtitle">Pin: | Player Count: </h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <h6 class="centered-text">To add players, scroll to the bottom</h6>
+                    <h6 class="centered-text">
+                        <b>(you have to do this first)</b>
+                    </h6>
                 </div>
             </div>
 
@@ -70,29 +80,6 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col s12">
-                    <h2 class="centered-text">Send Bots</h2>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="bot-count" type="text">
-                    <label for="bot-count">Bot Amount</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="bot-prefix" type="text">
-                    <label for="bot-prefix">Bot Prefix</label>
-                </div>
-
-                <div class="row">
-                    <div class="col s12 centerer">
-                        <a id="bot-send" class="waves-effect waves-light btn ">Send Bots</a>
-                    </div>
-                </div>
-            </div>
-
             <h2 class="centered-text">Team Hacks</h2>
 
             <div class="row">
@@ -104,7 +91,7 @@
                     <input id="member-prefix" type="text">
                     <label for="member-prefix">Member Prefix</label>
                 </div>
-            
+
                 <div class="row">
                     <div class="col s12 centerer">
                         <a id="member-send" class="waves-effect waves-light btn ">Send Members</a>
@@ -123,6 +110,49 @@
             <div class="row">
                 <div class="col s12 centerer">
                     <a id="answer-current-correct" class="waves-effect waves-light btn ">Answer Correctly</a>
+                </div>
+            </div>
+
+            <div class="row add-players-card">
+                <div class="col s12">
+                    <div class="card indigo darken-2">
+                        <div class="card-content white-text">
+                            <span class="card-title">Players</span>
+                            <div id="players-wrapper" class="players-wrapper">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <div id="player-inputs">
+                                <div class="row white-input">
+                                    <div class="input-field col s3">
+                                        <input id="player-amount" type="text">
+                                        <label for="player-amount">Amount</label>
+                                    </div>
+                                    <div class="input-field col s3">
+                                        <input id="player-name" type="text">
+                                        <label for="player-name">Name</label>
+                                    </div>
+                                    <div class="input-field col s3">
+                                        <select id="player-is-ghost">
+                                            <option value="1">True</option>
+                                            <option value="0">False</option>
+                                        </select>
+                                        <label>Player is Ghost</label>
+                                    </div>
+                                    <div class="input-field col s3">
+                                        <select id="unique-cid">
+                                            <option value="1">True</option>
+                                            <option value="0">False</option>
+                                        </select>
+                                        <label>Unique CID</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <a id="add-player" class="noselect waves-effect waves-white btn-flat">add player</a>
+                            <a id="toggle-select-players" class="noselect waves-effect waves-white btn-flat">toggle select</a>
+                            <a id="remove-selected-players" class="noselect waves-effect waves-white btn-flat">remove selected</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

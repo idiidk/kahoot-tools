@@ -30,6 +30,7 @@ $(() => {
     OptionsController.init();
 
     M.FormSelect.init($("select"));
+
     $(".container").fadeOut(0);
     showPanel(window.location.hash.replace("#", ""));
 
@@ -104,9 +105,9 @@ function doComLogin(username, password, callback) {
     });
 }
 
-function doGameLogin(pin, name) {
-    kahootSession = new KahootClient(pin, name);
-    kahootSession.connect((err) => {
+function doGameLogin(pin) {
+    kahootSession = new KahootClient(pin);
+    kahootSession.initialize((err) => {
         if (err) {
             sendMessage("kahoot-color-0", "Error", err, 4000);
             $("#start-login").removeClass("disabled");
@@ -123,7 +124,7 @@ function doGameLogin(pin, name) {
                 showPanel("game");
                 GameController.init(kahootSession);
             }
-            $("#game-state").text(`Pin: ${pin} | Name: ${name}`);
+            $("#game-state").text(`Pin: ${pin} | Player Count: 0`);
         }
     });
 }
@@ -134,7 +135,6 @@ function doLogin() {
     let waitForMe = false;
 
     const pin = $("#pin").val();
-    const name = $("#name").val();
     const username = $("#username").val();
     const password = $("#password").val();
 
@@ -142,7 +142,7 @@ function doLogin() {
         if (username && password) {
             waitForMe = true;
             doComLogin(username, password, () => {
-                doGameLogin(pin, name);
+                doGameLogin(pin);
             });
         } else {
             sendMessage("kahoot-color-0", "Error", "Please specify a username and password!", 4000);
@@ -151,8 +151,8 @@ function doLogin() {
     }
 
     if (!waitForMe) {
-        if (pin && name) {
-            doGameLogin(pin, name);
+        if (pin) {
+            doGameLogin(pin);
         } else {
             sendMessage("kahoot-color-0", "Error", "Please specify a pin and name to connect with!", 4000);
             $("#start-login").removeClass("disabled");

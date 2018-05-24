@@ -38,8 +38,91 @@ const clientEvents = {
     resetTwoFactorAuth: 53
 }
 
+class KahootPlayer {
+    constructor(name, isGhost, cid, kahootSession) {
+        this.name = name;
+        this.cid = cid;
+        this.isGhost = false;
+        this.kahootSession = kahootSession;
+        this.cometd = kahootSession.cometd;
+        this.pin = kahootSession.pin;
+    }
+
+    sendRaw(rawMessage, callback) {
+        rawMessage = rawMessage[0];
+        rawMessage.data.gameid = this.pin;
+        this.cometd.publish(rawMessage.channel, rawMessage.data, callback);
+    }
+
+    send(channel, data, callback) {
+        data.host = "kahoot.it";
+        data.gameid = this.pin;
+        this.cometd.publish(channel, data, callback);
+    }
+
+    sendGameAnswer(answerId) {
+        this.send("/controller/" + this.pin, {
+            id: clientEvents.gameBlockAnswer,
+            type: "message",
+            cid: this.cid,
+            content: JSON.stringify({
+                "choice": answerId,
+                "meta": {
+                    "lag": 15,
+                    "device": {
+                        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36",
+                        "screen": {
+                            "width": 1440,
+                            "height": 870
+                        }
+                    }
+                }
+            })
+        });
+    }
+
+    sendTeam(names) {
+        this.send("/controller/" + this.pin, {
+            id: clientEvents.joinTeamMembers,
+            type: "message",
+            cid: this.cid,
+            content: JSON.stringify(
+                names
+            )
+        }, function (publishAck) {});
+    }
+
+    removeFromGame() {
+        this.send("/controller/" + this.pin, {
+            "type": "left",
+            "cid": this.cid,
+            "client": "dviide.xyz",
+        })
+    }
+
+    bruteForceTwoFactor() {
+        let combinations = ["0123", "0132", "0213", "0231", "0321", "0312", "1023", "1032", "1203", "1230", "1302", "1320", "2013", "2031", "2103", "2130", "2301", "2310", "3012", "3021", "3102", "3120", "3201", "3210"]
+        for (let i = 0; i < combinations.length; i++) {
+            this.twoFactorLogin(combinations[i]);
+        }
+    }
+
+    twoFactorLogin(code) {
+        this.send("/service/controller", {
+            id: clientEvents.submitTwoFactorAuth,
+            type: "message",
+            cid: this.cid,
+            gameid: this.pin,
+            host: "kahoot.it",
+            content: JSON.stringify({
+                "sequence": code
+            })
+        }, function (publishAck) {});
+    }
+}
+
 class KahootClient {
-    constructor(pin, name, url = "https://www.kahoot.it") {
+    constructor(pin, url = "https://www.kahoot.it") {
         this.pin = pin;
         this.name = name;
         this.apiUrl = proxy + url;
@@ -54,19 +137,17 @@ class KahootClient {
         this.rawSession;
         this.error;
 
-        this.onRawMessageController = function (m) { };
-        this.onRawMessagePlayer = function (m) { };
-        this.onRawMessageStatus = function (m) { };
+        this.onRawMessageController = function (m) {};
+        this.onRawMessagePlayer = function (m) {};
+        this.onRawMessageStatus = function (m) {};
     }
 
-    connect(callback) {
+    initialize(callback) {
         const self = this;
         this.testSession(function (error) {
             if (!error) {
                 self.createWebsocket(function () {
-                    self.doLogin(function () {
-                        callback(null, self.twoFactor);
-                    });
+                    callback(null, self.twoFactor);
                 });
             } else {
                 callback(error, self.twoFactor);
@@ -74,87 +155,48 @@ class KahootClient {
         });
     }
 
-    //MAIN GAME FUNCTIONS
-    sendGameAnswer(answerId) {
-        this.cometd.publish("/service/controller", {
-            id: clientEvents.gameBlockAnswer,
-            type: "message",
-            gameid: this.pin,
-            host: "kahoot.it",
-            content: JSON.stringify(
-                {
-                    "choice": answerId,
-                    "meta": {
-                        "lag": 15,
-                        "device": {
-                            "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36",
-                            "screen": {
-                                "width": 1440, "height": 870
-                            }
-                        }
-                    }
-                }
-            )
-        }, function (publishAck) { });
+    disconnect(callback) {
+        this.state = 0;
+        this.cometd.disconnect(callback);
     }
 
-    sendTeam(names) {
-        setTimeout(() => {
-            this.cometd.publish("/service/controller", {
-                id: clientEvents.joinTeamMembers,
-                type: "message",
-                gameid: this.pin,
-                host: "kahoot.it",
-                content: JSON.stringify(
-                    names
-                )
-            }, function (publishAck) { });
-        }, 500);
+    send(channel, data, callback) {
+        data.host = "play.kahoot.it";
+        data.gameid = this.pin;
+        this.cometd.publish(channel, data, callback);
     }
 
-    //bruteForceTwoFactor - tries to bruteforce the two factor auth code. pretty easy because of only 24 possibilities.
-    bruteForceTwoFactor() {
+    addPlayer(name, isGhost, cid) {
+        this.send("/controller/" + this.pin, {
+            type: "joined",
+            cid: cid,
+            image: "dviide.xyz",
+            name: name,
+            isGhost: isGhost,
+            completedTwoFactorAuth: 1
+        });
+
+        return new KahootPlayer(name, isGhost, cid, this);
+    }
+
+    bruteForceTwoFactor(cid) {
         let combinations = ["0123", "0132", "0213", "0231", "0321", "0312", "1023", "1032", "1203", "1230", "1302", "1320", "2013", "2031", "2103", "2130", "2301", "2310", "3012", "3021", "3102", "3120", "3201", "3210"]
         for (let i = 0; i < combinations.length; i++) {
-            this.twoFactorLogin(combinations[i]);
+            this.twoFactorLogin(combinations[i], cid);
         }
     }
 
-    //twoFactorLogin - tries to login with two factor code, doesnt return anything. Success is handled at main player loop.
-    twoFactorLogin(code) {
-        this.cometd.publish("/service/controller", {
+    twoFactorLogin(code, cid) {
+        this.send("/service/controller", {
             id: clientEvents.submitTwoFactorAuth,
             type: "message",
+            cid: cid,
             gameid: this.pin,
             host: "kahoot.it",
-            content: JSON.stringify(
-                {
-                    "sequence": code
-                }
-            )
-        }, function (publishAck) { });
-    }
-
-    doLogout(callback) {
-        this.state = 0;
-        this.cometd.disconnect(function () {
-            if (typeof callback === "function") {
-                callback(null);
-            }
-        });
-    }
-
-    doLogin(callback) {
-        this.cometd.publish("/service/controller", {
-            gameid: this.pin,
-            host: "kahoot.it",
-            name: this.name,
-            type: "login"
-        }, function (publishAck) {
-            if (typeof callback === "function") {
-                callback(null);
-            }
-        });
+            content: JSON.stringify({
+                "sequence": code
+            })
+        }, function (publishAck) {});
     }
 
     createWebsocket(callback) {
@@ -240,7 +282,7 @@ class KahootServer {
         this.uuid;
         this.quiz;
         this.cometd;
-        this.message = () => { };
+        this.message = () => {};
 
         this.players = [];
         this.options = {
@@ -452,7 +494,8 @@ class KahootHelper {
                         callback("Auth failed, wrong username or password!");
                     }
                 }
-            }, error: function (response, statusText, req) {
+            },
+            error: function (response, statusText, req) {
                 if (req.status !== 401) {
                     if (typeof callback === "function") {
                         callback("Auth failed, wrong username or password!");
@@ -512,4 +555,9 @@ class KahootHelper {
     }
 }
 
-export { KahootClient, KahootServer, KahootHelper, proxy };
+export {
+    KahootClient,
+    KahootServer,
+    KahootHelper,
+    proxy
+};

@@ -1,32 +1,30 @@
 @import "themes.scss";
 @import "../node_modules/materialize-css/sass/components/_color-variables.scss";
-
 $secondary-color: color("indigo", "base") !default;
-
 @import "../node_modules/materialize-css/sass/materialize.scss";
-
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,700");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 @mixin themify($themes: $themes) {
-    @each $theme, $map in $themes {
+    @each $theme,
+    $map in $themes {
         .theme-#{$theme} & {
             $theme-map: () !global;
-
-            @each $key, $submap in $map {
-                $value: map-get(map-get($themes, $theme), "#{$key}");
-
+            @each $key,
+            $submap in $map {
+                $value: map-get(map-get($themes, $theme),
+                "#{$key}");
                 $theme-map: map-merge($theme-map, ($key: $value)) !global;
             }
-
             @content;
-
             $theme-map: null !global;
         }
     }
 }
 
 @function themed($key) {
-    @return map-get($theme-map, $key);
+    @return map-get($theme-map,
+    $key);
 }
 
 * {
@@ -43,7 +41,6 @@ html,
 body {
     overflow-x: hidden;
     margin-bottom: 20px;
-
     @include themify($themes) {
         color: themed("textColor");
         background-color: themed("backgroundColor");
@@ -54,6 +51,10 @@ input {
     @include themify($themes) {
         color: themed("textColor");
     }
+}
+
+a {
+    cursor: pointer;
 }
 
 #▲,
@@ -115,7 +116,6 @@ input {
     flex-wrap: wrap;
     width: 100vw;
     height: 7vh;
-
     @include themify($themes) {
         color: themed("navigatorTextColor");
         background-color: themed("navigatorBackgroundColor");
@@ -138,8 +138,6 @@ input {
     @include themify($themes) {
         background-color: themed("selectedBackground");
     }
-
-
     cursor: default;
     pointer-events: none;
 }
@@ -160,8 +158,48 @@ input {
     background-color: #298f0d;
 }
 
+.card-row {
+    margin-top: 6vh;
+}
+
 .seperator {
-    margin-bottom: 8vh;
+    margin-bottom: 2vh;
+}
+
+.add-players-card {
+  margin-top: 8vh;
+}
+
+.white-input {
+    input {
+      color: #fff;
+    }
+
+    input+label:not(span) {
+        color: #fff !important;
+    }
+
+    input:focus {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.75) !important;
+      box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.75) !important;
+    }
+}
+
+.players-wrapper {
+  padding-top: 1vh;
+  max-height: 10vh;
+  overflow: auto;
+}
+
+
+.noselect {
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .disabled {
