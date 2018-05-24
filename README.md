@@ -3,6 +3,8 @@
 
 A suite of tools for fucking with Kahoot games. Easily installable and customizable.
 
+**Join our [Discord Server](https://discord.gg/uB9bPms)!**
+
 ## Installation
 
 OS X, Linux and Windows:
