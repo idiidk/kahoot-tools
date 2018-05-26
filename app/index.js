@@ -154,7 +154,7 @@ function doLogin() {
         if (pin) {
             doGameLogin(pin);
         } else {
-            sendMessage("kahoot-color-0", "Error", "Please specify a pin and name to connect with!", 4000);
+            sendMessage("kahoot-color-0", "Error", "Please specify the pin of the game to connect with!", 4000);
             $("#start-login").removeClass("disabled");
         }
     }
