@@ -122,7 +122,7 @@ class KahootPlayer {
 }
 
 class KahootClient {
-    constructor(pin, url = "https://www.kahoot.it") {
+    constructor(pin, name, url = "https://www.kahoot.it") {
         this.pin = pin;
         this.name = name;
         this.apiUrl = proxy + url;
@@ -130,7 +130,6 @@ class KahootClient {
         this.cometd = null;
         this.answers = null;
         this.questionNum = null;
-        this.state = 0;
         this.solvedChallenge;
         this.session;
         this.clientId;
@@ -147,7 +146,9 @@ class KahootClient {
         this.testSession(function (error) {
             if (!error) {
                 self.createWebsocket(function () {
-                    callback(null, self.twoFactor);
+                    self.doLogin(function () {
+                        callback(null, self.twoFactor);
+                    })
                 });
             } else {
                 callback(error, self.twoFactor);
@@ -156,7 +157,6 @@ class KahootClient {
     }
 
     disconnect(callback) {
-        this.state = 0;
         this.cometd.disconnect(callback);
     }
 
@@ -179,24 +179,17 @@ class KahootClient {
         return new KahootPlayer(name, isGhost, cid, this);
     }
 
-    bruteForceTwoFactor(cid) {
-        let combinations = ["0123", "0132", "0213", "0231", "0321", "0312", "1023", "1032", "1203", "1230", "1302", "1320", "2013", "2031", "2103", "2130", "2301", "2310", "3012", "3021", "3102", "3120", "3201", "3210"]
-        for (let i = 0; i < combinations.length; i++) {
-            this.twoFactorLogin(combinations[i], cid);
-        }
-    }
-
-    twoFactorLogin(code, cid) {
+    doLogin(callback) {
         this.send("/service/controller", {
-            id: clientEvents.submitTwoFactorAuth,
-            type: "message",
-            cid: cid,
             gameid: this.pin,
             host: "kahoot.it",
-            content: JSON.stringify({
-                "sequence": code
-            })
-        }, function (publishAck) {});
+            name: this.name,
+            type: "login"
+        }, function (publishAck) {
+            if (typeof callback === "function") {
+                callback(true);
+            }
+        });
     }
 
     createWebsocket(callback) {
@@ -211,8 +204,7 @@ class KahootClient {
                 let controller = self.cometd.subscribe("/service/controller", function (m) {
                     self.onRawMessageController(m);
                     if (m.data.error) {
-                        self.state = 3;
-                        self.error = m.data.description;
+                        callback(m.data.description);
                     }
                 });
                 let player = self.cometd.subscribe("/service/player", function (m) {
@@ -229,27 +221,14 @@ class KahootClient {
                             tempJson = JSON.parse(m.data.content);
                             self.quizName = tempJson.quizName;
                             break;
-
-                        case clientEvents.resetTwoFactorAuth:
-                            self.state = 2;
-                            break;
-
-                        case clientEvents.twoFactorAuthIncorrect:
-                            self.state = 2;
-                            break;
-
-                        case clientEvents.twoFactorAuthCorrect:
-                            self.state = 1;
-                            break;
                     }
                 })
                 let status = self.cometd.subscribe("/service/status", function (m) {
                     self.onRawMessageStatus(m);
-                    if (m.data.status === "ACTIVE") {
-                        self.state = 1;
-                    }
                 })
                 callback(null);
+            } else {
+                callback("Session could not get parsed! This happens from time to time, just retry!")
             }
         });
     }
@@ -292,6 +271,18 @@ class KahootServer {
         };
     }
 
+    sendRaw(rawMessage, callback) {
+        rawMessage = rawMessage[0];
+        rawMessage.data.gameid = this.pin;
+        this.cometd.publish(rawMessage.channel, rawMessage.data, callback);
+    }
+
+    send(channel, data, callback) {
+        data.host = "play.kahoot.it";
+        data.gameid = this.pin;
+        this.cometd.publish(channel, data, callback);
+    }
+
     sendJavascript(script) {
         this.send("/service/player", {
             type: "message",
@@ -303,18 +294,6 @@ class KahootServer {
                 iframeSrc: "javascript:" + script + "; //"
             })
         });
-    }
-
-    sendRaw(rawMessage, callback) {
-        rawMessage = rawMessage[0];
-        rawMessage.data.gameid = this.pin;
-        this.cometd.publish(rawMessage.channel, rawMessage.data, callback);
-    }
-
-    send(channel, data, callback) {
-        data.host = "play.kahoot.it";
-        data.gameid = this.pin;
-        this.cometd.publish(channel, data, callback);
     }
 
     initialize(callback) {

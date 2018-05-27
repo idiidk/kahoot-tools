@@ -105,8 +105,8 @@ function doComLogin(username, password, callback) {
     });
 }
 
-function doGameLogin(pin) {
-    kahootSession = new KahootClient(pin);
+function doGameLogin(pin, name) {
+    kahootSession = new KahootClient(pin, name);
     kahootSession.initialize((err) => {
         if (err) {
             sendMessage("kahoot-color-0", "Error", err, 4000);
@@ -114,7 +114,7 @@ function doGameLogin(pin) {
             kahootSession = null;
         } else {
             if (kahootSession.twoFactor) {
-                sendMessage("kahoot-color-1", "Info", "Found 2fa, Bypassing...", 4000);
+                sendMessage("kahoot-color-1", "Info", "Found 2FA. Bypassing...", 4000);
                 setTimeout(() => {
                     kahootSession.bruteForceTwoFactor();
                     showPanel("game");
@@ -135,6 +135,7 @@ function doLogin() {
     let waitForMe = false;
 
     const pin = $("#pin").val();
+    const name = $("#name").val();
     const username = $("#username").val();
     const password = $("#password").val();
 
@@ -152,9 +153,9 @@ function doLogin() {
 
     if (!waitForMe) {
         if (pin) {
-            doGameLogin(pin);
+            doGameLogin(pin, name);
         } else {
-            sendMessage("kahoot-color-0", "Error", "Please specify the pin of the game to connect with!", 4000);
+            sendMessage("kahoot-color-0", "Error", "Please specify a pin and username to connect with!", 4000);
             $("#start-login").removeClass("disabled");
         }
     }
