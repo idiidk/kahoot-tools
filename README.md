@@ -1,4 +1,4 @@
-# Kahoot Tools
+﻿# Kahoot Tools
 > Scaring teachers since Sep 27, 2017!
 
 A suite of tools for fucking with Kahoot games. Easily installable and customizable.
@@ -22,7 +22,7 @@ Don`t have the time or resources to host yourself? You can now also just use my 
 
 ## Usage
 
-Kahoot tools runs a webserver on port 8080 and a cors server on port 3000. To use kahoot-tools, yarn dev, open a browser and go to localhost:8080.
+Kahoot tools runs a webserver on port 80 and a cors server on port 3000. To use kahoot-tools, yarn dev, open a browser and go to localhost:80.
 
 ## Release History
 
