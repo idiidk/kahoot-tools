@@ -17,9 +17,6 @@ node kahoot-tools.js
 
 To run kahoot-tools in dev mode, follow the steps above but replace ```npm run build``` with: ```npm run dev```
 
-Don`t have the time or resources to host yourself? You can now also just use my prehosted version!
-[http://dviide.xyz](http://dviide.xyz)
-
 ## Usage
 
 Kahoot tools runs a webserver on port 80 and a cors server on port 3000. To use kahoot-tools, yarn dev, open a browser and go to localhost:80.
