@@ -1,0 +1,6 @@
+{
+  "host": "0.0.0.0",
+  "appPort": "8080",
+  "corsUrl": "http://localhost",
+  "corsPort": "3000"
+}

@@ -26,6 +26,10 @@ Kahoot tools runs a webserver on port 8080 and a cors server on port 3000. To us
 
 ## Release History
 
+* 5.1.0 **Xenon Release**
+    * Preparing for future updates
+    * Removed server code
+
 * 5.0.0 **(Prerelease)**
     * Implemented 50% of the found exploits
     * Implemented multi player system
@@ -34,39 +38,12 @@ Kahoot tools runs a webserver on port 8080 and a cors server on port 3000. To us
     * Added selection for grouped or individual CID`s
     * Added grouped player hacking! (select a player group to affect)
 
-* 4.1.0
-    * Implemented custom servers!
-    * Implemented themes and option menu!
-    * Switched to materialize.
-    * Rewrote and wrote a bunch of code!
-
-* 4.0.0
-    * Switched to webpack and rewrote a bunch of code!
-
-...older history can be found in the [old](https://github.com/idiidk/kahoot-tools/tree/old) branch
+...older history can be found in the [old](https://github.com/idiidk/kahoot-tools/tree/old) branch and the [pre-xenon](https://github.com/idiidk/kahoot-tools/tree/pre-xenon) branch
 
 ## Goals
 
-### Version 5 (major update)
-
-- [x] Implement multi player system
-  * Multiple players per game
-  * Custom CID`s
-  * Kick on command
-- [x] Make players join faster
-- [ ] Implement other POC`s on [dviide.xyz/experiments](http://dviide.xyz/experiments)
-
-### Version 4.2 (thanks for the suggestion [@antiburen](https://github.com/antiburen/) !)
-- [x] Fully support teams
-    * [x] Allow hosting with team names.
-    * [x] Make teams work with bots
-    * [x] CRAZY NEW HACKS COMING SOON...
-
-### Version 4.1
-- [x] Fully implement custom servers.
-    * [x] Make a server API for building servers.
-    * [x] Make a spot for custom server file hosting.
-    * [x] Fully implement themes.
+### Xenon Release
+  - [ ] To be decided
 
 ## Meta
 

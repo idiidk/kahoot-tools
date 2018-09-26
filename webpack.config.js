@@ -41,7 +41,10 @@ module.exports = {
             dirNode,
             dirApp,
             dirAssets
-        ]
+        ],
+        alias: {
+          '@': path.resolve(__dirname)
+        }
     },
     plugins: [
         new webpack.DefinePlugin({
