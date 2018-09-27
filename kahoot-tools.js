@@ -1,4 +1,4 @@
-const config = require("./assets/config.json");
+const config = require("./config.json");
 const fs = require("fs");
 
 if (!fs.existsSync("./dist")) {
@@ -19,7 +19,7 @@ if (!fs.existsSync("./dist")) {
     });
 
     corsAnywhere.createServer({
-        originWhitelist: [], // Allow all origins
+        originWhitelist: [],
         requireHeader: ["origin", "x-requested-with"],
     }).listen(corsPort, host, function () {
         console.log("Running CORS Anywhere on port " + corsPort);

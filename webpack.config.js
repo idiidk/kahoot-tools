@@ -5,6 +5,7 @@ const corsAnywhere = require('cors-anywhere');
 
 // Is the current build a development build
 const IS_DEV = (process.env.NODE_ENV === 'dev');
+const config = require('./config.json');
 
 const dirNode = 'node_modules';
 const dirApp = path.join(__dirname, 'app');
@@ -15,11 +16,11 @@ const dirAssets = path.join(__dirname, 'assets');
  * Creating a cors anywhere server
  */
 if (IS_DEV) {
-    const port = 3000;
-    const host = "0.0.0.0";
+    const port = config.corsPort;
+    const host = config.host;
 
     corsAnywhere.createServer({
-        originWhitelist: [], // Allow all origins
+        originWhitelist: [],
         requireHeader: ['origin', 'x-requested-with'],
     }).listen(port, host, function () {
         console.log('Running CORS Anywhere on ' + host + ':' + port);
