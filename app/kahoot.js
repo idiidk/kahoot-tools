@@ -71,8 +71,7 @@ class KahootPlayer {
                 meta: {
                     lag: 15,
                     device: {
-                        userAgent:
-                            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36",
+                        userAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.79 Chrome/61.0.3163.79 Safari/537.36",
                         screen: {
                             width: 1440,
                             height: 870
@@ -85,14 +84,13 @@ class KahootPlayer {
 
     sendTeam(names) {
         this.send(
-            "/controller/" + this.pin,
-            {
+            "/controller/" + this.pin, {
                 id: clientEvents.joinTeamMembers,
                 type: "message",
                 cid: this.cid,
                 content: JSON.stringify(names)
             },
-            function(publishAck) {}
+            function (publishAck) {}
         );
     }
 
@@ -138,8 +136,7 @@ class KahootPlayer {
 
     twoFactorLogin(code) {
         this.send(
-            "/service/controller",
-            {
+            "/service/controller", {
                 id: clientEvents.submitTwoFactorAuth,
                 type: "message",
                 cid: this.cid,
@@ -149,7 +146,7 @@ class KahootPlayer {
                     sequence: code
                 })
             },
-            function(publishAck) {}
+            function (publishAck) {}
         );
     }
 }
@@ -169,18 +166,18 @@ class KahootClient {
         this.rawSession;
         this.error;
 
-        this.onRawMessageController = function(m) {};
-        this.onRawMessagePlayer = function(m) {};
-        this.onRawMessageStatus = function(m) {};
+        this.onRawMessageController = function (m) {};
+        this.onRawMessagePlayer = function (m) {};
+        this.onRawMessageStatus = function (m) {};
     }
 
     initialize(callback) {
         const self = this;
-        this.testSession(function(error) {
+        this.testSession(function (error) {
             if (!error) {
-                self.createWebsocket(function(error) {
+                self.createWebsocket(function (error) {
                     if (!error) {
-                        self.doLogin(function() {
+                        self.doLogin(function () {
                             callback(null);
                         });
                     } else {
@@ -218,14 +215,13 @@ class KahootClient {
 
     doLogin(callback) {
         this.send(
-            "/service/controller",
-            {
+            "/service/controller", {
                 gameid: this.pin,
                 host: "kahoot.it",
                 name: this.name,
                 type: "login"
             },
-            function() {
+            function () {
                 if (typeof callback === "function") {
                     callback(true);
                 }
@@ -240,18 +236,18 @@ class KahootClient {
             url: this.cometdUrl + "/" + this.pin + "/" + this.session
         });
         this.cometd.websocketEnabled = true;
-        this.cometd.handshake(function(h) {
+        this.cometd.handshake(function (h) {
             if (h.successful) {
                 self.cometd.subscribe(
                     "/service/controller",
-                    function(m) {
+                    function (m) {
                         self.onRawMessageController(m);
                         if (m.data.error) {
                             callback(m.data.description);
                         }
                     }
                 );
-                self.cometd.subscribe("/service/player", function(
+                self.cometd.subscribe("/service/player", function (
                     m
                 ) {
                     self.onRawMessagePlayer(m);
@@ -269,7 +265,7 @@ class KahootClient {
                             break;
                     }
                 });
-                self.cometd.subscribe("/service/status", function(
+                self.cometd.subscribe("/service/status", function (
                     m
                 ) {
                     self.onRawMessageStatus(m);
@@ -286,13 +282,12 @@ class KahootClient {
     testSession(callback) {
         const self = this;
         $.ajax({
-            url:
-                this.apiUrl +
+            url: this.apiUrl +
                 "/reserve/session/" +
                 this.pin +
                 "/?" +
                 KahootHelper.getTC(),
-            success: function(response, _, req) {
+            success: function (response, _, req) {
                 if (req.status !== 404) {
                     self.rawSession = req.getResponseHeader(
                         "x-kahoot-session-token"
@@ -310,7 +305,7 @@ class KahootClient {
                     callback("Game not found!");
                 }
             },
-            error: function() {
+            error: function () {
                 callback("Game not found!");
             }
         });
@@ -361,10 +356,10 @@ class KahootServer {
     initialize(callback) {
         const self = this;
 
-        this.reservePin(function(response) {
+        this.reservePin(function (response) {
             self.pin = parseInt(response);
 
-            self.reserveSession(response, function(
+            self.reserveSession(response, function (
                 response,
                 _,
                 req
@@ -379,23 +374,22 @@ class KahootServer {
                 self.cometd = new cometd.CometD();
 
                 self.cometd.configure({
-                    url:
-                        "wss://play.kahoot.it/cometd/" +
+                    url: "wss://play.kahoot.it/cometd/" +
                         self.pin +
                         "/" +
                         session
                 });
 
                 self.cometd.websocketEnabled = true;
-                self.cometd.handshake(function(h) {
+                self.cometd.handshake(function (h) {
                     if (h.successful) {
-                        self.cometd.subscribe("/service/player", function(m) {
+                        self.cometd.subscribe("/service/player", function (m) {
                             self.message(m);
                         });
 
                         self.cometd.subscribe(
                             "/controller/" + self.pin,
-                            function(m) {
+                            function (m) {
                                 self.message(m);
 
                                 if (m.data.type === "joined") {
@@ -411,11 +405,10 @@ class KahootServer {
                         );
 
                         self.send(
-                            "/service/player",
-                            {
+                            "/service/player", {
                                 type: "started"
                             },
-                            function() {
+                            function () {
                                 callback(null, self.pin);
                             }
                         );
@@ -427,8 +420,7 @@ class KahootServer {
 
     reservePin(callback) {
         $.ajax({
-            url:
-                proxy +
+            url: proxy +
                 "https://play.kahoot.it/reserve/session/?" +
                 KahootHelper.getTC(),
             method: "POST",
@@ -439,8 +431,7 @@ class KahootServer {
 
     reserveSession(pin, callback) {
         $.ajax({
-            url:
-                proxy +
+            url: proxy +
                 "https://play.kahoot.it/reserve/session/" +
                 pin +
                 "/?" +
@@ -459,42 +450,43 @@ class KahootHelper {
     static getGameAnswers(gameName, bearerToken, callback) {
         const self = this;
         if (!this.answers) {
-            this.searchGames(gameName, bearerToken, function(
+            this.searchGames(gameName, bearerToken, function (
                 response
             ) {
-                let answers = [];
-                let currEntity = 0;
-                if (response.totalHits > 0) {
-                    for (let e = 0; e < response.entities.length; e++) {
-                        if (response.entities[e].title === gameName) {
-                            currEntity = e;
-                        }
-                    }
-                    response = response.entities[currEntity];
-                    for (let i = 0; i < response.questions.length; i++) {
-                        for (
-                            let a = 0;
-                            a < response.questions[i].choices.length;
-                            a++
-                        ) {
-                            if (
-                                response.questions[i].choices[a].correct ===
-                                true
-                            ) {
-                                answers[i] = {
-                                    questionNum: i,
-                                    question: response.questions[i].question,
-                                    answer: response.questions[i].choices[a],
-                                    answerNum: a
-                                };
+                if (response.status === 401) {
+                    callback("Not authorized. Please relog!");
+                    localStorage.removeItem("bearerToken");
+                } else {
+                    let answers = [];
+                    let currEntity = 0;
+                    if (response.totalHits > 0) {
+                        for (let e = 0; e < response.entities.length; e++) {
+                            if (response.entities[e].title === gameName) {
+                                currEntity = e;
                             }
                         }
-                    }
-                    self.answers = answers;
-                    callback(null, answers);
-                } else {
-                    if (typeof callback === "function") {
-                        callback("No games found!");
+                        response = response.entities[currEntity];
+                        for (let i = 0; i < response.questions.length; i++) {
+                            for (
+                                let a = 0; a < response.questions[i].choices.length; a++
+                            ) {
+                                if (
+                                    response.questions[i].choices[a].correct ===
+                                    true
+                                ) {
+                                    answers[i] = {
+                                        questionNum: i,
+                                        question: response.questions[i].question,
+                                        answer: response.questions[i].choices[a],
+                                        answerNum: a
+                                    };
+                                }
+                            }
+                        }
+                        self.answers = answers;
+                        callback(null, answers);
+                    } else {
+                        callback("No answers were found. This can happen if the kahoot is private.");
                     }
                 }
             });
@@ -510,15 +502,15 @@ class KahootHelper {
 
         $.ajax({
             method: "GET",
-            url:
-                proxy +
+            url: proxy +
                 "https://create.kahoot.it/rest/kahoots/search/public?query=" +
                 gameName.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "") +
                 "&limit=100" +
                 "&_=" +
                 new Date().getTime(),
             headers: headers,
-            success: callback
+            success: callback,
+            error: callback
         });
     }
 
@@ -529,8 +521,7 @@ class KahootHelper {
 
         $.ajax({
             method: "GET",
-            url:
-                proxy +
+            url: proxy +
                 "https://play.kahoot.it/rest/kahoots/" +
                 gameUUID +
                 "?_=" +
@@ -561,7 +552,7 @@ class KahootHelper {
             url: proxy + "https://create.kahoot.it/rest/authenticate",
             data: formData,
             headers: headers,
-            success: function(response, _, req) {
+            success: function (response, _, req) {
                 if (req.status !== 401) {
                     if (typeof callback === "function") {
                         if (response.access_token) {
@@ -581,7 +572,7 @@ class KahootHelper {
                     }
                 }
             },
-            error: function(_, __, req) {
+            error: function (_, __, req) {
                 if (req.status !== 401) {
                     if (typeof callback === "function") {
                         callback("Auth failed, wrong username or password!");
@@ -620,15 +611,15 @@ class KahootHelper {
         const offset = eval(challenge.split("var offset = ")[1].split(";")[0]);
         const decodeMod = parseInt(
             challenge
-                .split(") % ")[1]
-                .split(")")[0]
-                .trim()
+            .split(") % ")[1]
+            .split(")")[0]
+            .trim()
         );
         const decodePlus = parseInt(
             challenge
-                .split(decodeMod)[1]
-                .split("+ ")[1]
-                .split(")")[0]
+            .split(decodeMod)[1]
+            .split("+ ")[1]
+            .split(")")[0]
         );
         let final = "";
 
@@ -643,7 +634,7 @@ class KahootHelper {
     }
 
     static waitForSocketConnection(socket, callback) {
-        setTimeout(function() {
+        setTimeout(function () {
             if (socket.readyState === 1) {
                 if (typeof callback === "function") {
                     callback();
@@ -656,4 +647,9 @@ class KahootHelper {
     }
 }
 
-export { KahootClient, KahootServer, KahootHelper, proxy };
+export {
+    KahootClient,
+    KahootServer,
+    KahootHelper,
+    proxy
+};

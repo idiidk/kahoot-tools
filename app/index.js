@@ -40,7 +40,8 @@ $(() => {
     }
 
     OptionsController.init();
-
+    const collapsibles = document.querySelectorAll('.collapsible');
+    M.Collapsible.init(collapsibles);
     M.FormSelect.init($("select"));
 
     $(".container").fadeOut(0);

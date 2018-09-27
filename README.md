@@ -11,6 +11,7 @@ OS X, Linux and Windows:
 git clone https://github.com/idiidk/kahoot-tools.git
 cd kahoot-tools
 npm install
+# Edit config.json
 npm run build
 node kahoot-tools.js
 ```

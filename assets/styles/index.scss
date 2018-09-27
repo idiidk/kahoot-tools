@@ -6,16 +6,19 @@ $secondary-color: color("indigo", "base") !default;
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 @mixin themify($themes: $themes) {
+
     @each $theme,
     $map in $themes {
         .theme-#{$theme} & {
             $theme-map: () !global;
+
             @each $key,
             $submap in $map {
                 $value: map-get(map-get($themes, $theme),
                 "#{$key}");
                 $theme-map: map-merge($theme-map, ($key: $value)) !global;
             }
+
             @content;
             $theme-map: null !global;
         }
@@ -41,6 +44,7 @@ html,
 body {
     overflow-x: hidden;
     margin-bottom: 20px;
+
     @include themify($themes) {
         color: themed("textColor");
         background-color: themed("backgroundColor");
@@ -116,6 +120,7 @@ a {
     flex-wrap: wrap;
     width: 100vw;
     height: 7vh;
+
     @include themify($themes) {
         color: themed("navigatorTextColor");
         background-color: themed("navigatorBackgroundColor");
@@ -138,6 +143,7 @@ a {
     @include themify($themes) {
         background-color: themed("selectedBackground");
     }
+
     cursor: default;
     pointer-events: none;
 }
@@ -158,21 +164,17 @@ a {
     background-color: #298f0d;
 }
 
-.card-row {
-    margin-top: 6vh;
-}
-
 .seperator {
     margin-bottom: 2vh;
 }
 
 .add-players-card {
-  margin-top: 8vh;
+    margin-top: 1vh;
 }
 
 .white-input {
     input {
-      color: #fff;
+        color: #fff;
     }
 
     input+label:not(span) {
@@ -180,26 +182,46 @@ a {
     }
 
     input:focus {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.75) !important;
-      box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.75) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.75) !important;
+        box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.75) !important;
     }
 }
 
 .players-wrapper {
-  padding-top: 1vh;
-  max-height: 10vh;
-  overflow: auto;
+    padding-top: 1vh;
+    max-height: 10vh;
+    overflow: auto;
+}
+
+.collapsible {
+    border: none;
+
+    .collapsible-header {
+        @include themify($themes) {
+            background-color: themed("navigatorBackgroundColor");
+        }
+
+        border-bottom: none;
+    }
+
+    .collapsible-body {
+        @include themify($themes) {
+            background-color: themed("navigatorBackgroundColor");
+        }
+
+        border-bottom: none;
+    }
 }
 
 
 .noselect {
-  cursor: pointer;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .disabled {

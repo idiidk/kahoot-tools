@@ -1,7 +1,11 @@
 import $ from "jquery/dist/jquery.min.js";
 
-import { KahootHelper } from "../kahoot.js";
-import { sendMessage } from "../message.js";
+import {
+    KahootHelper
+} from "../kahoot.js";
+import {
+    sendMessage
+} from "../message.js";
 
 let cards = [];
 let crashTimer = false;
@@ -33,7 +37,7 @@ class GameController {
                             sendMessage(
                                 "kahoot-color-0",
                                 "Error",
-                                "No answers were found. This can happen if the kahoot is private.",
+                                err,
                                 6000
                             );
                         } else {
@@ -364,4 +368,6 @@ class GameController {
     }
 }
 
-export { GameController };
+export {
+    GameController
+};
