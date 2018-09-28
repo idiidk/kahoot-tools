@@ -1,3 +1,4 @@
+const config = require("./config.json");
 const fs = require("fs");
 
 if (!fs.existsSync("./dist")) {
@@ -7,9 +8,9 @@ if (!fs.existsSync("./dist")) {
     const express = require("express");
     const app = express();
 
-    const host = "0.0.0.0";
-    const appPort = 80;
-    const corsPort = 3000;
+    const host = config.host;
+    const appPort = config.appPort;
+    const corsPort = config.corsPort;
 
     app.use(express.static("./dist"))
 
@@ -18,7 +19,7 @@ if (!fs.existsSync("./dist")) {
     });
 
     corsAnywhere.createServer({
-        originWhitelist: [], // Allow all origins
+        originWhitelist: [],
         requireHeader: ["origin", "x-requested-with"],
     }).listen(corsPort, host, function () {
         console.log("Running CORS Anywhere on port " + corsPort);

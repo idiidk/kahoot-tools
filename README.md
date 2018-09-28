@@ -1,4 +1,4 @@
-﻿# Kahoot Tools
+# Kahoot Tools
 > Scaring teachers since Sep 27, 2017!
 
 A suite of tools for fucking with Kahoot games. Easily installable and customizable.
@@ -11,19 +11,25 @@ OS X, Linux and Windows:
 git clone https://github.com/idiidk/kahoot-tools.git
 cd kahoot-tools
 npm install
+# Edit config.json
 npm run build
 node kahoot-tools.js
 ```
 
 To run kahoot-tools in dev mode, follow the steps above but replace ```npm run build``` with: ```npm run dev```
 
-Don't have the time to host yourself? Use [@simdoes's](https://github.com/simdoes) mirror: [kahoot.ml](http://kahoot.ml) 
+Don`t have the time or resources to host yourself? You can now also just use my prehosted version!
+[http://dviide.xyz](http://dviide.xyz)
 
 ## Usage
 
-Kahoot tools runs a webserver on port 80 and a cors server on port 3000. To use kahoot-tools, yarn dev, open a browser and go to localhost:80.
+Kahoot tools runs a webserver on port 8080 and a cors server on port 3000. To use kahoot-tools, yarn dev, open a browser and go to localhost:8080.
 
 ## Release History
+
+* 5.1.0 **Xenon Release**
+    * Preparing for future updates
+    * Removed server code
 
 * 5.0.0 **(Prerelease)**
     * Implemented 50% of the found exploits
@@ -33,39 +39,12 @@ Kahoot tools runs a webserver on port 80 and a cors server on port 3000. To use 
     * Added selection for grouped or individual CID`s
     * Added grouped player hacking! (select a player group to affect)
 
-* 4.1.0
-    * Implemented custom servers!
-    * Implemented themes and option menu!
-    * Switched to materialize.
-    * Rewrote and wrote a bunch of code!
-
-* 4.0.0
-    * Switched to webpack and rewrote a bunch of code!
-
-...older history can be found in the [old](https://github.com/idiidk/kahoot-tools/tree/old) branch
+...older history can be found in the [old](https://github.com/idiidk/kahoot-tools/tree/old) branch and the [pre-xenon](https://github.com/idiidk/kahoot-tools/tree/pre-xenon) branch
 
 ## Goals
 
-### Version 5 (major update)
-
-- [x] Implement multi player system
-  * Multiple players per game
-  * Custom CID`s
-  * Kick on command
-- [x] Make players join faster
-- [ ] Implement other POC`s on [dviide.xyz/experiments](http://dviide.xyz/experiments)
-
-### Version 4.2 (thanks for the suggestion [@antiburen](https://github.com/antiburen/) !)
-- [x] Fully support teams
-    * [x] Allow hosting with team names.
-    * [x] Make teams work with bots
-    * [x] CRAZY NEW HACKS COMING SOON...
-
-### Version 4.1
-- [x] Fully implement custom servers.
-    * [x] Make a server API for building servers.
-    * [x] Make a spot for custom server file hosting.
-    * [x] Fully implement themes.
+### Xenon Release
+  - [ ] To be decided
 
 ## Meta
 

@@ -1,12 +1,11 @@
 import $ from "jquery/dist/jquery.min.js";
 
 import {
-    KahootClient,
     KahootHelper
-} from "./kahoot.js";
+} from "../kahoot.js";
 import {
     sendMessage
-} from "./message.js";
+} from "../message.js";
 
 let cards = [];
 let crashTimer = false;
@@ -14,23 +13,51 @@ let answers = false;
 
 class GameController {
     static init(kahootSession) {
-        sendMessage("kahoot-color-3", "Success", "Created socket, ready for action!", 5000);
+        sendMessage(
+            "kahoot-color-3",
+            "Success",
+            "Created socket, ready for action!",
+            5000
+        );
 
         kahootSession.onRawMessagePlayer = m => {
             if (m.data.id === 9 && localStorage.getItem("bearerToken")) {
                 let json = JSON.parse(m.data.content);
-                sendMessage("kahoot-color-1", "Info", `Got quiz name: ${json.quizName}. Searching for answers...`, 5000);
-                KahootHelper.getGameAnswers(json.quizName, localStorage.getItem("bearerToken"), (err, answerList) => {
-                    if (err) {
-                        sendMessage("kahoot-color-0", "Error", "No answers were found. This can happen if the kahoot is private.", 6000);
-                    } else {
-                        sendMessage("kahoot-color-3", "Success", `Got ${answerList.length} answers. The hack should work now!`, 5000);
-                        $("#answer-current-correct").removeClass("disabled");
-                        answers = answerList;
+                sendMessage(
+                    "kahoot-color-1",
+                    "Info",
+                    `Got quiz name: ${json.quizName}. Searching for answers...`,
+                    5000
+                );
+                KahootHelper.getGameAnswers(
+                    json.quizName,
+                    localStorage.getItem("bearerToken"),
+                    (err, answerList) => {
+                        if (err) {
+                            sendMessage(
+                                "kahoot-color-0",
+                                "Error",
+                                err,
+                                6000
+                            );
+                        } else {
+                            sendMessage(
+                                "kahoot-color-3",
+                                "Success",
+                                `Got ${
+                                    answerList.length
+                                } answers. The hack should work now!`,
+                                5000
+                            );
+                            $("#answer-current-correct").removeClass(
+                                "disabled"
+                            );
+                            answers = answerList;
+                        }
                     }
-                });
+                );
             }
-        }
+        };
 
         function guid() {
             function s4() {
@@ -38,7 +65,20 @@ class GameController {
                     .toString(16)
                     .substring(1);
             }
-            return s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4();
+            return (
+                s4() +
+                s4() +
+                "-" +
+                s4() +
+                "-" +
+                s4() +
+                "-" +
+                s4() +
+                "-" +
+                s4() +
+                s4() +
+                s4()
+            );
         }
 
         function getCardByGuid(guid) {
@@ -57,13 +97,19 @@ class GameController {
                 const card = cards[i];
                 if (card.selected) {
                     cards[i].selected = false;
-                    $(`#${cards[i].guid}`).removeClass("indigo lighten-2 white-text");
+                    $(`#${cards[i].guid}`).removeClass(
+                        "indigo lighten-2 white-text"
+                    );
                 } else {
                     cards[i].selected = true;
-                    $(`#${cards[i].guid}`).addClass("indigo lighten-2 white-text");
+                    $(`#${cards[i].guid}`).addClass(
+                        "indigo lighten-2 white-text"
+                    );
                 }
             }
-            $("#game-state").text(`Pin: ${kahootSession.pin} | Player Count: ${cards.length}`);
+            $("#game-state").text(
+                `Pin: ${kahootSession.pin} | Player Count: ${cards.length}`
+            );
         });
 
         $("#remove-selected-players").click(() => {
@@ -78,7 +124,7 @@ class GameController {
                     toRemove.push({
                         guid: card.guid,
                         index: i
-                    })
+                    });
                 }
             }
 
@@ -103,7 +149,11 @@ class GameController {
                         cid = guid();
                     }
 
-                    const user = kahootSession.addPlayer(playerName + i, playerIsGhost, cid);
+                    const user = kahootSession.addPlayer(
+                        playerName + i,
+                        playerIsGhost,
+                        cid
+                    );
                     users.push(user);
                 }
                 const cardId = guid();
@@ -119,10 +169,14 @@ class GameController {
                     if (card) {
                         if (card.selected) {
                             cards[getCardByGuid(cardId)].selected = false;
-                            $(`#${cardId}`).removeClass("indigo lighten-2 white-text");
+                            $(`#${cardId}`).removeClass(
+                                "indigo lighten-2 white-text"
+                            );
                         } else {
                             cards[getCardByGuid(cardId)].selected = true;
-                            $(`#${cardId}`).addClass("indigo lighten-2 white-text");
+                            $(`#${cardId}`).addClass(
+                                "indigo lighten-2 white-text"
+                            );
                         }
                     }
                 });
@@ -133,7 +187,11 @@ class GameController {
                         card.users[p].removeFromGame();
                     }
                     cards.splice(getCardByGuid(cardId), 1);
-                    $("#game-state").text(`Pin: ${kahootSession.pin} | Player Count: ${cards.length}`);
+                    $("#game-state").text(
+                        `Pin: ${kahootSession.pin} | Player Count: ${
+                            cards.length
+                        }`
+                    );
                 });
 
                 cards.push({
@@ -141,9 +199,16 @@ class GameController {
                     guid: cardId,
                     selected: false
                 });
-                $("#game-state").text(`Pin: ${kahootSession.pin} | Player Count: ${cards.length}`);
+                $("#game-state").text(
+                    `Pin: ${kahootSession.pin} | Player Count: ${cards.length}`
+                );
             } else {
-                sendMessage("kahoot-color-0", "Error", "Please fill in all required fields!", 6000);
+                sendMessage(
+                    "kahoot-color-0",
+                    "Error",
+                    "Please fill in all required fields!",
+                    6000
+                );
             }
         });
 
@@ -200,7 +265,12 @@ class GameController {
             const memberPrefix = $("#member-prefix").val();
 
             if (memberCount && memberPrefix) {
-                sendMessage("kahoot-color-1", "Info", `Sending ${memberCount} members...`, 4000);
+                sendMessage(
+                    "kahoot-color-1",
+                    "Info",
+                    `Sending ${memberCount} members...`,
+                    4000
+                );
 
                 let totalMembers = [];
 
@@ -218,15 +288,30 @@ class GameController {
                     }
                 }
 
-                sendMessage("kahoot-color-3", "Success", "Queued up your members. They should connect soon...", 5000);
+                sendMessage(
+                    "kahoot-color-3",
+                    "Success",
+                    "Queued up your members. They should connect soon...",
+                    5000
+                );
             } else {
-                sendMessage("kahoot-color-0", "Error", "Please supply a prefix and amount!", 4000);
+                sendMessage(
+                    "kahoot-color-0",
+                    "Error",
+                    "Please supply a prefix and amount!",
+                    4000
+                );
             }
         });
 
         $("#crash-game").click(() => {
             if (crashTimer) {
-                sendMessage("kahoot-color-1", "Info", "Stopping timers...", 4000);
+                sendMessage(
+                    "kahoot-color-1",
+                    "Info",
+                    "Stopping timers...",
+                    4000
+                );
                 clearInterval(crashTimer);
                 crashTimer = false;
             } else {
@@ -245,7 +330,9 @@ class GameController {
                 }, 0.001);
             }
 
-            $("#crash-game")[crashTimer ? "addClass" : "removeClass"]("button-active");
+            $("#crash-game")[crashTimer ? "addClass" : "removeClass"](
+                "button-active"
+            );
         });
 
         $("#answer-current-correct").click(() => {
@@ -255,13 +342,27 @@ class GameController {
                     if (card.selected) {
                         for (let p = 0; p < card.users.length; p++) {
                             const user = card.users[p];
-                            user.sendGameAnswer(answers[kahootSession.questionNum].answerNum);
+                            user.sendGameAnswer(
+                                answers[kahootSession.questionNum].answerNum
+                            );
                         }
                     }
                 }
-                sendMessage("kahoot-color-3", "Success", `Sent answer ${answers[kahootSession.questionNum].answerNum + 1} for question ${kahootSession.questionNum + 1}`, 4000);
+                sendMessage(
+                    "kahoot-color-3",
+                    "Success",
+                    `Sent answer ${answers[kahootSession.questionNum]
+                        .answerNum +
+                        1} for question ${kahootSession.questionNum + 1}`,
+                    4000
+                );
             } else {
-                sendMessage("kahoot-color-0", "Error", "Did the quiz start? We dont have a question num!", 4000);
+                sendMessage(
+                    "kahoot-color-0",
+                    "Error",
+                    "Did the quiz start? We dont have a question num!",
+                    4000
+                );
             }
         });
     }
@@ -269,4 +370,4 @@ class GameController {
 
 export {
     GameController
-}
+};
