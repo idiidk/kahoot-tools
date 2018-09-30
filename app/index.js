@@ -27,8 +27,6 @@ import "styles/index.scss";
 
 let kahootSession;
 
-$("#start-login").click(doLogin);
-
 $(() => {
     if (!window.localStorage) {
         alert(
@@ -39,6 +37,12 @@ $(() => {
         );
     }
 
+    $("#pin, #name, #username, #password").keypress(function (e) {
+        if (e.keyCode == 13)
+            $("#start-login").click();
+    });
+
+    $("#start-login").click(doLogin);
     OptionsController.init();
     const collapsibles = document.querySelectorAll('.collapsible');
     M.Collapsible.init(collapsibles);
