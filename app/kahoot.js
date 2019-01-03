@@ -101,54 +101,6 @@ class KahootPlayer {
             client: "dviide.xyz"
         });
     }
-
-    bruteForceTwoFactor() {
-        let combinations = [
-            "0123",
-            "0132",
-            "0213",
-            "0231",
-            "0321",
-            "0312",
-            "1023",
-            "1032",
-            "1203",
-            "1230",
-            "1302",
-            "1320",
-            "2013",
-            "2031",
-            "2103",
-            "2130",
-            "2301",
-            "2310",
-            "3012",
-            "3021",
-            "3102",
-            "3120",
-            "3201",
-            "3210"
-        ];
-        for (let i = 0; i < combinations.length; i++) {
-            this.twoFactorLogin(combinations[i]);
-        }
-    }
-
-    twoFactorLogin(code) {
-        this.send(
-            "/service/controller", {
-                id: clientEvents.submitTwoFactorAuth,
-                type: "message",
-                cid: this.cid,
-                gameid: this.pin,
-                host: "kahoot.it",
-                content: JSON.stringify({
-                    sequence: code
-                })
-            },
-            function (publishAck) {}
-        );
-    }
 }
 
 class KahootClient {
@@ -198,6 +150,54 @@ class KahootClient {
         data.host = "play.kahoot.it";
         data.gameid = this.pin;
         this.cometd.publish(channel, data, callback);
+    }
+
+    bruteForceTwoFactor() {
+        let combinations = [
+            "0123",
+            "0132",
+            "0213",
+            "0231",
+            "0321",
+            "0312",
+            "1023",
+            "1032",
+            "1203",
+            "1230",
+            "1302",
+            "1320",
+            "2013",
+            "2031",
+            "2103",
+            "2130",
+            "2301",
+            "2310",
+            "3012",
+            "3021",
+            "3102",
+            "3120",
+            "3201",
+            "3210"
+        ];
+        for (let i = 0; i < combinations.length; i++) {
+            this.twoFactorLogin(combinations[i]);
+        }
+    }
+
+    twoFactorLogin(code) {
+        this.send(
+            "/service/controller", {
+                id: clientEvents.submitTwoFactorAuth,
+                type: "message",
+                cid: this.cid,
+                gameid: this.pin,
+                host: "kahoot.it",
+                content: JSON.stringify({
+                    sequence: code
+                })
+            },
+            function (publishAck) {}
+        );
     }
 
     addPlayer(name, isGhost, cid) {

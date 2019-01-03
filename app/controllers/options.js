@@ -10,7 +10,13 @@ class OptionsController {
             self.loadConfig(config);
         });
 
-        if(config !== {}) {
+        $("#clear-storage").click(() => {
+            sessionStorage.clear();
+            location.hash = "";
+            location.reload();
+        });
+
+        if (config !== {}) {
             self.loadConfig(config);
         }
     }
