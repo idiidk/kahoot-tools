@@ -63,4 +63,4 @@ Distributed under the MIT license. See ``LICENSE`` for more information.
 5. Create a new Pull Request
 
 ## Credit
-[@cvgellhorn](https://github.com/cvgellhorn/) - For the webkit boilerplate: [https://github.com/cvgellhorn/webpack-boilerplate](repositiory)
+[@cvgellhorn](https://github.com/cvgellhorn/) - For the webpack boilerplate: [https://github.com/cvgellhorn/webpack-boilerplate](repositiory)
