@@ -64,7 +64,8 @@ a {
 #▲,
 #◆,
 #●,
-#■ {
+#■,
+#random{
     margin-left: .5vw;
     margin-right: .5vw;
     width: 10vw;
@@ -162,6 +163,10 @@ a {
 
 .kahoot-color-3 {
     background-color: #298f0d;
+}
+
+.kahoot-color-r {
+    background-color: #b20caa;
 }
 
 .seperator {

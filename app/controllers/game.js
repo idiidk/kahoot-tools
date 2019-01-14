@@ -259,6 +259,18 @@ class GameController {
                 }
             }
         });
+		$("#random").click(() => {
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                if (card.selected) {
+                    for (let p = 0; p < card.users.length; p++) {
+                        const user = card.users[p];
+                        user.sendGameAnswer(Math.floor(Math.random() * 3.99999));
+                    }
+                }
+            }
+        });
+		
 
         $("#member-send").click(() => {
             const memberCount = $("#member-count").val();
