@@ -265,7 +265,7 @@ class GameController {
                 if (card.selected) {
                     for (let p = 0; p < card.users.length; p++) {
                         const user = card.users[p];
-                        user.sendGameAnswer(Math.floor(Math.random() * 3.99999));
+                        user.sendGameAnswer(Math.floor(Math.random() * 4));
                     }
                 }
             }
