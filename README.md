@@ -19,7 +19,7 @@ node kahoot-tools.js
 To run kahoot-tools in dev mode, follow the steps above but replace ```npm run build``` with: ```npm run dev```
 
 Can't host yourself? You can now also just use [@SimDoes](https://github.com/simdoes)'s prehosted version!
---> [kahoot.ml](https://kahoot.ml) or [bot.kahoot.ml](https://bot.kahoot.ml)
+--> [bot.omegaboot.com](https://bot.omegaboot.com)
 
 ## Usage
 
