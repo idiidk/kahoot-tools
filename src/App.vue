@@ -1,31 +1,70 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <transition name="fade" mode="out-in">
+      <router-view class="router"/>
+    </transition>
+
+    <div class="navigator md-layout">
+      <router-link
+        tag="md-button"
+        class="md-layout-item box"
+        active-class="md-primary"
+        to="/"
+        exact
+      >{{this.$globals.session ? 'Game' : 'Login'}}</router-link>
+      <router-link
+        tag="md-button"
+        class="md-layout-item box"
+        active-class="md-primary"
+        to="/options"
+        exact
+      >Options</router-link>
     </div>
-    <router-view/>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
+<style lang="scss">
+@import "~noty/src/noty.scss";
+@import "~noty/src/themes/mint.scss";
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,700");
+
+* {
+  font-family: "Poppins", sans-serif;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.router {
+  width: 90%;
+  margin: 0 auto;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+@media only screen and (min-width: 601px) {
+  .router {
+    width: 85%;
+  }
+}
+@media only screen and (min-width: 1201px)  {
+  .router {
+    width: 70%;
+  }
+}
+
+.navigator {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  margin-bottom: 0.5vh;
+}
+
+.navigator .box {
+  transition: all 0.2s !important;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
