@@ -1,21 +1,23 @@
 import Vue from "vue"
 import VueMaterial from "vue-material"
+import "vue-material/dist/vue-material.min.css";
+import "vue-material/dist/theme/default-dark.css";
+import config from "../config.json";
+
 import App from "./App.vue"
 import router from "./router"
 import "./registerServiceWorker"
 
-import "vue-material/dist/vue-material.min.css"
-import "vue-material/dist/theme/default-dark.css"
-
-export const store = new Vue({
+export const Store = new Vue({
   data: {
-    session: null
+    client: null
   }
 })
 
-Vue.prototype.$globals = store
-Vue.config.productionTip = false
+export const Config = config;
 
+Vue.prototype.$globals = Store
+Vue.config.productionTip = false
 Vue.use(VueMaterial)
 
 new Vue({

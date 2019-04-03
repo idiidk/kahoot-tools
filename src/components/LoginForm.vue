@@ -5,14 +5,18 @@
       <md-input v-model="pin" :disabled="loading" type="pin"></md-input>
     </md-field>
 
-    <div class="centerer">
-      <md-button class="md-primary md-raised" v-on:click="doLogin" v-if="!loading">find session</md-button>
-      <md-progress-spinner :md-diameter="50" :md-stroke="5" md-mode="indeterminate" v-else></md-progress-spinner>
+    <div class="centerer" v-if="!loading">
+      <md-button class="md-primary md-raised" v-on:click="doLogin">find session</md-button>
     </div>
+
+    <span class="centerer" v-else>
+      <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
+    </span>
   </div>
 </template>
 
 <script>
+import { Config } from "@/main";
 import Kahoot from "kahoot-api";
 import Noty from "noty";
 
@@ -30,7 +34,32 @@ export default {
         return;
       }
 
-      const client = new Kahoot.Client()
+      this.loading = true;
+
+      const client = new Kahoot.Client(
+        this.pin,
+        `//${Config.corsUrl}:${Config.corsPort}/`
+      );
+
+      client
+        .checkSession()
+        .then(session => {
+          this.loading = false;
+          this.notify("Got session, ready for action!", "success");
+
+          this.$globals.client = client;
+          this.$router.push("game");
+        })
+        .catch(error => {
+          this.loading = false;
+
+          if (error.toString().includes(404)) {
+            this.notify("Game not found", "error");
+            return;
+          }
+
+          this.notify(error.toString(), "error");
+        });
     },
     notify: function(text, type) {
       new Noty({

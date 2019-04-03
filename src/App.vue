@@ -11,7 +11,16 @@
         active-class="md-primary"
         to="/"
         exact
-      >{{this.$globals.session ? 'Game' : 'Login'}}</router-link>
+        v-if="!this.$globals.client"
+      >Login</router-link>
+      <router-link
+        tag="md-button"
+        class="md-layout-item box"
+        active-class="md-primary"
+        to="/game"
+        exact
+        v-else
+      >Game</router-link>
       <router-link
         tag="md-button"
         class="md-layout-item box"
@@ -24,13 +33,9 @@
 </template>
 
 <style lang="scss">
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons");
 @import "~noty/src/noty.scss";
 @import "~noty/src/themes/mint.scss";
-@import url("https://fonts.googleapis.com/css?family=Poppins:400,700");
-
-* {
-  font-family: "Poppins", sans-serif;
-}
 
 .router {
   width: 90%;
@@ -42,7 +47,7 @@
     width: 85%;
   }
 }
-@media only screen and (min-width: 1201px)  {
+@media only screen and (min-width: 1201px) {
   .router {
     width: 70%;
   }
@@ -61,7 +66,7 @@
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s;
+  transition: opacity 0.3s;
 }
 .fade-enter,
 .fade-leave-to {
