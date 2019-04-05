@@ -10,7 +10,8 @@ import "./registerServiceWorker"
 export const Store = new Vue({
   data: {
     client: null,
-    theme: localStorage.getItem("theme") || "light"
+    theme: localStorage.getItem("theme") || "light",
+    players: []
   }
 })
 

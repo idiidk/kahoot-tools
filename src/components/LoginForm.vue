@@ -42,7 +42,7 @@ export default {
       );
 
       client
-        .checkSession()
+        .initialize()
         .then(session => {
           this.loading = false;
           this.notify("Got session, ready for action!", "success");
@@ -54,8 +54,14 @@ export default {
           this.loading = false;
 
           if (error.toString().includes(404)) {
-            this.notify("Game not found", "error");
-            return;
+            error = "Game not found";
+          } else if (
+            error
+              .toString()
+              .toLowerCase()
+              .includes("network")
+          ) {
+            error = "Network error, is the cors proxy running?";
           }
 
           this.notify(error.toString(), "error");

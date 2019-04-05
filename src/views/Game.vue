@@ -1,15 +1,18 @@
 <template>
   <div>
     <PageHeader title="Game" :subtitle="`Pin: ${this.pin}`"/>
+    <GameForm></GameForm>
   </div>
 </template>
 
 <script>
 import PageHeader from "@/components/PageHeader";
+import GameForm from "@/components/GameForm"
 
 export default {
   components: {
-    PageHeader
+    PageHeader,
+    GameForm
   },
   data: () => {
     return {
@@ -17,8 +20,6 @@ export default {
     };
   },
   mounted: function() {
-    console.log(this.$globals.client)
-
     if (this.$globals.client) {
       this.pin = this.$globals.client.pin;
     } else {
