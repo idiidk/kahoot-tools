@@ -32,10 +32,24 @@
   </div>
 </template>
 
+<script>
+import Vue from "vue";
+
+export default {
+  mounted: function() {
+    Vue.material.theming.theme = this.$globals.theme;
+  }
+};
+</script>
+
+
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons");
+@import "~vue-material/dist/theme/engine";
 @import "~noty/src/noty.scss";
 @import "~noty/src/themes/mint.scss";
+@import "@/assets/themes.scss";
+@import "~vue-material/dist/theme/all";
 
 .router {
   width: 90%;

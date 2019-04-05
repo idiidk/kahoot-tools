@@ -1,7 +1,6 @@
 import Vue from "vue"
 import VueMaterial from "vue-material"
 import "vue-material/dist/vue-material.min.css";
-import "vue-material/dist/theme/default-dark.css";
 import config from "../config.json";
 
 import App from "./App.vue"
@@ -10,7 +9,8 @@ import "./registerServiceWorker"
 
 export const Store = new Vue({
   data: {
-    client: null
+    client: null,
+    theme: localStorage.getItem("theme") || "light"
   }
 })
 
