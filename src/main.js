@@ -11,13 +11,14 @@ export const Store = new Vue({
   data: {
     client: null,
     theme: localStorage.getItem("theme") || "light",
-    players: []
+    playerGroups: []
   }
 })
 
 export const Config = config;
 
 Vue.prototype.$globals = Store
+Vue.prototype.$eventBus = new Vue()
 Vue.config.productionTip = false
 Vue.use(VueMaterial)
 

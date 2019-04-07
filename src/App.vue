@@ -53,6 +53,7 @@ export default {
 
 .router {
   width: 90%;
+  height: calc(100vh - (0.5vh + 42px));
   margin: 0 auto;
 }
 
@@ -85,5 +86,17 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.centerer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.full {
+  width: 100%;
+  height: 100vh;
 }
 </style>

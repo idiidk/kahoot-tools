@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="players">
-      <PlayerChip></PlayerChip>
+      <PlayerChip v-for="playerGroup in this.$globals.playerGroups" :key="playerGroup.cid" :group="playerGroup"></PlayerChip>
     </div>
 
     <md-tabs class="md-transparent" md-alignment="fixed">
@@ -33,7 +33,7 @@ export default {
   margin-bottom: 2vh;
 }
 
-.players * {
+.players div {
   margin-bottom: 5px;
 }
 </style>
