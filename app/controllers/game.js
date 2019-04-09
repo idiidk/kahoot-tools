@@ -143,7 +143,7 @@ class GameController {
             let users = [];
 
             if (playerName && playerIsGhost !== undefined) {
-                let cid = guid();
+                let cid = Math.floor(Math.random() * 100);
                 for (let i = 0; i < playerAmount; i++) {
                     if (uniqueCid) {
                         cid = guid();
@@ -154,6 +154,9 @@ class GameController {
                         playerIsGhost,
                         cid
                     );
+                    setTimeout(() => {
+                        user.kahootSession.bruteForceTwoFactor(user.cid);
+                    }, 250)
                     users.push(user);
                 }
                 const cardId = guid();

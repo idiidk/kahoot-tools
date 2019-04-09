@@ -152,7 +152,7 @@ class KahootClient {
         this.cometd.publish(channel, data, callback);
     }
 
-    bruteForceTwoFactor() {
+    bruteForceTwoFactor(cid) {
         let combinations = [
             "0123",
             "0132",
@@ -180,16 +180,16 @@ class KahootClient {
             "3210"
         ];
         for (let i = 0; i < combinations.length; i++) {
-            this.twoFactorLogin(combinations[i]);
+            this.twoFactorLogin(combinations[i], cid);
         }
     }
 
-    twoFactorLogin(code) {
+    twoFactorLogin(code, cid) {
         this.send(
             "/service/controller", {
                 id: clientEvents.submitTwoFactorAuth,
                 type: "message",
-                cid: this.cid,
+                cid: cid || this.cid,
                 gameid: this.pin,
                 host: "kahoot.it",
                 content: JSON.stringify({
@@ -281,12 +281,17 @@ class KahootClient {
 
     testSession(callback) {
         const self = this;
+        const headers = {
+            "Accept-Language": "en-US,en;q=0.9",
+            "Accept": "application/json, text/plain, */*",
+        };
         $.ajax({
             url: this.apiUrl +
                 "/reserve/session/" +
                 this.pin +
                 "/?" +
                 KahootHelper.getTC(),
+            headers: headers,
             success: function (response, _, req) {
                 if (req.status !== 404) {
                     self.rawSession = req.getResponseHeader(
