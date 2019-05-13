@@ -1,82 +1,45 @@
 <template>
-  <div id="app">
+  <v-app :dark="this.$globals.theme === 'dark'">
+    <v-tabs fixed-tabs grow class="navigator">
+      <v-tab v-if="!this.$globals.session" to="/">Login</v-tab>
+      <v-tab v-else to="/game">Game</v-tab>
+      <v-tab to="/options">Options</v-tab>
+    </v-tabs>
+
     <transition name="fade" mode="out-in">
       <router-view class="router"/>
     </transition>
-
-    <div class="navigator md-layout">
-      <router-link
-        tag="md-button"
-        class="md-layout-item box"
-        active-class="md-primary"
-        to="/"
-        exact
-        v-if="!this.$globals.client"
-      >Login</router-link>
-      <router-link
-        tag="md-button"
-        class="md-layout-item box"
-        active-class="md-primary"
-        to="/game"
-        exact
-        v-else
-      >Game</router-link>
-      <router-link
-        tag="md-button"
-        class="md-layout-item box"
-        active-class="md-primary"
-        to="/options"
-        exact
-      >Options</router-link>
-    </div>
-  </div>
+  </v-app>
 </template>
-
-<script>
-import Vue from "vue";
-
-export default {
-  mounted: function() {
-    Vue.material.theming.theme = this.$globals.theme;
-  }
-};
-</script>
-
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons");
-@import "~vue-material/dist/theme/engine";
 @import "~noty/src/noty.scss";
 @import "~noty/src/themes/mint.scss";
-@import "@/assets/themes.scss";
-@import "~vue-material/dist/theme/all";
 
-.router {
-  width: 90%;
-  height: calc(100vh - (0.5vh + 42px));
-  margin: 0 auto;
-}
-
-@media only screen and (min-width: 601px) {
-  .router {
-    width: 85%;
-  }
-}
-@media only screen and (min-width: 1201px) {
-  .router {
-    width: 70%;
-  }
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
 }
 
 .navigator {
-  position: fixed;
+  position: fixed !important;
   bottom: 0;
-  width: 100vw;
-  margin-bottom: 0.5vh;
+  width: 100%;
 }
 
-.navigator .box {
-  transition: all 0.2s !important;
+.router {
+  width: 90%;
+  margin: 0 auto;
+
+  @media only screen and (min-width: 601px) {
+    width: 85%;
+  }
+  @media only screen and (min-width: 1201px) {
+    width: 70%;
+  }
 }
 
 .fade-enter-active,
@@ -93,10 +56,5 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-}
-
-.full {
-  width: 100%;
-  height: 100vh;
 }
 </style>

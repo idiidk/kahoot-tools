@@ -1,37 +1,23 @@
 <template>
-  <md-chip
-    v-on:click="toggleSelect"
-    :class="selected ? 'md-primary' : ''"
-    class="player-chip"
-  >{{group.name}} x {{group.amount}}</md-chip>
+  <v-chip v-on:input="removePlayers" close color="primary">
+    <v-avatar class="primary darken-1">{{player.amount}}</v-avatar>
+    {{player.name}}
+    <span v-if="player.target !== player.amount"> (joining...)</span>
+  </v-chip>
 </template>
 
 <script>
 export default {
-  name: "PlayerChip",
-  props: ["group"],
+  props: ["player", "index"],
   methods: {
-    toggleSelect: function() {
-      this.group.selected = !this.group.selected;
-    }
-  },
-  computed: {
-    selected: function() {
-      return this.group.selected;
+    removePlayers() {
+      if (this.player.instances) {
+        this.player.instances.forEach(player => {
+          player.leave();
+          this.$globals.players.splice(this.index, 1);
+        });
+      }
     }
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.player-chip {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  cursor: pointer;
-}
-</style>

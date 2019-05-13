@@ -1,40 +1,37 @@
 <template>
   <div>
-    <div class="players">
-      <PlayerChip v-for="playerGroup in this.$globals.playerGroups" :key="playerGroup.cid" :group="playerGroup"></PlayerChip>
-    </div>
+    <v-tabs grow v-model="tabs" class="tabs">
+      <v-tab key="players" ripple>Players</v-tab>
+      <v-tab key="game" ripple>Game</v-tab>
+      <v-tab key="games" ripple>Games</v-tab>
+    </v-tabs>
 
-    <md-tabs class="md-transparent" md-alignment="fixed">
-      <md-tab id="tab-players" md-label="Players">
+    <v-tabs-items v-model="tabs">
+      <v-tab-item key="players">
         <PlayerHacks></PlayerHacks>
-      </md-tab>
-      <md-tab id="tab-teams" md-label="Teams"></md-tab>
-      <md-tab id="tab-answers" md-label="Answers"></md-tab>
-      <md-tab id="tab-malicious" md-label="Malicious"></md-tab>
-    </md-tabs>
+      </v-tab-item>
+
+      <v-tab-item key="game">
+        <PlayerHacks></PlayerHacks>
+      </v-tab-item>
+
+      <v-tab-item key="games">a</v-tab-item>
+    </v-tabs-items>
   </div>
 </template>
 
 <script>
-import PlayerChip from "@/components/PlayerChip";
 import PlayerHacks from "@/components/hacks/PlayerHacks";
 
 export default {
   name: "GameForm",
+  data() {
+    return {
+      tabs: null
+    };
+  },
   components: {
-    PlayerHacks,
-    PlayerChip
+    PlayerHacks
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.players {
-  margin-bottom: 2vh;
-}
-
-.players div {
-  margin-bottom: 5px;
-}
-</style>
-

@@ -7,7 +7,7 @@
 
 <script>
 import PageHeader from "@/components/PageHeader";
-import OptionsForm from "@/components/OptionsForm"
+import OptionsForm from "@/components/OptionsForm";
 
 export default {
   components: {

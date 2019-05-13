@@ -1,7 +1,7 @@
 <template>
   <div class="header">
-    <span class="title">{{title}}</span>
-    <p class="subtitle">{{subtitle}}</p>
+    <h1 class="display-3 font-weight-bold">{{title}}</h1>
+    <h3 class="headline">{{subtitle}}</h3>
   </div>
 </template>
 
@@ -17,16 +17,6 @@ export default {
   width: 100%;
   text-align: center;
   padding-top: 7.5vh;
-}
-
-.title {
-  font-size: 7.5vmin;
-  font-weight: 700;
-}
-
-.subtitle {
-  font-size: 4vmin;
-  font-weight: normal;
 }
 </style>
 

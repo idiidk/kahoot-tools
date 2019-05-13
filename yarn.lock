@@ -1349,7 +1349,7 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
-atob@^2.1.1, atob@^2.1.2:
+atob@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
@@ -1375,14 +1375,6 @@ aws4@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
   integrity sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
-
-axios@^0.18.0:
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.18.0.tgz#32d53e4851efdc0a11993b6cd000789d70c05102"
-  integrity sha1-MtU+SFHv3AoRmTts0AB4nXDAUQI=
-  dependencies:
-    follow-redirects "^1.3.0"
-    is-buffer "^1.1.5"
 
 babel-code-frame@^6.26.0:
   version "6.26.0"
@@ -2034,16 +2026,6 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   integrity sha512-brWl9y6vOB1xYPZcpZde3N9zDByXTosAeMDo4p1wzo6UMOX4vumB+TP1RZ76sfE6Md68Q0NJSrE/gbezd4Ul+w==
   dependencies:
     delayed-stream "~1.0.0"
-
-cometd-nodejs-client@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/cometd-nodejs-client/-/cometd-nodejs-client-1.0.2.tgz#eb04cfa953a508257487f4800a725a5cd735fe27"
-  integrity sha512-V49AZtxrEhbHRSSTYdTB0i8SGa5ip3iwbTfboVEku5/H9fMAw4GkFnzzKSBU96jCNkTq46vIuN1V5UhUIeCjMA==
-
-cometd@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/cometd/-/cometd-4.0.3.tgz#6e7e58d0547ecc23f9f13c7b07a85132f60afcfb"
-  integrity sha512-6oq+ay++yZNVKq4q/FXSVE9KLPGsCJqJ/nwUknsAZyPitsqvQvD1ASS/dE7A0DOu6orItjJtDIs02iRhlJhXMA==
 
 commander@2.17.x:
   version "2.17.1"
@@ -3222,7 +3204,7 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-follow-redirects@^1.0.0, follow-redirects@^1.3.0:
+follow-redirects@^1.0.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.7.0.tgz#489ebc198dc0e7f64167bd23b03c4c19b5784c76"
   integrity sha512-m/pZQy4Gj287eNy94nivy5wchN3Kp+Q5WgUPNy5lJSZ3sgkVKSYV/ZChMAQVIgx1SqfZ2zBZtPA2YlXIWxxJOQ==
@@ -4382,17 +4364,6 @@ jsprim@^1.2.2:
     extsprintf "1.3.0"
     json-schema "0.2.3"
     verror "1.10.0"
-
-kahoot-api@^0.4.6:
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/kahoot-api/-/kahoot-api-0.4.6.tgz#b43101eb15f0bdb0bce751fcffc8bba41b142efd"
-  integrity sha512-/1K+yoXONKXzJlE1eKDWjMSezyhv/O9bnCJwM2J80Pl8MLhP6aIXJmqUnq/vIpo4SuVeTDii1ARaYRcNCCmXTw==
-  dependencies:
-    atob "^2.1.2"
-    axios "^0.18.0"
-    cometd "^4.0.3"
-    cometd-nodejs-client "^1.0.2"
-    tiny-emitter "^2.1.0"
 
 killable@^1.0.0:
   version "1.0.1"
@@ -7218,11 +7189,6 @@ timsort@^0.3.0:
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
-tiny-emitter@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz#1d1a56edfc51c43e863cbb5382a72330e3555423"
-  integrity sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==
-
 to-arraybuffer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz#7d229b1fcc637e466ca081180836a7aabff83f43"
@@ -7582,11 +7548,6 @@ vue-loader@^15.6.4:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-material@^1.0.0-beta-10.2:
-  version "1.0.0-beta-10.2"
-  resolved "https://registry.yarnpkg.com/vue-material/-/vue-material-1.0.0-beta-10.2.tgz#c3effea97e0c5a0c696b0051d5ef9c6e6cf2a5ed"
-  integrity sha512-DXOUXm6M8zbeJ6LPvP1h/0EhXmCkxNGz2dM/0q4w+lsT9uTaos+YDrwQvJBJcxil3fEw6oHCfhG/peWks+8v7Q==
-
 vue-router@^3.0.1:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.2.tgz#dedc67afe6c4e2bc25682c8b1c2a8c0d7c7e56be"
@@ -7617,6 +7578,11 @@ vue@^2.6.6:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
+
+vuetify@^1.5.14:
+  version "1.5.14"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.5.14.tgz#ff67d0b8a398be5297da159b6cd1b31f4d2898b8"
+  integrity sha512-7iM+TfghR/wu/Gl+k37lKr0N8Ddr6SxzqHtoK1dIyHgCH6SJRkpaXPw2MC5/FsAg9aUDJbYNWrzSeu5eHw+Q/w==
 
 watchpack@^1.5.0:
   version "1.6.0"

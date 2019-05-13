@@ -1,40 +1,34 @@
 <template>
   <div>
-    <MainPlayerPrompt v-if="mainPlayerPrompt"></MainPlayerPrompt>
-    <div v-else>
-      <PageHeader title="Game" :subtitle="`Pin: ${this.pin}`"/>
-      <GameForm></GameForm>
-    </div>
+    <PageHeader title="Game" subtitle="Now the fun begins!"/>
+    <GameForm></GameForm>
   </div>
 </template>
 
 <script>
 import PageHeader from "@/components/PageHeader";
 import GameForm from "@/components/GameForm";
-import MainPlayerPrompt from "@/components/MainPlayerPrompt";
 
 export default {
   components: {
     PageHeader,
     GameForm,
-    MainPlayerPrompt
-  },
-  data: () => {
-    return {
-      pin: 0,
-      mainPlayerPrompt: false
-    };
   },
   mounted: function() {
-    if (this.$globals.client) {
-      this.pin = this.$globals.client.pin;
-
-      if (this.$globals.client.twoFactor) {
-        this.mainPlayerPrompt = true;
-      }
-    } else {
+    if (!this.$globals.session) {
       this.$router.push("/");
     }
+  },
+  data() {
+    return {
+      tabs: null
+    };
   }
 };
 </script>
+
+<style lang="scss">
+.tabs {
+  margin-top: 5vh !important;
+}
+</style>

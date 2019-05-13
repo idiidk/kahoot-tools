@@ -1,108 +1,89 @@
 <template>
-  <div>
-    <h1>Add Player Groups</h1>
+  <v-container grid-list-md text-xs-center>
+    <v-layout row wrap>
+      <v-flex xs6>
+        <v-text-field v-model="name" maxlength="13" :counter="13" label="Name"></v-text-field>
+      </v-flex>
 
-    <div class="md-layout md-gutter">
-      <div class="md-layout-item">
-        <md-field>
-          <label>Name</label>
-          <md-input v-model="name"></md-input>
-        </md-field>
-      </div>
-      <div class="md-layout-item">
-        <md-field>
-          <label>Amount</label>
-          <md-input type="number" v-model="amount"></md-input>
-        </md-field>
-      </div>
-    </div>
+      <v-flex xs6>
+        <v-text-field v-model="amount" label="Amount"></v-text-field>
+      </v-flex>
 
-    <md-checkbox v-model="isGhost">Is Ghost</md-checkbox>
-    <div class="md-layout md-gutter">
-      <div class="md-layout-item">
-        <md-button v-on:click="addPlayer" class="md-raised md-primary add-button">Add</md-button>
-      </div>
-      <div class="md-layout-item">
-        <md-button v-on:click="toggleSelect" class="md-raised md-primary add-button">Toggle Selected</md-button>
-      </div>
-      <div class="md-layout-item">
-        <md-button v-on:click="removeSelect" class="md-raised md-primary add-button">Remove Selected</md-button>
-      </div>
+      <v-btn v-on:click="addPlayer" color="primary">Add Players</v-btn>
+    </v-layout>
+
+    <div class="text-xs-center players">
+      <PlayerChip
+        v-for="(player, index) of this.$globals.players"
+        :key="index"
+        :index="index"
+        :player="player"
+      ></PlayerChip>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>
 import Noty from "noty";
-import uuidv4 from "uuid/v4";
-import { setTimeout } from "timers";
+import { Player, Session, Events } from "kahoot-api";
+import PlayerChip from "@/components/PlayerChip";
 
 export default {
   name: "PlayerHacks",
+  components: {
+    PlayerChip
+  },
+  data() {
+    return {
+      name: null,
+      amount: 0
+    };
+  },
+  computed: {
+    safeAmount() {
+      return parseInt(this.amount);
+    }
+  },
   methods: {
-    addPlayer: function() {
-      let error = null;
-      const players = [];
-      const exists =
-        this.$globals.playerGroups.filter(group => {
-          return group.name === this.name;
-        }).length !== 0;
-
-      if (!exists) {
-        if (this.amount > 0 && this.name !== "") {
-          const cid = uuidv4();
-
-          for (let i = 0; i < this.amount; i++) {
-            const player = this.$globals.client.addPlayer(
-              parseInt(this.amount) === 1 ? this.name : `${this.name}-${i}`,
-              cid,
-              this.isGhost
-            );
-
-            setTimeout(() => {
-              player.bruteForceTwoFactor();
-            }, 250);
-
-            players.push(player);
-          }
-
-          this.$globals.playerGroups.push({
+    addPlayer() {
+      const name = this.name;
+      if (!this.checkDuplicates(name)) {
+        const globals = this.$globals;
+        const session = globals.session;
+        const pin = globals.pin;
+        const playerIndex =
+          globals.players.push({
             name: this.name,
-            amount: this.amount,
-            isGhost: this.isGhost,
-            cid: cid,
-            players: players,
-            selected: false
-          });
-        } else {
-          error = "Please specify an amount greater than 0 and a valid name!";
+            target: this.safeAmount,
+            amount: 0,
+            instances: []
+          }) - 1;
+
+        for (let i = 0; i < this.safeAmount; i++) {
+          session
+            .check(pin)
+            .then(info => session.connect(info))
+            .then(socket => {
+              const player = new Player(socket);
+              player.join(`${name}-${i}`).then(() => {
+                if (globals.players[playerIndex]) {
+                  globals.players[playerIndex].amount += 1;
+                  globals.players[playerIndex].instances.push(player);
+                } else {
+                  player.leave();
+                }
+              });
+            });
         }
       } else {
-        error = "Player with this name already added";
-      }
-
-      if (error) {
-        this.notify(error, "warning");
+        this.notify(`Player named ${name} already added!`, "warning");
       }
     },
-    toggleSelect: function() {
-      this.$globals.playerGroups.forEach(group => {
-        group.selected = !group.selected;
-      });
-    },
-    removeSelect: function() {
-      this.$globals.playerGroups.forEach(group => {
-        if (group.selected) {
-          group.players.forEach(player => {
-            player.removeFromGame();
-          });
-
-          this.$globals.playerGroups.splice(
-            this.$globals.playerGroups.indexOf(group),
-            1
-          );
-        }
-      });
+    checkDuplicates(name) {
+      const found = this.$globals.players.filter(
+        player => player.name === name
+      );
+      return found.length > 0;
     },
     notify: function(text, type) {
       new Noty({
@@ -112,22 +93,13 @@ export default {
         type: type
       }).show();
     }
-  },
-  data: () => {
-    return {
-      name: "",
-      amount: 0,
-      isGhost: false
-    };
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.add-button {
-  margin: 0;
-  margin-top: 4px;
-  width: 100%;
+.players {
+  margin-top: 2.5vh;
 }
 </style>
 
