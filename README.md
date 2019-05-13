@@ -8,7 +8,7 @@ A suite of tools for fucking with Kahoot games. Easily installable and customiza
 OS X, Linux and Windows:
 
 ```sh
-git clone --single-branch --branch vue https://github.com/idiidk/kahoot-tools.git
+git clone --single-branch --branch vue-rewrite https://github.com/idiidk/kahoot-tools.git
 cd kahoot-tools
 npm install
 # Edit config.json
