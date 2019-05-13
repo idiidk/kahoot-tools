@@ -1,29 +1,28 @@
-# kahoot-tools-vue
+# Kahoot Tools Vue
+> Scaring teachers since Sep 27, 2017!
 
-## Project setup
-```
-yarn install
-```
+A suite of tools for fucking with Kahoot games. Easily installable and customizable.
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## Installation
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+OS X, Linux and Windows:
 
-### Run your tests
-```
-yarn run test
+```sh
+git clone --single-branch --branch vue https://github.com/idiidk/kahoot-tools.git
+cd kahoot-tools
+npm install
+# Edit config.json
+npm run build
+# Host the dist directory, only when building
+node proxy.js
 ```
 
-### Lints and fixes files
-```
-yarn run lint
-```
+To run kahoot-tools-vue in dev mode, follow the steps above but replace ```npm run build``` with: ```npm run serve```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Meta
+
+idiidk – [@idiidka](https://twitter.com/idiidka)
+
+Distributed under the MIT license. See ``LICENSE`` for more information.
+
+[https://github.com/idiidk](https://github.com/idiidk/)
