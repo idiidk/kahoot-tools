@@ -20,7 +20,7 @@
 
 <script>
 import Noty from "noty";
-import { Adapters, Session, Events } from "kahoot-api";
+import { Adapters, Session } from "kahoot-api";
 
 export default {
   name: "PlayerHacks",
