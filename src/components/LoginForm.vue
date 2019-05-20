@@ -29,15 +29,16 @@ export default {
 
       this.loading = true;
 
-      const session = new Session(`//${Config.corsUrl}:${Config.corsPort}/`);
+      const session = new Session(this.pin, `//${Config.corsUrl}:${Config.corsPort}/`);
 
       session
-        .check(this.pin)
-        .then(sessionInfo => {
+        .openSocket()
+        .then(socket => {
           this.loading = false;
 
           this.$globals.pin = this.pin;
           this.$globals.session = session;
+          this.$globals.mainSocket = socket;
           this.notify("Got session info, ready for action!", "success");
           this.$router.push("game");
         })

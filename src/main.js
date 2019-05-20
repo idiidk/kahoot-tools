@@ -13,6 +13,7 @@ export const Store = new Vue({
   data: {
     pin: null,
     session: null,
+    mainSocket: null,
     theme: localStorage.getItem("theme") || "light",
     players: []
   }

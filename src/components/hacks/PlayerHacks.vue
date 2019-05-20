@@ -9,34 +9,26 @@
         <v-text-field v-model="amount" label="Amount"></v-text-field>
       </v-flex>
 
-      <v-btn v-on:click="addPlayer" color="primary">Add Players</v-btn>
-    </v-layout>
+      <v-flex xs12>
+        <v-switch v-model="isGhost" label="Ghost"></v-switch>
+      </v-flex>
 
-    <div class="text-xs-center players">
-      <PlayerChip
-        v-for="(player, index) of this.$globals.players"
-        :key="index"
-        :index="index"
-        :player="player"
-      ></PlayerChip>
-    </div>
+      <v-btn v-on:click="addPlayers" color="primary">Add Players</v-btn>
+    </v-layout>
   </v-container>
 </template>
 
 <script>
 import Noty from "noty";
-import { Player, Session, Events } from "kahoot-api";
-import PlayerChip from "@/components/PlayerChip";
+import { Adapters, Session, Events } from "kahoot-api";
 
 export default {
   name: "PlayerHacks",
-  components: {
-    PlayerChip
-  },
   data() {
     return {
       name: null,
-      amount: 0
+      amount: 0,
+      isGhost: false
     };
   },
   computed: {
@@ -45,26 +37,35 @@ export default {
     }
   },
   methods: {
-    addPlayer() {
+    addPlayers() {
       const name = this.name;
+      const isGhost = this.isGhost;
       if (!this.checkDuplicates(name)) {
         const globals = this.$globals;
         const session = globals.session;
-        const pin = globals.pin;
         const playerIndex =
           globals.players.push({
             name: this.name,
             target: this.safeAmount,
             amount: 0,
+            ghost: false,
             instances: []
           }) - 1;
 
         for (let i = 0; i < this.safeAmount; i++) {
-          session
-            .check(pin)
-            .then(info => session.connect(info))
-            .then(socket => {
-              const player = new Player(socket);
+          if (isGhost) {
+            const ghost = new Adapters.Ghost(this.$globals.mainSocket);
+            ghost.join(`${name}-${i}`).then(() => {
+              if (globals.players[playerIndex]) {
+                globals.players[playerIndex].amount += 1;
+                globals.players[playerIndex].instances.push(ghost);
+              } else {
+                ghost.leave();
+              }
+            });
+          } else {
+            session.openSocket().then(socket => {
+              const player = new Adapters.Player(socket);
               player.join(`${name}-${i}`).then(() => {
                 if (globals.players[playerIndex]) {
                   globals.players[playerIndex].amount += 1;
@@ -74,15 +75,19 @@ export default {
                 }
               });
             });
+          }
         }
-      } else {
-        this.notify(`Player named ${name} already added!`, "warning");
       }
     },
     checkDuplicates(name) {
       const found = this.$globals.players.filter(
         player => player.name === name
       );
+
+      if (found.length > 0) {
+        this.notify(`Player named ${name} already added!`, "warning");
+      }
+
       return found.length > 0;
     },
     notify: function(text, type) {

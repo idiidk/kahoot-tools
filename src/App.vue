@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="this.$globals.theme === 'dark'">
+  <v-app :dark="this.$globals.theme === 'Dark'">
     <v-tabs fixed-tabs grow class="navigator">
       <v-tab v-if="!this.$globals.session" to="/">Login</v-tab>
       <v-tab v-else to="/game">Game</v-tab>
