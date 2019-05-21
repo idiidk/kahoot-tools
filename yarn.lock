@@ -4383,16 +4383,16 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-kahoot-api@^0.6.5:
-  version "0.6.5"
-  resolved "https://registry.yarnpkg.com/kahoot-api/-/kahoot-api-0.6.5.tgz#4eb389fe35305ca2b9990f3fe7e88f4119bf0c03"
-  integrity sha512-1EVSzz5wmCGzsfUYhbRJ5fg2VRvL5HE7SenxjqfBmQDMd/JwyjjsmedfFn5nqU6p1ERaAstVUMaBRJVLgs12aA==
+kahoot-api@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/kahoot-api/-/kahoot-api-0.7.1.tgz#8d3cff09237c45194a511c463d357a3d583f3300"
+  integrity sha512-eBmHv8ofLxZWcTiRriezbAKmY6mxW1n8muR8rv7ib5c619TLKisSiTR8/bg429H0LIQILzYI+3/WeW/vluuDZA==
   dependencies:
     axios "^0.18.0"
     cometd "^4.0.3"
     cometd-nodejs-client "^1.0.2"
     core-js "2"
-    events "^3.0.0"
+    tiny-emitter "^2.1.0"
 
 killable@^1.0.0:
   version "1.0.1"
@@ -7217,6 +7217,11 @@ timsort@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
+
+tiny-emitter@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz#1d1a56edfc51c43e863cbb5382a72330e3555423"
+  integrity sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==
 
 to-arraybuffer@^1.0.0:
   version "1.0.1"
