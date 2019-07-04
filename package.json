@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=dev node_modules/webpack-dev-server/bin/webpack-dev-server.js --host localhost --progress --config webpack.config.dev.js",
     "build": "node node_modules/webpack/bin/webpack.js -p --progress --config webpack.config.build.js",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,8 @@
     "lodash": "^4.17.5",
     "materialize-css": "^1.0.0-beta",
     "normalize.css": "^8.0.0",
-    "velocity-animate": "^1.5.1"
+    "velocity-animate": "^1.5.1",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -39,5 +42,6 @@
     "webpack": "^3.11.0",
     "webpack-dev-server": "^3.1.11",
     "webpack-merge": "^4.1.2"
-  }
+  },
+  "snyk": true
 }
