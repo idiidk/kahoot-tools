@@ -29,7 +29,10 @@ export default {
 
       this.loading = true;
 
-      const session = new Session(this.pin, `//${Config.corsUrl}:${Config.corsPort}/`);
+      const session = new Session(
+        this.pin,
+        `//${Config.corsUrl}:${Config.corsPort}/`
+      );
 
       session
         .openSocket()

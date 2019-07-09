@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageHeader title="Options" subtitle="Customize kahoot-tools"/>
+    <PageHeader title="Options" subtitle="Customize kahoot-tools" />
     <OptionsForm></OptionsForm>
   </div>
 </template>

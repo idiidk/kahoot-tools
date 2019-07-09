@@ -7,7 +7,7 @@
     </v-tabs>
 
     <transition name="fade" mode="out-in">
-      <router-view class="router"/>
+      <router-view class="router" />
     </transition>
   </v-app>
 </template>
