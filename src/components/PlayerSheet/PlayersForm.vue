@@ -54,19 +54,36 @@ export default {
           }) - 1;
 
         for (let i = 0; i < target; i++) {
-          session.openSocket().then(socket => {
-            const player = new Adapters.Player(socket);
-            player.join(`${name}-${i}`).then(() => {
+          setTimeout(() => {
+            console.log("a");
+            session.openSocket().then(socket => {
+              const player = new Adapters.Player(socket);
               const playerGroup = globals.players[playerIndex];
+              const playerName = `${name}-${i}`;
 
-              if (playerGroup) {
-                playerGroup.amount += 1;
-                playerGroup.instances.push(player);
-              } else {
-                player.leave();
-              }
+              player
+                .join(playerName)
+                .then(() => {
+                  if (playerGroup) {
+                    playerGroup.amount += 1;
+                    playerGroup.instances.push(player);
+                  } else {
+                    player.leave();
+                  }
+                })
+                .catch(e => {
+                  if (playerGroup) {
+                    playerGroup.amount += 1;
+                    this.$globals.notify(
+                      `Error: ${playerName} - ${e.message}`,
+                      "error"
+                    );
+                  } else {
+                    player.leave();
+                  }
+                });
             });
-          });
+          }, 250 * i);
         }
       }
     },
@@ -93,7 +110,7 @@ export default {
         return false;
       }
 
-      if(target <= 0) {
+      if (target <= 0) {
         notify(`Amount should be at least one`, "warning");
         return false;
       }

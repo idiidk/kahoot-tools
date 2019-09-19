@@ -8,7 +8,7 @@
       <v-list-item-title>{{player.name}}</v-list-item-title>
       <v-fade-transition hide-on-leave>
         <v-progress-linear v-if="!allJoined" :value="progress"></v-progress-linear>
-        <v-list-item-subtitle v-else>{{player.amount}} joined</v-list-item-subtitle>
+        <v-list-item-subtitle v-else>{{player.instances.length}} / {{player.target}} joined</v-list-item-subtitle>
       </v-fade-transition>
     </v-list-item-content>
 
