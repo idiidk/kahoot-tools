@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageHeader title="Game" subtitle="Now the fun begins!"/>
+    <PageHeader title="Game" :subtitle="`Connected to ${$globals.pin}`"/>
     <GameForm></GameForm>
   </div>
 </template>

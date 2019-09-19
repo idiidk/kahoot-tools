@@ -1,46 +1,30 @@
 <template>
-  <div>
-    <v-tabs grow v-model="tabs" class="tabs">
-      <v-tab key="players" ripple>Players</v-tab>
-      <v-tab key="game" ripple>Game</v-tab>
-      <v-tab key="experimental" ripple>Experimental</v-tab>
-    </v-tabs>
+  <div class="wrapper">
+    <h1>Hacks</h1>
 
-    <v-tabs-items v-model="tabs">
-      <v-tab-item key="players">
-        <PlayerHacks></PlayerHacks>
-      </v-tab-item>
-
-      <v-tab-item key="game">a</v-tab-item>
-
-      <v-tab-item key="experimental">b</v-tab-item>
-    </v-tabs-items>
-
-    <div class="text-xs-center players">
-      <PlayerChip
-        v-for="(player, index) of this.$globals.players"
-        :key="index"
-        :index="index"
-        :player="player"
-      ></PlayerChip>
-    </div>
+    <v-expansion-panels>
+      <v-expansion-panel>
+        <v-expansion-panel-header>Player</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <PlayerHacks />
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </div>
 </template>
-
 <script>
-import PlayerHacks from "@/components/hacks/PlayerHacks";
-import PlayerChip from "@/components/PlayerChip";
+import PlayerHacks from "@/components/PlayerHacks";
 
 export default {
   name: "GameForm",
-  data() {
-    return {
-      tabs: null
-    };
-  },
   components: {
-    PlayerHacks,
-    PlayerChip
+    PlayerHacks
   }
 };
 </script>
+
+<style scoped>
+.wrapper {
+  padding-top: 5vh;
+}
+</style>

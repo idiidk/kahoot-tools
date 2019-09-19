@@ -1,37 +1,38 @@
 import Vue from "vue";
-import Vuetify from "vuetify";
-import colors from "vuetify/es5/util/colors";
-import config from "../config.json";
-
+import Noty from "noty";
 import App from "./App.vue";
 import router from "./router";
+import vuetify from "@/plugins/vuetify";
+import config from "../config.json";
 import "./registerServiceWorker";
 
-import "vuetify/dist/vuetify.min.css";
-
-export const Store = new Vue({
+export const Globals = new Vue({
   data: {
     pin: null,
     session: null,
     mainSocket: null,
-    theme: localStorage.getItem("theme") || "light",
+    dark: localStorage.getItem("dark") === "true" || false,
     players: []
+  },
+  methods: {
+    notify: function(text, type) {
+      new Noty({
+        text: text,
+        timeout: 2000,
+        layout: "topRight",
+        type: type
+      }).show();
+    }
   }
 });
 
 export const Config = config;
 
-Vue.prototype.$globals = Store;
+Vue.prototype.$globals = Globals;
 Vue.config.productionTip = false;
-Vue.use(Vuetify, {
-  theme: {
-    primary: colors.indigo.darken1,
-    secondary: colors.indigo,
-    accent: colors.indigo.base
-  }
-});
 
 new Vue({
   router,
+  vuetify,
   render: h => h(App)
 }).$mount("#app");

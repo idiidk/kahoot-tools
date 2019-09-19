@@ -1,14 +1,29 @@
 <template>
-  <v-app :dark="this.$globals.theme === 'Dark'">
-    <v-tabs fixed-tabs grow class="navigator">
+  <v-app :dark="true">
+    <v-tabs grow class="navigator">
       <v-tab v-if="!this.$globals.session" to="/">Login</v-tab>
       <v-tab v-else to="/game">Game</v-tab>
       <v-tab to="/options">Options</v-tab>
     </v-tabs>
 
     <transition name="fade" mode="out-in">
-      <router-view class="router"/>
+      <router-view class="router" />
     </transition>
+
+    <v-btn
+      v-if="this.$globals.session"
+      @click="sheetExpanded = !sheetExpanded"
+      fixed
+      dark
+      fab
+      bottom
+      right
+      color="primary"
+    >
+      <v-icon>person</v-icon>
+    </v-btn>
+
+    <PlayerSheet v-model="sheetExpanded" />
   </v-app>
 </template>
 
@@ -25,9 +40,9 @@ body {
 }
 
 .navigator {
-  position: fixed !important;
+  position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
 }
 
 .router {
@@ -58,3 +73,21 @@ body {
   width: 100%;
 }
 </style>
+
+<script>
+import PlayerSheet from "@/components/PlayerSheet";
+
+export default {
+  data() {
+    return {
+      sheetExpanded: false
+    };
+  },
+  mounted: function() {
+    this.$vuetify.theme.dark = this.$globals.dark;
+  },
+  components: {
+    PlayerSheet
+  }
+};
+</script>

@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <v-select v-model="theme" :items="themes" label="Theme"></v-select>
-  </div>
+  <v-container fluid>
+    <v-switch v-model="dark" label="Dark Mode"></v-switch>
+  </v-container>
 </template>
 
 <script>
@@ -9,20 +9,15 @@ import Vue from "vue";
 
 export default {
   name: "OptionsForm",
-  data: () => {
-    return {
-      theme: "Light",
-      themes: ["Light", "Dark"]
-    };
+  data() {
+    return { dark: this.$globals.dark };
   },
   watch: {
-    theme: function(theme) {
-      this.$globals.theme = theme;
-      localStorage.setItem("theme", theme);
+    dark: function(theme) {
+      this.$globals.dark = this.dark;
+      this.$vuetify.theme.dark = this.$globals.dark;
+      localStorage.setItem("dark", this.dark);
     }
-  },
-  mounted: function() {
-    this.theme = this.$globals.theme;
   }
 };
 </script>

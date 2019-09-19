@@ -11,7 +11,6 @@
 <script>
 import { Config } from "@/main";
 import { Session } from "kahoot-api";
-import Noty from "noty";
 
 export default {
   data: () => {
@@ -22,14 +21,19 @@ export default {
   },
   methods: {
     doLogin: function() {
+      const notify = this.$globals.notify;
+
       if (!this.pin) {
-        this.notify("Please provide a pin", "error");
+        notify("Please provide a pin", "error");
         return;
       }
 
       this.loading = true;
 
-      const session = new Session(this.pin, `//${Config.corsUrl}:${Config.corsPort}/`);
+      const session = new Session(
+        this.pin,
+        `//${Config.corsUrl}:${Config.corsPort}/`
+      );
 
       session
         .openSocket()
@@ -39,21 +43,16 @@ export default {
           this.$globals.pin = this.pin;
           this.$globals.session = session;
           this.$globals.mainSocket = socket;
-          this.notify("Got session info, ready for action!", "success");
+          notify(
+            "Got session info, ready for action!",
+            "success"
+          );
           this.$router.push("game");
         })
         .catch(error => {
           this.loading = false;
-          this.notify(error.toString(), "error");
+          notify(error.toString(), "error");
         });
-    },
-    notify: function(text, type) {
-      new Noty({
-        text: text,
-        timeout: 2000,
-        layout: "bottomRight",
-        type: type
-      }).show();
     }
   }
 };
