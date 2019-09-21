@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "prod": "node run.js"
+    "host": "node run.js",
+    "proxy": "PROXY_ONLY=true node run.js"
   },
   "dependencies": {
     "core-js": "^3.2.1",

@@ -3,21 +3,24 @@
 
 A suite of tools for fucking with Kahoot games. Easily installable and customizable.
 
+![](https://idiidk.app/DEMO.gif)
+
 ## Installation
 
 OS X, Linux and Windows:
 
 ```sh
-git clone --single-branch --branch vue-rewrite https://github.com/idiidk/kahoot-tools.git
+git clone https://github.com/idiidk/kahoot-tools.git
 cd kahoot-tools
-npm install
+npm install # or use yarn
 # Edit config.json
 npm run build
-# Host the dist directory, only when building
-node proxy.js
+npm run host
 ```
 
-To run kahoot-tools-vue in dev mode, follow the steps above but replace ```npm run build``` with: ```npm run serve```
+To run kahoot-tools-vue in dev mode, follow the steps above but replace ```npm run build``` with: ```npm run serve```. 
+
+In dev mode, you need to run the cors proxy in a seperate terminal. Use the command: ```npm run proxy```
 
 ## Meta
 

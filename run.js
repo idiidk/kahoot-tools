@@ -18,6 +18,9 @@ const webServer = http.createServer((request, response) => {
 corsServer.listen(corsPort, host, function() {
   console.log(`[+] CORS anywhere running on port ${corsPort}`);
 });
-webServer.listen(webPort, host, () => {
-  console.log(`[+] Serving site at http://${host}:${webPort}`);
-});
+
+if (!process.env.PROXY_ONLY) {
+  webServer.listen(webPort, host, () => {
+    console.log(`[+] Serving site at http://${host}:${webPort}`);
+  });
+}
