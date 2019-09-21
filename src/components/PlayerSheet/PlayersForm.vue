@@ -9,10 +9,10 @@
         <v-text-field v-model="amount" label="Amount"></v-text-field>
       </v-flex>
 
-      <v-flex xs3>
-        <v-btn width="100%" v-on:click="addPlayers" color="primary">Add Players</v-btn>
+      <v-flex xs6>
+        <v-btn width="100%" v-on:click="addGroup" color="primary">Add Group</v-btn>
       </v-flex>
-      <v-flex xs3>
+      <v-flex xs6>
         <v-btn width="100%" v-on:click="removeSelected" color="primary">Remove Selected</v-btn>
       </v-flex>
     </v-layout>
@@ -20,9 +20,6 @@
 </template>
 
 <script>
-import Noty from "noty";
-import { Adapters, Session } from "kahoot-api";
-
 export default {
   name: "AddPlayersForm",
   data() {
@@ -37,70 +34,19 @@ export default {
     }
   },
   methods: {
-    addPlayers() {
+    addGroup() {
       const name = this.name;
-      const target = this.safeAmount;
+      const amount = this.safeAmount;
 
-      if (this.validate(name, target)) {
-        const globals = this.$globals;
-        const session = globals.session;
-        const playerIndex =
-          globals.players.push({
-            name,
-            target,
-            amount: 0,
-            selected: false,
-            instances: []
-          }) - 1;
-
-        for (let i = 0; i < target; i++) {
-          setTimeout(() => {
-            console.log("a");
-            session.openSocket().then(socket => {
-              const player = new Adapters.Player(socket);
-              const playerGroup = globals.players[playerIndex];
-              const playerName = `${name}-${i}`;
-
-              player
-                .join(playerName)
-                .then(() => {
-                  if (playerGroup) {
-                    playerGroup.amount += 1;
-                    playerGroup.instances.push(player);
-                  } else {
-                    player.leave();
-                  }
-                })
-                .catch(e => {
-                  if (playerGroup) {
-                    playerGroup.amount += 1;
-                    this.$globals.notify(
-                      `Error: ${playerName} - ${e.message}`,
-                      "error"
-                    );
-                  } else {
-                    player.leave();
-                  }
-                });
-            });
-          }, 250 * i);
-        }
+      if (this.validate(name, amount)) {
+        this.$kahoot.addPlayerGroup(name, amount).catch(error => {
+          const notify = this.$globals.notify;
+          notify(error.message, "error");
+        });
       }
     },
     removeSelected() {
-      const players = this.$globals.players;
-      for (let p = 0; p < players.length; p++) {
-        const player = players[p];
-
-        if (player.selected) {
-          for (let i = 0; i < player.instances.length; i++) {
-            const instance = player.instances[i];
-            instance.leave();
-          }
-
-          players.splice(p, 1);
-        }
-      }
+      this.$kahoot.removeSelectedGroups();
     },
     validate(name, target) {
       const notify = this.$globals.notify;
@@ -115,12 +61,15 @@ export default {
         return false;
       }
 
-      const found = this.$globals.players.filter(
-        player => player.name === name
-      );
+      if (isNaN(this.safeAmount)) {
+        notify(`Amount invalid`, "warning");
+        return false;
+      }
+
+      const found = this.$kahoot.getGroupByName(name);
 
       if (found.length > 0) {
-        notify(`Player named ${name} already added`, "warning");
+        notify(`Group named ${name} already added`, "warning");
         return false;
       }
 

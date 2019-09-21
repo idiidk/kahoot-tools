@@ -2,16 +2,16 @@
   <v-container>
     <v-row justify="center">
       <v-col>
-        <v-btn color="#e21b3c" width="100%" @click="answer(0)">▲</v-btn>
+        <v-btn class="answer-button white--text" color="#e21b3c" @click="answer(0)">▲</v-btn>
       </v-col>
       <v-col>
-        <v-btn color="#1368ce" width="100%" @click="answer(1)">◆</v-btn>
+        <v-btn class="answer-button white--text" color="#1368ce" @click="answer(1)">◆</v-btn>
       </v-col>
       <v-col>
-        <v-btn color="#d89e00" width="100%" @click="answer(2)">●</v-btn>
+        <v-btn class="answer-button white--text" color="#d89e00" @click="answer(2)">●</v-btn>
       </v-col>
       <v-col>
-        <v-btn color="#298f0d" width="100%" @click="answer(3)">■</v-btn>
+        <v-btn class="answer-button white--text" color="#298f0d" @click="answer(3)">■</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -22,20 +22,17 @@ export default {
   name: "PlayerHacks",
   methods: {
     answer(choice) {
-      const players = this.getSelectedPlayers();
+      const players = this.$kahoot.getSelectedPlayers();
       players.forEach(player => {
-        player.instances.forEach(instance => {
-          instance.answer(choice);
-        });
+        player.answer(choice);
       });
-    },
-    getSelectedPlayers() {
-      const players = this.$globals.players;
-      return players.filter(player => player.selected);
     }
   }
 };
 </script>
 
 <style>
+.answer-button {
+  width: 100%;
+}
 </style>

@@ -2,10 +2,10 @@
   <v-list flat>
     <v-list-item-group>
       <BotItem
-        v-for="(player, index) of this.$globals.players"
+        v-for="(group, index) of this.$kahoot.groups"
         :key="index"
         :index="index"
-        :player="player"
+        :group="group"
       />
     </v-list-item-group>
   </v-list>

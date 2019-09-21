@@ -2,8 +2,8 @@
   <v-bottom-sheet v-model="expanded" transition="slide-y-reverse-transition" :hide-overlay="true">
     <v-sheet class="sheet-content">
       <v-subheader>
-        {{this.$globals.players.length}} Group
-        <span v-if="this.$globals.players.length!==1">s</span>
+        {{this.$kahoot.groups.length}} Group
+        <span v-if="this.$kahoot.groups.length!==1">s</span>
       </v-subheader>
 
       <BotList />

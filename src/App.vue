@@ -1,7 +1,7 @@
 <template>
   <v-app :dark="true">
     <v-tabs grow class="navigator">
-      <v-tab v-if="!this.$globals.session" to="/">Login</v-tab>
+      <v-tab v-if="!this.$kahoot.session" to="/">Login</v-tab>
       <v-tab v-else to="/game">Game</v-tab>
       <v-tab to="/options">Options</v-tab>
     </v-tabs>
@@ -11,7 +11,7 @@
     </transition>
 
     <v-btn
-      v-if="this.$globals.session"
+      v-if="this.$kahoot.session"
       @click="sheetExpanded = !sheetExpanded"
       fixed
       dark

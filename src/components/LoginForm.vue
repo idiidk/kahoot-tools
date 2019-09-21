@@ -3,7 +3,7 @@
     <v-text-field label="Pin" v-model="pin" :disabled="loading" type="pin"></v-text-field>
 
     <div class="centerer">
-      <v-btn :loading="loading" v-on:click="doLogin" color="primary">find session</v-btn>
+      <v-btn :loading="loading" @click="login" color="primary">find session</v-btn>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
     };
   },
   methods: {
-    doLogin: function() {
+    login: function() {
       const notify = this.$globals.notify;
 
       if (!this.pin) {
@@ -40,13 +40,11 @@ export default {
         .then(socket => {
           this.loading = false;
 
-          this.$globals.pin = this.pin;
-          this.$globals.session = session;
-          this.$globals.mainSocket = socket;
-          notify(
-            "Got session info, ready for action!",
-            "success"
-          );
+          this.$kahoot.pin = this.pin;
+          this.$kahoot.session = session;
+          this.$kahoot.socket = socket;
+
+          notify("Got session info, ready for action!", "success");
           this.$router.push("game");
         })
         .catch(error => {

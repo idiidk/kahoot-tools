@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageHeader title="Game" :subtitle="`Connected to ${$globals.pin}`"/>
+    <PageHeader title="Game" :subtitle="`Connected to ${$kahoot.pin}`"/>
     <GameForm></GameForm>
   </div>
 </template>
@@ -15,20 +15,9 @@ export default {
     GameForm,
   },
   mounted: function() {
-    if (!this.$globals.session) {
+    if (!this.$kahoot.session) {
       this.$router.push("/");
     }
-  },
-  data() {
-    return {
-      tabs: null
-    };
   }
 };
 </script>
-
-<style lang="scss">
-.tabs {
-  margin-top: 5vh !important;
-}
-</style>
