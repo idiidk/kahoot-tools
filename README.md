@@ -3,7 +3,7 @@
 
 A suite of tools for fucking with Kahoot games. Easily installable and customizable.
 
-![](https://idiidk.app/DEMO.gif?v2)
+<img src="https://idiidk.app/kahoot-tools.gif" width="100%">
 
 ## Installation
 
