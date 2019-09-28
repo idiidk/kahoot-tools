@@ -4617,10 +4617,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-kahoot-api@^0.8.4:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/kahoot-api/-/kahoot-api-0.8.4.tgz#5c336519a0c09c4bf08cac5dd47d2c516c62c7a9"
-  integrity sha512-X1H4dDP5TfzfwyDRIreizK8TPvV54HANMZoDbgzXAlpTEsq7VdkxYvTENvZNGF44fbJQESsELkM3dUexIjRJrA==
+kahoot-api@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/kahoot-api/-/kahoot-api-0.9.0.tgz#0f3de02c5c7cc5498279738441f07d30548d80a6"
+  integrity sha512-GN828eusuIpDM1jCiQxfx/wKxYC71vd6fqsgJP0xULRAabkPXiE1iInQaXfvko4Welmc2hdL9890Y7Ou8a4fhA==
   dependencies:
     "@babel/runtime" "^7.6.0"
     axios "^0.19.0"
