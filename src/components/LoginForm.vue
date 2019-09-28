@@ -1,22 +1,29 @@
 <template>
-  <div>
-    <v-text-field label="Pin" v-model="pin" :disabled="loading" type="pin"></v-text-field>
-
-    <div class="centerer">
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-text-field label="Pin" v-model="pin" :disabled="loading" type="pin"></v-text-field>
+      </v-col>
+      <v-col>
+        <v-text-field label="Main player name" v-model="name" :disabled="loading" type="text"></v-text-field>
+      </v-col>
+    </v-row>
+    <v-row justify="center">
       <v-btn :loading="loading" @click="login" color="primary">find session</v-btn>
-    </div>
-  </div>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 import { Config } from "@/main";
-import { Session } from "kahoot-api";
+import { Session, Adapters } from "kahoot-api";
 
 export default {
   data: () => {
     return {
       loading: false,
-      pin: null
+      pin: null,
+      name: null
     };
   },
   methods: {
@@ -25,6 +32,11 @@ export default {
 
       if (!this.pin) {
         notify("Please provide a pin", "error");
+        return;
+      }
+
+      if (!this.name) {
+        notify("Please provide a main player name", "error");
         return;
       }
 
@@ -38,14 +50,18 @@ export default {
       session
         .openSocket()
         .then(socket => {
-          this.loading = false;
+          const mainPlayer = new Adapters.Player(socket);
+          return mainPlayer.join(this.name).then(() => {
+            this.loading = false;
 
-          this.$kahoot.pin = this.pin;
-          this.$kahoot.session = session;
-          this.$kahoot.socket = socket;
+            this.$kahoot.pin = this.pin;
+            this.$kahoot.session = session;
+            this.$kahoot.socket = socket;
+            this.$kahoot.mainPlayer = mainPlayer;
 
-          notify("Got session info, ready for action!", "success");
-          this.$router.push("game");
+            notify("Connected, ready for action!", "success");
+            this.$router.push("game");
+          });
         })
         .catch(error => {
           this.loading = false;

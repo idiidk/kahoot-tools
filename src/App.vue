@@ -43,11 +43,13 @@ body {
   position: fixed;
   bottom: 0;
   width: 100vw;
+  z-index: 2;
 }
 
 .router {
   width: 90%;
   margin: 0 auto;
+  margin-bottom: calc(48px * 2);
 
   @media only screen and (min-width: 601px) {
     width: 85%;
@@ -64,13 +66,6 @@ body {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}
-
-.centerer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
 }
 </style>
 

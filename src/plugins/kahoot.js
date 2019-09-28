@@ -28,6 +28,10 @@ const manager = new Vue({
       pin: null,
       session: null,
       socket: null,
+      mainPlayer: null,
+      quizName: null,
+      questionIndex: 0,
+      activeKahoot: {},
       groups: []
     };
   },
@@ -44,7 +48,12 @@ const manager = new Vue({
 
         for (let i = 0; i < amount; i++) {
           this.initPlayer().then(player => {
-            const finalName = `${name}-${i}`;
+            let finalName;
+            if (amount === 1) {
+              finalName = name;
+            } else {
+              finalName = `${name}-${i}`;
+            }
 
             group.players.push(player);
             return player
