@@ -8,13 +8,14 @@ async function wait(ms) {
 }
 
 class PlayerGroup {
-  constructor(name, target) {
+  constructor(name, target, canBeRemoved = true) {
     this.name = name;
     this.players = [];
     this.joined = 0;
     this.errored = 0;
     this.target = target;
     this.selected = false;
+    this.canBeRemoved = canBeRemoved;
   }
 
   get totalPlayers() {
@@ -41,9 +42,9 @@ const manager = new Vue({
       const player = await new Adapters.Player(socket);
       return player;
     },
-    addPlayerGroup(name, amount) {
+    addPlayerGroup(name, amount, canBeRemoved = true) {
       return new Promise(async (resolve, reject) => {
-        const group = new PlayerGroup(name, amount);
+        const group = new PlayerGroup(name, amount, canBeRemoved);
         this.groups.push(group);
 
         for (let i = 0; i < amount; i++) {
@@ -92,7 +93,11 @@ const manager = new Vue({
     },
     removeSelectedGroups() {
       const selected = this.getSelectedGroups();
-      selected.forEach(playerGroup => {
+      const canBeRemoved = selected.filter(
+        playerGroup => playerGroup.canBeRemoved
+      );
+
+      canBeRemoved.forEach(playerGroup => {
         for (let i = 0; i < playerGroup.players.length; i++) {
           const player = playerGroup.players[i];
           player.leave();
@@ -109,3 +114,5 @@ export default {
     MainVue.prototype.$kahoot = manager;
   }
 };
+
+export { PlayerGroup };

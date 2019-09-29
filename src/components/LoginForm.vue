@@ -16,6 +16,7 @@
 
 <script>
 import { Config } from "@/main";
+import { PlayerGroup } from "@/plugins/kahoot";
 import { Session, Adapters } from "kahoot-api";
 
 export default {
@@ -54,10 +55,15 @@ export default {
           return mainPlayer.join(this.name).then(() => {
             this.loading = false;
 
+            const group = new PlayerGroup(this.name, 1, false);
+            group.players.push(mainPlayer);
+            group.joined = 1;
+
             this.$kahoot.pin = this.pin;
             this.$kahoot.session = session;
             this.$kahoot.socket = socket;
             this.$kahoot.mainPlayer = mainPlayer;
+            this.$kahoot.groups.push(group);
 
             notify("Connected, ready for action!", "success");
             this.$router.push("game");
