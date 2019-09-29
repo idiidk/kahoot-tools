@@ -6,6 +6,13 @@
         <h1 v-else>{{kahoot.title}}</h1>
       </v-scale-transition>
 
+      <v-btn class="spaced" @click="$emit('resetSelected')" color="primary">back</v-btn>
+      <v-btn
+        class="spaced white--text"
+        @click="toggleActive"
+        :color="activeColor"
+      >toggle active quiz</v-btn>
+
       <v-expansion-panels>
         <KahootQuestionItem
           v-for="(question, index) of kahoot.questions"
@@ -13,9 +20,6 @@
           :question="question"
         />
       </v-expansion-panels>
-
-      <v-btn class="spaced" @click="$emit('resetSelected')" color="primary">back</v-btn>
-      <v-btn class="spaced" @click="toggleActive" :color="activeColor">toggle active quiz</v-btn>
     </v-col>
   </v-row>
 </template>
@@ -48,6 +52,9 @@ export default {
       }
     },
     isActive() {
+      if (!this.kahoot.uuid) {
+        return false;
+      }
       return this.$kahoot.activeKahoot.uuid === this.kahoot.uuid;
     }
   },
@@ -64,7 +71,7 @@ export default {
 
 <style scoped>
 .spaced {
-  margin-top: 2vh;
+  margin: 2vh 0 2vh 0;
   margin-right: 2vw;
 }
 </style>
