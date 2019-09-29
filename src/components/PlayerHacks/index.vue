@@ -1,14 +1,14 @@
 <template>
-  <SimpleAnswer />
+  <AnswerForm />
 </template>
 
 <script>
-import SimpleAnswer from "./SimpleAnswer";
+import AnswerForm from "./AnswerForm";
 
 export default {
   name: "PlayerHacks",
   components: {
-    SimpleAnswer
+    AnswerForm
   }
 };
 </script>
