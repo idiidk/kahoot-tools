@@ -3,7 +3,8 @@
 
 A suite of tools for fucking with Kahoot games. Easily installable and customizable.
 
-<img src="https://idiidk.app/kahoot-tools.gif" width="100%">
+## Quick Start
+To quickly start using kahoot-tools after installation, please refer to the quick start guide (WIP)
 
 ## Installation
 
