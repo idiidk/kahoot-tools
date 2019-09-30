@@ -1,12 +1,6 @@
 import Vue from "vue";
 import { Adapters } from "kahoot-api";
 
-async function wait(ms) {
-  return new Promise(resolve => {
-    setTimeout(resolve, ms);
-  });
-}
-
 class PlayerGroup {
   constructor(name, target, canBeRemoved = true) {
     this.name = name;
@@ -39,11 +33,11 @@ const manager = new Vue({
   methods: {
     async initPlayer() {
       const socket = await this.session.openSocket();
-      const player = await new Adapters.Player(socket);
+      const player = new Adapters.Player(socket);
       return player;
     },
     addPlayerGroup(name, amount, canBeRemoved = true) {
-      return new Promise(async (resolve, reject) => {
+      return new Promise((resolve, reject) => {
         const group = new PlayerGroup(name, amount, canBeRemoved);
         this.groups.push(group);
 
@@ -67,8 +61,6 @@ const manager = new Vue({
                 reject(error);
               });
           });
-
-          await wait(150);
         }
 
         resolve(group);
