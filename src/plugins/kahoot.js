@@ -1,6 +1,12 @@
 import Vue from "vue";
 import { Adapters } from "kahoot-api";
 
+function wait(milliseconds) {
+  return new Promise(resolve => {
+    setTimeout(resolve, milliseconds);
+  });
+}
+
 class PlayerGroup {
   constructor(name, target, canBeRemoved = true) {
     this.name = name;
@@ -8,7 +14,7 @@ class PlayerGroup {
     this.joined = 0;
     this.errored = 0;
     this.target = target;
-    this.selected = false;
+    this.selected = true;
     this.canBeRemoved = canBeRemoved;
   }
 
@@ -37,7 +43,7 @@ const manager = new Vue({
       return player;
     },
     addPlayerGroup(name, amount, canBeRemoved = true) {
-      return new Promise((resolve, reject) => {
+      return new Promise(async (resolve, reject) => {
         const group = new PlayerGroup(name, amount, canBeRemoved);
         this.groups.push(group);
 
@@ -61,6 +67,8 @@ const manager = new Vue({
                 reject(error);
               });
           });
+
+          await wait(100);
         }
 
         resolve(group);
