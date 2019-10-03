@@ -15,6 +15,7 @@
             <v-col cols="2">
               <SimpleAnswerButton
                 :color="buttons[index].color"
+                :choice="index"
                 v-if="choice.correct"
               >{{buttons[index].text}}</SimpleAnswerButton>
             </v-col>
