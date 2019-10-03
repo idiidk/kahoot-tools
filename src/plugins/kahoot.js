@@ -14,7 +14,7 @@ class PlayerGroup {
     this.joined = 0;
     this.errored = 0;
     this.target = target;
-    this.selected = false;
+    this.selected = true;
     this.canBeRemoved = canBeRemoved;
   }
 
