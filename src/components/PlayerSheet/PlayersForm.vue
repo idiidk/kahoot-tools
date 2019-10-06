@@ -39,7 +39,7 @@ export default {
       const amount = this.safeAmount;
 
       if (this.validate(name, amount)) {
-        this.$kahoot.addPlayerGroup(name, amount).catch(error => {
+        this.$kahoot.addPlayerGroup(name, amount, true, this.$globals.options.selectOnAdd).catch(error => {
           const notify = this.$globals.notify;
           notify(error.message, "error");
         });

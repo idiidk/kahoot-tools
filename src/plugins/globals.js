@@ -1,19 +1,32 @@
-import Noty from "noty";
-
 export default {
   install(Vue) {
+    Vue.component();
+
     const Globals = new Vue({
       data: {
-        dark: localStorage.getItem("dark") === "true" || false
+        options: {
+          dark: false,
+          selectOnAdd: false
+        },
+        notification: {
+          text: "",
+          type: "",
+          active: false
+        }
       },
       methods: {
         notify: function(text, type) {
-          new Noty({
-            text: text,
-            timeout: 2000,
-            layout: "topRight",
-            type: type
-          }).show();
+          this.notification.text = text;
+          this.notification.type = type;
+          this.notification.active = true;
+        }
+      },
+      watch: {
+        options: {
+          handler() {
+            localStorage.setItem("options", JSON.stringify(this.options));
+          },
+          deep: true
         }
       }
     });

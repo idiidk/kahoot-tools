@@ -8,13 +8,13 @@ function wait(milliseconds) {
 }
 
 class PlayerGroup {
-  constructor(name, target, canBeRemoved = true) {
+  constructor(name, target, canBeRemoved = true, selected = false) {
     this.name = name;
     this.players = [];
     this.joined = 0;
     this.errored = 0;
     this.target = target;
-    this.selected = true;
+    this.selected = selected;
     this.canBeRemoved = canBeRemoved;
   }
 
@@ -42,9 +42,9 @@ const manager = new Vue({
       const player = new Adapters.Player(socket);
       return player;
     },
-    addPlayerGroup(name, amount, canBeRemoved = true) {
+    addPlayerGroup(name, amount, canBeRemoved, selectOnAdd) {
       return new Promise(async (resolve, reject) => {
-        const group = new PlayerGroup(name, amount, canBeRemoved);
+        const group = new PlayerGroup(name, amount, canBeRemoved, selectOnAdd);
         this.groups.push(group);
 
         for (let i = 0; i < amount; i++) {

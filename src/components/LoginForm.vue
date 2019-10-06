@@ -5,7 +5,7 @@
         <v-text-field label="Pin" v-model="pin" :disabled="loading" type="pin"></v-text-field>
       </v-col>
       <v-col>
-        <v-text-field label="Main player name" v-model="name" :disabled="loading" type="text"></v-text-field>
+        <v-text-field label="Name" v-model="name" :disabled="loading" type="text"></v-text-field>
       </v-col>
     </v-row>
     <v-row justify="center">
@@ -55,7 +55,7 @@ export default {
           return mainPlayer.join(this.name).then(() => {
             this.loading = false;
 
-            const group = new PlayerGroup(this.name, 1, false);
+            const group = new PlayerGroup(this.name, 1, false, this.$globals.options.selectOnAdd);
             group.players.push(mainPlayer);
             group.joined = 1;
 

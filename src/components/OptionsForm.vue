@@ -1,22 +1,34 @@
 <template>
   <v-container fluid>
-    <v-switch v-model="dark" label="Dark Mode"></v-switch>
+    <v-select v-model="$globals.options.dark" :items="themeItems" label="Theme"></v-select>
+    <v-select
+      v-model="$globals.options.selectOnAdd"
+      :items="selectOnAddItems"
+      label="Select Group on Add"
+    ></v-select>
   </v-container>
 </template>
 
 <script>
-import Vue from "vue";
-
 export default {
   name: "OptionsForm",
   data() {
-    return { dark: this.$globals.dark };
+    return {
+      themeItems: [
+        { text: "Light", value: false },
+        { text: "Dark", value: true }
+      ],
+      selectOnAddItems: [
+        { text: "Yes", value: true },
+        { text: "No", value: false }
+      ]
+    };
   },
   watch: {
-    dark: function(theme) {
-      this.$globals.dark = this.dark;
-      this.$vuetify.theme.dark = this.$globals.dark;
-      localStorage.setItem("dark", this.dark);
+    "$globals.options.dark": {
+      handler() {
+        this.$vuetify.theme.dark = this.$globals.options.dark;
+      }
     }
   }
 };

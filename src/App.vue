@@ -1,14 +1,10 @@
 <template>
   <v-app :dark="true">
-    <v-tabs grow class="navigator">
-      <v-tab v-if="!this.$kahoot.session" to="/">Login</v-tab>
-      <v-tab v-else to="/game">Game</v-tab>
-      <v-tab to="/options">Options</v-tab>
-    </v-tabs>
+    <Notification />
 
-    <transition name="fade" mode="out-in">
+    <v-fade-transition mode="out-in">
       <router-view class="router" />
-    </transition>
+    </v-fade-transition>
 
     <v-btn
       v-if="this.$kahoot.session"
@@ -24,21 +20,61 @@
     </v-btn>
 
     <PlayerSheet v-model="sheetExpanded" />
+
+    <v-tabs grow class="navigator">
+      <v-tab v-if="!this.$kahoot.session" to="/">Login</v-tab>
+      <v-tab v-else to="/game">Game</v-tab>
+      <v-tab to="/options">Options</v-tab>
+    </v-tabs>
   </v-app>
 </template>
 
+<script>
+import Notification from "@/components/Notification";
+import PlayerSheet from "@/components/PlayerSheet";
+
+export default {
+  data() {
+    return {
+      sheetExpanded: false
+    };
+  },
+  mounted: function() {
+    this.loadConfig();
+
+    function clean() {
+      this.$kahoot.groups.forEach(group => {
+        for (let i = 0; i < group.players.length; i++) {
+          const player = group.players[i];
+          player.leave();
+        }
+      });
+    }
+    const globalClean = clean.bind(this);
+    window.onbeforeunload = globalClean;
+  },
+  methods: {
+    getConfig() {
+      const options = localStorage.getItem("options");
+      if (options) {
+        return JSON.parse(options);
+      } else {
+        return this.$globals.options;
+      }
+    },
+    loadConfig() {
+      this.$globals.options = this.getConfig();
+      this.$vuetify.theme.dark = this.$globals.options.dark;
+    }
+  },
+  components: {
+    PlayerSheet,
+    Notification
+  }
+};
+</script>
+
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons");
-@import "~noty/src/noty.scss";
-@import "~noty/src/themes/mint.scss";
-
-html,
-body {
-  width: 100vw;
-  height: 100vh;
-  font-family: "Roboto", sans-serif;
-}
-
 .navigator {
   position: fixed;
   bottom: 0;
@@ -58,31 +94,4 @@ body {
     width: 70%;
   }
 }
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
 </style>
-
-<script>
-import PlayerSheet from "@/components/PlayerSheet";
-
-export default {
-  data() {
-    return {
-      sheetExpanded: false
-    };
-  },
-  mounted: function() {
-    this.$vuetify.theme.dark = this.$globals.dark;
-  },
-  components: {
-    PlayerSheet
-  }
-};
-</script>

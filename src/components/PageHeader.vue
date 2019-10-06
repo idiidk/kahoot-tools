@@ -1,7 +1,7 @@
 <template>
   <div class="header">
-    <h1 class="display-3 font-weight-bold">{{title}}</h1>
-    <h3 class="headline">{{subtitle}}</h3>
+    <h1 class="display-3 font-weight-black">{{title}}</h1>
+    <h2 class="display-1">{{subtitle}}</h2>
   </div>
 </template>
 
@@ -17,6 +17,8 @@ export default {
   width: 100%;
   text-align: center;
   padding-top: 7.5vh;
+  padding-bottom: 3vh;
+  
 }
 </style>
 
