@@ -1,6 +1,6 @@
 {
   "name": "kahoot-tools-vue",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,7 +11,7 @@
   "dependencies": {
     "core-js": "^3.2.1",
     "cors-anywhere": "^0.4.1",
-    "kahoot-api": "^0.9.3",
+    "kahoot-api": "^0.9.4",
     "register-service-worker": "^1.6.2",
     "serve-handler": "^6.1.1",
     "vue": "^2.6.10",
