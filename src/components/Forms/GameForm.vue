@@ -7,35 +7,41 @@
     </h1>
 
     <v-expansion-panels multiple>
-      <HackPanel title="Player">
-        <PlayerHacks />
-      </HackPanel>
+      <Panel title="Player">
+        <PlayerPanel />
+      </Panel>
 
-      <HackPanel title="Experimental">
-        <ExperimentalHacks />
-      </HackPanel>
+      <Panel title="Team">
+        <TeamPanel />
+      </Panel>
 
-      <HackPanel title="Answer Explorer">
-        <AnswerExplorer />
-      </HackPanel>
+      <Panel title="Experimental">
+        <ExperimentalPanel />
+      </Panel>
+
+      <Panel title="Answer Explorer">
+        <AnswerExplorerPanel />
+      </Panel>
     </v-expansion-panels>
   </div>
 </template>
 <script>
 import { Events } from "kahoot-api";
 
-import HackPanel from "@/components/HackPanel";
-import PlayerHacks from "@/components/PlayerHacks";
-import ExperimentalHacks from "@/components/ExperimentalHacks";
-import AnswerExplorer from "@/components/AnswerExplorer";
+import Panel from "@/components/Panel";
+import PlayerPanel from "@/components/Panels/Player";
+import ExperimentalPanel from "@/components/Panels/Experimental";
+import AnswerExplorerPanel from "@/components/Panels/AnswerExplorer";
+import TeamPanel from "@/components/Panels/Team";
 
 export default {
   name: "GameForm",
   components: {
-    PlayerHacks,
-    ExperimentalHacks,
-    AnswerExplorer,
-    HackPanel
+    PlayerPanel,
+    ExperimentalPanel,
+    AnswerExplorerPanel,
+    TeamPanel,
+    Panel
   },
   computed: {
     totalSelectedGroups() {

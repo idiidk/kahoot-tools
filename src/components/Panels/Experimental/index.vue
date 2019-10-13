@@ -6,7 +6,7 @@
 import FillLeaderboard from "./FillLeaderboard";
 
 export default {
-  name: "ExperimentalHacks",
+  name: "ExperimentalPanel",
   components: {
     FillLeaderboard
   }

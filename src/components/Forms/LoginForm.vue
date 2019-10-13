@@ -2,10 +2,10 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-text-field label="Pin" v-model="pin" :disabled="loading" type="pin"></v-text-field>
+        <v-text-field label="Pin" v-model="pin" v-on:keyup.enter="login" :disabled="loading" type="pin"></v-text-field>
       </v-col>
       <v-col>
-        <v-text-field label="Name" v-model="name" :disabled="loading" type="text"></v-text-field>
+        <v-text-field label="Name" v-model="name" v-on:keyup.enter="login" :disabled="loading" type="text"></v-text-field>
       </v-col>
     </v-row>
     <v-row justify="center">
@@ -20,6 +20,7 @@ import { PlayerGroup } from "@/plugins/kahoot";
 import { Session, Adapters } from "kahoot-api";
 
 export default {
+  name: "LoginForm",
   data: () => {
     return {
       loading: false,

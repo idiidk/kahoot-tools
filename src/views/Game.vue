@@ -7,7 +7,7 @@
 
 <script>
 import PageHeader from "@/components/PageHeader";
-import GameForm from "@/components/GameForm";
+import GameForm from "@/components/Forms/GameForm";
 
 export default {
   components: {

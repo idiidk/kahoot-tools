@@ -28,7 +28,7 @@
 
 <script>
 import { KahootColors } from "@/assets/colors";
-import SimpleAnswerButton from "@/components/PlayerHacks/SimpleAnswerButton";
+import SimpleAnswerButton from "@/components/Panels/Player/SimpleAnswerButton";
 
 export default {
   name: "KahootQuestionItem",

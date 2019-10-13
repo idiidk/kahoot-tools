@@ -7,7 +7,7 @@
 
 <script>
 import PageHeader from "@/components/PageHeader";
-import LoginForm from "@/components/LoginForm";
+import LoginForm from "@/components/Forms/LoginForm";
 
 export default {
   components: {

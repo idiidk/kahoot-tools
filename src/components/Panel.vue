@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "HackPanel",
+  name: "Panel",
   props: ["title"]
 };
 </script>

@@ -6,7 +6,7 @@
 import AnswerForm from "./AnswerForm";
 
 export default {
-  name: "PlayerHacks",
+  name: "PlayerPanel",
   components: {
     AnswerForm
   }
