@@ -6,7 +6,7 @@ export default {
       data: {
         options: {
           dark: false,
-          selectOnAdd: false
+          selectOnAdd: true
         },
         notification: {
           text: "",
