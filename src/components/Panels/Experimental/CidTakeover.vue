@@ -59,7 +59,7 @@ export default {
       }
     }
   },
-  beforeCreate() {
+  mounted() {
     this.$kahoot.$on("global", this.onMessage);
   },
   components: { CidTakeoverItem }
