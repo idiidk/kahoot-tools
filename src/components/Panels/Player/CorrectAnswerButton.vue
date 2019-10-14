@@ -14,7 +14,7 @@ export default {
   computed: {
     choice() {
       if (this.$kahoot.activeKahoot.title) {
-        const questionIndex = this.$kahoot.questionIndex;
+        const questionIndex = this.$kahoot.mainPlayer.quiz.questionIndex;
         const questions = this.$kahoot.activeKahoot.questions;
         if (questionIndex > questions.length) {
           this.$globals.notify(

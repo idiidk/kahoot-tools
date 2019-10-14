@@ -26,8 +26,6 @@
   </div>
 </template>
 <script>
-import { Events } from "kahoot-api";
-
 import Panel from "@/components/Panel";
 import PlayerPanel from "@/components/Panels/Player";
 import ExperimentalPanel from "@/components/Panels/Experimental";
@@ -46,27 +44,6 @@ export default {
   computed: {
     totalSelectedGroups() {
       return this.$kahoot.getSelectedGroups().length;
-    }
-  },
-  methods: {
-    onMessage(message) {
-      switch (message.id) {
-        case Events.startQuiz: {
-          const quizName = message.content.quizName;
-          this.$kahoot.quizName = quizName;
-          break;
-        }
-        case Events.getReady: {
-          const questionIndex = message.content.questionIndex;
-          this.$kahoot.questionIndex = questionIndex;
-          break;
-        }
-      }
-    }
-  },
-  mounted() {
-    if (this.$kahoot.mainPlayer) {
-      this.$kahoot.mainPlayer.on("message", this.onMessage);
     }
   }
 };

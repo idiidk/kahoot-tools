@@ -30,8 +30,6 @@ const manager = new Vue({
       session: null,
       socket: null,
       mainPlayer: null,
-      quizName: null,
-      questionIndex: 0,
       activeKahoot: {},
       groups: []
     };
@@ -60,6 +58,7 @@ const manager = new Vue({
             return player
               .join(finalName)
               .then(() => {
+                player.on("message", this.emitGlobal);
                 group.joined++;
               })
               .catch(error => {
@@ -105,6 +104,9 @@ const manager = new Vue({
 
         this.groups.splice(this.groups.indexOf(playerGroup), 1);
       });
+    },
+    emitGlobal(message) {
+      this.$emit("global", message);
     }
   }
 });

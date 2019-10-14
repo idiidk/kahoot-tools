@@ -2,10 +2,22 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-text-field label="Pin" v-model="pin" v-on:keyup.enter="login" :disabled="loading" type="pin"></v-text-field>
+        <v-text-field
+          label="Pin"
+          v-model="pin"
+          v-on:keyup.enter="login"
+          :disabled="loading"
+          type="pin"
+        ></v-text-field>
       </v-col>
       <v-col>
-        <v-text-field label="Name" v-model="name" v-on:keyup.enter="login" :disabled="loading" type="text"></v-text-field>
+        <v-text-field
+          label="Name"
+          v-model="name"
+          v-on:keyup.enter="login"
+          :disabled="loading"
+          type="text"
+        ></v-text-field>
       </v-col>
     </v-row>
     <v-row justify="center">
@@ -56,7 +68,12 @@ export default {
           return mainPlayer.join(this.name).then(() => {
             this.loading = false;
 
-            const group = new PlayerGroup(this.name, 1, false, this.$globals.options.selectOnAdd);
+            const group = new PlayerGroup(
+              this.name,
+              1,
+              false,
+              this.$globals.options.selectOnAdd
+            );
             group.players.push(mainPlayer);
             group.joined = 1;
 
@@ -65,6 +82,7 @@ export default {
             this.$kahoot.socket = socket;
             this.$kahoot.mainPlayer = mainPlayer;
             this.$kahoot.groups.push(group);
+            mainPlayer.on("message", this.$kahoot.emitGlobal);
 
             notify("Connected, ready for action!", "success");
             this.$router.push("game");

@@ -3,7 +3,9 @@
     <Notification />
 
     <v-fade-transition mode="out-in">
-      <router-view class="router" />
+      <keep-alive>
+        <router-view class="router" />
+      </keep-alive>
     </v-fade-transition>
 
     <v-btn

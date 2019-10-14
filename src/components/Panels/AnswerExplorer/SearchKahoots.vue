@@ -1,7 +1,7 @@
 <template>
   <v-row no-gutters>
     <v-col cols="12">
-      <h1>Kahoot Name: {{this.$kahoot.quizName || "not started yet"}}</h1>
+      <h1>Kahoot Name: {{this.$kahoot.mainPlayer.quiz.name || "not started yet"}}</h1>
       <p class="subtitle">Active Kahoot: {{this.$kahoot.activeKahoot.title}}</p>
       <v-text-field
         v-model="name"
@@ -49,12 +49,12 @@ export default {
       });
     },
     refreshName() {
-      this.name = this.$kahoot.quizName;
+      this.name = this.$kahoot.mainPlayer.quiz.name;
     }
   },
   computed: {
     appendIcon() {
-      if (this.name === this.$kahoot.quizName) {
+      if (this.name === this.$kahoot.mainPlayer.quiz.name) {
         return "check";
       } else {
         return "refresh";
