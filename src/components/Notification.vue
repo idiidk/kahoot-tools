@@ -3,7 +3,7 @@
     v-model="$globals.notification.active"
     top
     right
-    :timeout="2500"
+    :timeout="5000"
     :color="$globals.notification.type"
   >
     {{$globals.notification.text}}
