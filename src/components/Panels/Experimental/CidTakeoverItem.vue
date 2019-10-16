@@ -22,7 +22,9 @@ export default {
   props: ["player"],
   methods: {
     async initiateTakeover() {
-      const found = this.$kahoot.getGroupByName(`${this.player.name} (TAKEN OVER)`);
+      const found = this.$kahoot.getGroupByName(
+        `${this.player.name} (TAKEN OVER)`
+      );
       if (found.length > 0) {
         this.$globals.notify(`Group named ${name} already added`, "warning");
         return false;
@@ -46,6 +48,10 @@ export default {
       });
 
       const player = new Adapters.Player(socket);
+      player.loggedIn = true;
+      player.cid = this.player.cid;
+      player.name = this.player.name;
+
       const group = new PlayerGroup(
         `${this.player.name} (TAKEN OVER)`,
         1,
@@ -54,7 +60,10 @@ export default {
       );
       group.players.push(player);
       group.joined = 1;
-      this.$globals.notify(`Taken over the player, player was added to group list!`, "success");
+      this.$globals.notify(
+        `Taken over the player, player was added to group list!`,
+        "success"
+      );
       this.$kahoot.groups.push(group);
     }
   }

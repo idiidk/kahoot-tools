@@ -46,16 +46,16 @@ export default {
     },
     toggleActive() {
       if (this.isActive()) {
-        this.$kahoot.activeKahoot = {};
+        this.$globals.activeKahoot = {};
       } else {
-        this.$kahoot.activeKahoot = this.kahoot;
+        this.$globals.activeKahoot = this.kahoot;
       }
     },
     isActive() {
       if (!this.kahoot.uuid) {
         return false;
       }
-      return this.$kahoot.activeKahoot.uuid === this.kahoot.uuid;
+      return this.$globals.activeKahoot.uuid === this.kahoot.uuid;
     }
   },
   computed: {

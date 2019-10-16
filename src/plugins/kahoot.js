@@ -29,8 +29,6 @@ const manager = new Vue({
       pin: null,
       session: null,
       socket: null,
-      mainPlayer: null,
-      activeKahoot: {},
       groups: []
     };
   },
@@ -104,9 +102,6 @@ const manager = new Vue({
 
         this.groups.splice(this.groups.indexOf(playerGroup), 1);
       });
-    },
-    emitGlobal(message) {
-      this.$emit("global", message);
     }
   }
 });

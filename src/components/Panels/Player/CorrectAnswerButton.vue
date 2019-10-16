@@ -1,7 +1,7 @@
 <template>
   <SimpleAnswerButton
     color="primary"
-    :disabled="!this.$kahoot.activeKahoot.title"
+    :disabled="!this.$globals.activeKahoot.title"
     :choice="choice"
   >{{correctText}}</SimpleAnswerButton>
 </template>
@@ -13,9 +13,9 @@ export default {
   name: "CorrectAnswerButton",
   computed: {
     choice() {
-      if (this.$kahoot.activeKahoot.title) {
-        const questionIndex = this.$kahoot.mainPlayer.quiz.questionIndex;
-        const questions = this.$kahoot.activeKahoot.questions;
+      if (this.$globals.activeKahoot.title) {
+        const questionIndex = this.$globals.mainPlayer.quiz.questionIndex;
+        const questions = this.$globals.activeKahoot.questions;
         if (questionIndex > questions.length) {
           this.$globals.notify(
             "Reached end of quiz, the selected quiz probably doesn't match the quiz you are playing",
@@ -34,7 +34,7 @@ export default {
       }
     },
     correctText() {
-      return this.$kahoot.activeKahoot.title
+      return this.$globals.activeKahoot.title
         ? "correct"
         : "select a kahoot first";
     }
