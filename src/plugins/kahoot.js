@@ -56,7 +56,9 @@ const manager = new Vue({
             return player
               .join(finalName)
               .then(() => {
-                player.on("message", this.emitGlobal);
+                player.on("message", msg =>
+                  this.$globals.$emit("message", msg)
+                );
                 group.joined++;
               })
               .catch(error => {
@@ -73,6 +75,11 @@ const manager = new Vue({
     },
     getGroupByName(name) {
       return this.groups.filter(group => group.name === name);
+    },
+    getGroupByPlayerCid(cid) {
+      return this.groups.find(group => {
+        return group.players.find(player => player.cid === cid);
+      });
     },
     getSelectedGroups() {
       return this.groups.filter(group => group.selected);

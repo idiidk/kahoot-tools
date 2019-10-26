@@ -1,14 +1,26 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-select v-model="$globals.options.dark" :items="themeItems" label="Theme"></v-select>
+      <v-col>
+        <v-select v-model="$globals.options.dark" :items="themeItems" label="Theme"></v-select>
+      </v-col>
+
+      <v-col>
+        <v-select
+          v-model="$globals.options.stealthMode"
+          :items="stealthModeItems"
+          label="Stealth Mode"
+        ></v-select>
+      </v-col>
     </v-row>
     <v-row>
-      <v-select
-        v-model="$globals.options.selectOnAdd"
-        :items="selectOnAddItems"
-        label="Select Group on Add"
-      ></v-select>
+      <v-col>
+        <v-select
+          v-model="$globals.options.selectOnAdd"
+          :items="selectOnAddItems"
+          label="Select Group on Add"
+        ></v-select>
+      </v-col>
     </v-row>
     <v-row>
       <v-col align="center" cols="12">
@@ -30,6 +42,10 @@ export default {
       selectOnAddItems: [
         { text: "Yes", value: true },
         { text: "No", value: false }
+      ],
+      stealthModeItems: [
+        { text: "On", value: true },
+        { text: "Off", value: false }
       ]
     };
   },

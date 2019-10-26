@@ -8,7 +8,8 @@ export default {
       data: {
         options: {
           dark: false,
-          selectOnAdd: true
+          selectOnAdd: true,
+          stealthMode: false
         },
         notification: {
           text: "",
@@ -26,27 +27,29 @@ export default {
           this.notification.active = true;
         },
         initListeners() {
-          this.mainPlayer.on("message", message => {
+          this.$on("message", message => {
             switch (message.id) {
               case Events.revealAnswer: {
                 const nemesis = message.content.nemesis;
                 if (nemesis) {
-                  const found = this.nemeses.find(
-                    player => player.cid === nemesis.cid
-                  );
-
-                  if (!found) {
-                    this.notify(
-                      `Able to take over ${nemesis.name} with ${nemesis.totalScore} points!`,
-                      "info"
+                  if (!this.$kahoot.getGroupByPlayerCid(nemesis.cid)) {
+                    const found = this.nemeses.find(
+                      player => player.cid === nemesis.cid
                     );
-                    this.nemeses.push(nemesis);
-                  } else {
-                    this.nemeses.forEach((player, index) => {
-                      if (player.cid === nemesis.cid) {
-                        this.nemeses[index].totalScore = nemesis.totalScore;
-                      }
-                    });
+
+                    if (!found) {
+                      this.notify(
+                        `Able to take over ${nemesis.name} with ${nemesis.totalScore} points!`,
+                        "info"
+                      );
+                      this.nemeses.push(nemesis);
+                    } else {
+                      this.nemeses.forEach((player, index) => {
+                        if (player.cid === nemesis.cid) {
+                          this.nemeses[index].totalScore = nemesis.totalScore;
+                        }
+                      });
+                    }
                   }
                 }
                 break;

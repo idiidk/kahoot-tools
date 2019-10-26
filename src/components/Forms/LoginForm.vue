@@ -79,9 +79,12 @@ export default {
 
             this.$kahoot.pin = this.pin;
             this.$kahoot.session = session;
-            this.$kahoot.socket = socket;            
+            this.$kahoot.socket = socket;
             this.$kahoot.groups.push(group);
             this.$globals.mainPlayer = mainPlayer;
+            mainPlayer.on("message", msg =>
+              this.$globals.$emit("message", msg)
+            );
             this.$globals.initListeners();
 
             notify("Connected, ready for action!", "success");

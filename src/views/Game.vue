@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageHeader title="Game" :subtitle="`Connected to ${$kahoot.pin}`"/>
+    <PageHeader title="Game" :subtitle="`Connected to ${$kahoot.pin}`" />
     <GameForm></GameForm>
   </div>
 </template>
@@ -12,7 +12,7 @@ import GameForm from "@/components/Forms/GameForm";
 export default {
   components: {
     PageHeader,
-    GameForm,
+    GameForm
   },
   mounted: function() {
     if (!this.$kahoot.session) {
