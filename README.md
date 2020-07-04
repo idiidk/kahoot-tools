@@ -1,3 +1,6 @@
+## This version is very outdated
+If you want a working kahoot bot that's also written by me, check out OmegaBoot: https://dl.omegaboot.com
+
 # Kahoot Tools Vue
 > Scaring teachers since Sep 27, 2017!
 
