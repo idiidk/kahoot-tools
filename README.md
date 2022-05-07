@@ -1,10 +1,7 @@
-## This version is very outdated
-If you want a working kahoot bot that's also written by me, check out OmegaBoot: https://dl.omegaboot.com
-
 # Kahoot Tools Vue
 > Scaring teachers since Sep 27, 2017!
 
-A suite of tools for fucking with Kahoot games. Easily installable and customizable.
+This release is intended for educational purposes only. This project is pretty outdated and I won't be supporting it any longer. It's still a good source for anyone looking to unravel the inner workings of Kahoot.
 
 ## Quick Start
 To quickly start using kahoot-tools after installation, please refer to the quick start guide (WIP)
